@@ -1,9 +1,6 @@
 package app;
 
-import editor.shapes.DirectedRectangle;
-import editor.shapes.Line;
-import editor.shapes.Rectangle;
-import editor.shapes.Triangle;
+import editor.shapes.*;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.*;
@@ -42,9 +39,13 @@ public class Main extends Application {
         line.setTranslateY(0);
         line.setTranslateZ(400);
 
+        Circle circle = new Circle(50);
+        circle.setTranslateX(350);
+        circle.setTranslateY(350);
+        circle.setTranslateZ(400);
 
         // Add the Shapes and the Light to the Group
-        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line);
+        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle);
 
 //        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 

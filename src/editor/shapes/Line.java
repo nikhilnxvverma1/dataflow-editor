@@ -5,6 +5,7 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
 /**
+ * Creates a Line between two 2d points.
  * The translation of the Line MeshView is advised to be kept at 0,0,z
  */
 public class Line extends MeshView {
