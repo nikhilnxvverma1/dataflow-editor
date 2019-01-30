@@ -1,8 +1,11 @@
 package app;
 
+import editor.shapes.DirectedRectangle;
+import editor.shapes.Line;
 import editor.shapes.Rectangle;
 import editor.shapes.Triangle;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Cylinder;
@@ -29,8 +32,19 @@ public class Main extends Application {
         triangle.setTranslateY(500);
         triangle.setTranslateZ(400);
 
+        DirectedRectangle directedRectangle = new DirectedRectangle(80,60);
+        directedRectangle.setTranslateX(200);
+        directedRectangle.setTranslateY(400);
+        directedRectangle.setTranslateZ(400);
+
+        Line line = new Line(new Point2D(222,522),new Point2D(432,562));
+        line.setTranslateX(0);
+        line.setTranslateY(0);
+        line.setTranslateZ(400);
+
+
         // Add the Shapes and the Light to the Group
-        Group root = new Group(cylinder,rectangle,triangle);
+        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line);
 
 //        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
