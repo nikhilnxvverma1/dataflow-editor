@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Cylinder;
 import javafx.stage.Stage;
 
@@ -44,8 +45,14 @@ public class Main extends Application {
         circle.setTranslateY(350);
         circle.setTranslateZ(400);
 
+        javafx.scene.shape.Rectangle jRect = new javafx.scene.shape.Rectangle(80,60);
+        jRect.setTranslateX(400);
+        jRect.setTranslateY(200);
+//        jRect.setTranslateY(400);
+        jRect.setFill(Color.ORANGE);
+
         // Add the Shapes and the Light to the Group
-        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle);
+        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle,jRect);
 
 //        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
@@ -54,9 +61,9 @@ public class Main extends Application {
 
         // Create a Camera to view the 3D Shapes
         ParallelCamera camera = new ParallelCamera();
-        camera.setTranslateX(0);
+        camera.setTranslateX(-100);
         camera.setTranslateY(0);
-        camera.setTranslateZ(100);
+        camera.setTranslateZ(0);
         scene.setCamera(camera);
         scene.setFill(Color.rgb(10, 10, 40));
 

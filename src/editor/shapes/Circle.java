@@ -51,16 +51,40 @@ public class Circle extends MeshView {
             texCoordinates[texIndex + 1] = 0.5f + (float)Math.sin(Math.toRadians(deg));
 
             // faces
-            faces[facesIndex++] = elementIndex; // vertex
-            faces[facesIndex++] = elementIndex; // texture coordinate
-
             if(deg%2==0){//every even number of times
+
+                // for the previous triangle
+                if(deg!=0){
+                    faces[facesIndex++] = elementIndex; // vertex
+                    faces[facesIndex++] = elementIndex; // texture coordinate
+                }
+
+                // for this triangle
+                faces[facesIndex++] = elementIndex; // vertex
+                faces[facesIndex++] = elementIndex; // texture coordinate
+
+                faces[facesIndex++] = 0; // center's vertex
+                faces[facesIndex++] = 0; // center's texture coordinate
+            }else{
+                // for the previous triangle
+                faces[facesIndex++] = elementIndex; // vertex
+                faces[facesIndex++] = elementIndex; // texture coordinate
+
+                // for this triangle
+                faces[facesIndex++] = elementIndex; // vertex
+                faces[facesIndex++] = elementIndex; // texture coordinate
+
                 faces[facesIndex++] = 0; // center's vertex
                 faces[facesIndex++] = 0; // center's texture coordinate
             }
 
 
         }
+
+        // for the last triangle we add the final vertex as the first vertex
+        // for the previous triangle
+        faces[facesIndex++] = 1; // vertex
+        faces[facesIndex] = 1; // texture coordinate
 
         TriangleMesh triangleMesh = new TriangleMesh();
         triangleMesh.getPoints().setAll(points);
