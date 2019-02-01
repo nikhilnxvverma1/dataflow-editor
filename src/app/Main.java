@@ -48,11 +48,13 @@ public class Main extends Application {
         javafx.scene.shape.Rectangle jRect = new javafx.scene.shape.Rectangle(80,60);
         jRect.setTranslateX(400);
         jRect.setTranslateY(200);
+        jRect.setTranslateZ(0);
 //        jRect.setTranslateY(400);
         jRect.setFill(Color.ORANGE);
 
         // Add the Shapes and the Light to the Group
         Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle,jRect);
+//        Group root = new Group(jRect);
 
 //        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
@@ -60,8 +62,12 @@ public class Main extends Application {
         Scene scene = new Scene(root, 800, 600);
 
         // Create a Camera to view the 3D Shapes
-        ParallelCamera camera = new ParallelCamera();
-        camera.setTranslateX(-100);
+        PerspectiveCamera camera = new PerspectiveCamera();
+        camera.setNearClip(1);
+        camera.setFarClip(1000);
+        camera.setFieldOfView(35);
+
+        camera.setTranslateX(0);
         camera.setTranslateY(0);
         camera.setTranslateZ(0);
         scene.setCamera(camera);
