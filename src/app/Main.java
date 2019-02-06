@@ -2,6 +2,7 @@ package app;
 
 import editor.shapes.*;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
@@ -53,10 +54,10 @@ public class Main extends Application {
         jRect.setFill(Color.ORANGE);
 
         // Add the Shapes and the Light to the Group
-        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle,jRect);
+//        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle,jRect);
 //        Group root = new Group(jRect);
 
-//        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
 
         Scene scene = new Scene(root, 800, 600);
@@ -70,10 +71,12 @@ public class Main extends Application {
         camera.setTranslateX(0);
         camera.setTranslateY(0);
         camera.setTranslateZ(0);
-        scene.setCamera(camera);
-        scene.setFill(Color.rgb(10, 10, 40));
+//        scene.setCamera(camera);
+//        scene.setFill(Color.rgb(10, 10, 40));
 
         primaryStage.setTitle("Visual Editor");
+        primaryStage.setWidth(1500);
+        primaryStage.setHeight(900);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
