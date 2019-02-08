@@ -1,6 +1,6 @@
 package model;
 
-public class ConditionalNode extends DataflowNode{
+public class ConditionalNode extends DataFlowNode {
     protected Type type = Type.LESS_THAN;
 
     public enum Type{

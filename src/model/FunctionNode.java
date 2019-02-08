@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class FunctionNode extends DataflowNode{
+public class FunctionNode extends DataFlowNode {
 
     private String name;
     private ArrayList<DataValueType> arguments = new ArrayList<>();

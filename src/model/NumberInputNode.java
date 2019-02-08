@@ -1,6 +1,6 @@
 package model;
 
-public class NumberInputNode extends DataflowNode{
+public class NumberInputNode extends DataFlowNode {
 
     double value;
 

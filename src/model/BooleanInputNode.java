@@ -1,6 +1,6 @@
 package model;
 
-public class BooleanInputNode extends DataflowNode{
+public class BooleanInputNode extends DataFlowNode {
 
     private boolean value;
 

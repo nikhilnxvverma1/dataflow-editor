@@ -1,6 +1,6 @@
 package model;
 
-public class ArithmeticNode extends DataflowNode {
+public class ArithmeticNode extends DataFlowNode {
 
     protected Type type = Type.ADD;
 
