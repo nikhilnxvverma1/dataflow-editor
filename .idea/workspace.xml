@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Visual design and static UI through the FXML file(mainly the toolbar)">
-      <change afterPath="$PROJECT_DIR$/src/app/MainController.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Fixed canvas size bug, controller setup, basic mouse event handling">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/nikhilverma.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/controller/SidebarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/delegate/SidebarListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/delegate/WorkspaceListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sample.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -78,40 +84,52 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/sample.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/MainController.java">
+        <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+            <state relative-caret-position="416">
+              <caret line="36" column="69" lean-forward="true" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#334#335#0" expanded="true" />
-                <element signature="e#370#371#0" expanded="true" />
-                <element signature="e#471#472#0" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
-                <element signature="e#469#470#0" expanded="true" />
-                <element signature="e#529#530#0" expanded="true" />
-                <element signature="e#735#736#0" expanded="true" />
-                <element signature="e#794#795#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
+                <element signature="e#807#808#0" expanded="true" />
+                <element signature="e#880#881#0" expanded="true" />
+                <element signature="e#940#941#0" expanded="true" />
+                <element signature="e#1013#1014#0" expanded="true" />
+                <element signature="e#1072#1073#0" expanded="true" />
+                <element signature="e#1146#1147#0" expanded="true" />
+                <element signature="e#1208#1209#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/Controller.java">
+        <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="25" lean-forward="true" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+            <state relative-caret-position="210">
+              <caret line="14" column="90" selection-start-line="14" selection-start-column="90" selection-end-line="14" selection-end-column="90" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/DataflowNode.java">
+        <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+            <state relative-caret-position="210">
+              <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,6 +140,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -177,11 +196,18 @@
         <option value="$PROJECT_DIR$/src/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/app/MainController.java" />
+        <option value="$PROJECT_DIR$/src/app/delegate/SidebarListener.java" />
+        <option value="$PROJECT_DIR$/src/app/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/app/delegate/WorkspaceListener.java" />
+        <option value="$PROJECT_DIR$/src/controller/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/SidebarController.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="1024" />
@@ -220,7 +246,15 @@
               <item name="dataflow-editor" type="b2602c69:ProjectViewProjectNode" />
               <item name="dataflow-editor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dataflow-editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dataflow-editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="delegate" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -239,10 +273,11 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549511991159" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549592448578" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -281,7 +316,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.*" />
+          <option name="PATTERN" value="app.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -417,17 +452,24 @@
       <option name="project" value="LOCAL" />
       <updated>1549423456233</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixed canvas size bug, controller setup, basic mouse event handling">
+      <created>1549512114398</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1549512114398</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1024" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="1024" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.12698413" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.12698413" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -436,7 +478,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32725322" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32725322" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -460,7 +502,7 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Coverage" order="10" side_tool="true" weight="0.3299363" />
-      <window_info anchor="right" x="0" y="0" width="370" height="824" id="Documentation" order="11" side_tool="true" visible="true" weight="0.32967034" />
+      <window_info anchor="right" x="0" y="0" width="370" height="824" id="Documentation" order="11" side_tool="true" weight="0.32967034" />
       <window_info anchor="right" id="Maven" order="12" />
     </layout>
   </component>
@@ -477,7 +519,8 @@
     <MESSAGE value="Full base model class for dataflow node and extended for arithmetic nodes" />
     <MESSAGE value="Model classes for conditional(including relational),input and function nodes" />
     <MESSAGE value="Visual design and static UI through the FXML file(mainly the toolbar)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Visual design and static UI through the FXML file(mainly the toolbar)" />
+    <MESSAGE value="Fixed canvas size bug, controller setup, basic mouse event handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed canvas size bug, controller setup, basic mouse event handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -606,21 +649,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/sample.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/app/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/delegate/SidebarListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DataflowNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="25" lean-forward="true" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -634,20 +680,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/MainController.java">
+    <entry file="file://$PROJECT_DIR$/src/app/sample.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/delegate/WorkspaceListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#471#472#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#735#736#0" expanded="true" />
-            <element signature="e#794#795#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="90" selection-start-line="14" selection-start-column="90" selection-end-line="14" selection-end-column="90" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="36" column="69" lean-forward="true" selection-start-line="36" selection-start-column="69" selection-end-line="36" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#807#808#0" expanded="true" />
+            <element signature="e#880#881#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
+            <element signature="e#1013#1014#0" expanded="true" />
+            <element signature="e#1072#1073#0" expanded="true" />
+            <element signature="e#1146#1147#0" expanded="true" />
+            <element signature="e#1208#1209#0" expanded="true" />
           </folding>
         </state>
       </provider>
