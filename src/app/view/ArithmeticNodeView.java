@@ -1,6 +1,8 @@
 package app.view;
 
 import javafx.scene.shape.Circle;
+import model.ArithmeticNode;
+import model.DataFlowNode;
 
 /**
  * View for arithmetic data flow node having 2 inputs and one output
@@ -13,10 +15,16 @@ public class ArithmeticNodeView extends DataFlowView{
     private Circle inputHandle2 = new Circle();
     private Circle outputHandle = new Circle();
 
+    private ArithmeticNode arithmeticNode;
 
     public ArithmeticNodeView(DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
         initialize();
+    }
+
+    @Override
+    public DataFlowNode getDataFlowNode() {
+        return arithmeticNode;
     }
 
     private void initialize(){

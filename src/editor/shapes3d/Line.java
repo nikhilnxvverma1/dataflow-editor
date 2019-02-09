@@ -1,4 +1,4 @@
-package editor.shapes;
+package editor.shapes3d;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.MeshView;

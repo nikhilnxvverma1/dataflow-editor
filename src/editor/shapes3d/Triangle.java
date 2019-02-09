@@ -1,4 +1,4 @@
-package editor.shapes;
+package editor.shapes3d;
 
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;

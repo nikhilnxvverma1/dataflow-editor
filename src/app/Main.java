@@ -1,12 +1,11 @@
 package app;
 
-import editor.shapes.*;
+import editor.shapes3d.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Cylinder;
 import javafx.stage.Stage;
 
@@ -57,7 +56,7 @@ public class Main extends Application {
 //        Group root = new Group(cylinder,rectangle,triangle,directedRectangle,line,circle,jRect);
 //        Group root = new Group(jRect);
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("static-ui.fxml"));
 
 
         Scene scene = new Scene(root, 800, 600);

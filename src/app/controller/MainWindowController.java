@@ -37,6 +37,9 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         canvas.heightProperty().bind(rootContainer.heightProperty());
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,canvas);
+
+        //TODO file handling, create models
+        this.sidebarController.initialize(null);
     }
 
     //==================================================================================================================

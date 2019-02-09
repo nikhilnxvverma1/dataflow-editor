@@ -9,6 +9,7 @@ import javafx.scene.SubScene;
  */
 public class WorkspaceController {
 
+    /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
 
@@ -16,4 +17,8 @@ public class WorkspaceController {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
     }
+
+    //==================================================================================================================
+    //  Event received from the parent controller
+    //==================================================================================================================
 }
