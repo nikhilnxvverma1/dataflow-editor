@@ -14,10 +14,12 @@ public class FunctionDefinition {
     List<DataFlowNode> startingDataFlowNodes;
     List<DataFlowNode> endingDataFlowNodes;
 
-    public FunctionDefinition(boolean isMain) {
+    public FunctionDefinition(boolean isMain,String name) {
         this.isMain = isMain;
         if(this.isMain){
             this.name = "main";
+        }else{
+            this.name = name;
         }
     }
 

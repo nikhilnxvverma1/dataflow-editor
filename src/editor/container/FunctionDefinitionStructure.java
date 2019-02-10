@@ -8,11 +8,11 @@ import model.FunctionDefinition;
  * and current camera position of the scene
  */
 public class FunctionDefinitionStructure{
-    FunctionDefinition functionDefinition;
-    Group group;
-    double cameraX;
-    double cameraY;
-    double cameraZ;
+    public FunctionDefinition functionDefinition;
+    public Group group;
+    public double cameraX;
+    public double cameraY;
+    public double cameraZ;
 
     public FunctionDefinitionStructure(FunctionDefinition functionDefinition) {
         this.functionDefinition = functionDefinition;

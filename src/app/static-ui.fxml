@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="rootContainer" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainWindowController">
    <children>
-      <SubScene fx:id="canvas" fill="#3156c6" height="900.0" layoutX="270.0" onMouseClicked="#mouseClickOnCanvas" onMouseDragged="#mouseDraggedOnCanvas" onMousePressed="#mousePressedOnCanvas" onMouseReleased="#mouseReleasedOnCanvas" style="-fx-background-color: blue;" width="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SubScene fx:id="canvas" fill="#3156c6" focusTraversable="true" height="900.0" layoutX="270.0" onMouseClicked="#mouseClickOnCanvas" onMouseDragged="#mouseDraggedOnCanvas" onMousePressed="#mousePressedOnCanvas" onMouseReleased="#mouseReleasedOnCanvas" style="-fx-background-color: blue;" width="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <root>
           <Region />
         </root>
@@ -28,11 +28,10 @@
                         <ToolBar layoutY="7.0" prefHeight="40.0" prefWidth="268.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
                               <Label text="Functions" />
-                            <Button mnemonicParsing="false" text="+" />
+                            <Button mnemonicParsing="false" onAction="#newFunctionDefinition" text="+" />
                           </items>
                         </ToolBar>
-                        <ListView fx:id="functionListView" layoutX="34.0" layoutY="51.0" prefHeight="226.0" prefWidth="268.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                        <Label layoutX="12.0" layoutY="63.0" text="main" />
+                        <ListView fx:id="functionListView" editable="true" layoutX="34.0" layoutY="51.0" onEditCancel="#functionListEditCancel" onEditCommit="#functionListEditCommit" onEditStart="#functionListEditStarted" onKeyPressed="#deleteSelectedFunctionDefinition" prefHeight="226.0" prefWidth="268.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
