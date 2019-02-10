@@ -118,4 +118,20 @@ public class SidebarController {
     private String getValidNewName(){
         return "function" + functionStructureList.size();
     }
+
+    void deleteSelectedFunctionDefinition(){
+        int selectedIndex = functionListView.getSelectionModel().getSelectedIndex();
+        //remove selected index if it is not main
+        if(!functionStructureList.get(selectedIndex).functionDefinition.isMain()){
+
+            // remove from list view first so that the callback doesn't crash (because of a small dependency)
+            functionListView.getItems().remove(selectedIndex);
+            functionStructureList.remove(selectedIndex);
+
+        }else{
+            Logger.info("Deletion of main function definition disallowed");
+        }
+
+        // TODO create a new delete command and commit it
+    }
 }

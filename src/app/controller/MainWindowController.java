@@ -125,7 +125,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         if((keyEvent.getCode() == KeyCode.DELETE) ||
                 (keyEvent.getCode() == KeyCode.BACK_SPACE)){
             Logger.debug("delete function definition");
-//        sidebarController.newFunctionDefinition(actionEvent);
+            sidebarController.deleteSelectedFunctionDefinition();
+
         }
 
     }

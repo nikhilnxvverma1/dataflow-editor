@@ -9,4 +9,7 @@ public class Logger {
     public static void debug(String string){
         System.out.println(string);
     }
+    public static void info(String string){
+        System.out.println(string);
+    }
 }
