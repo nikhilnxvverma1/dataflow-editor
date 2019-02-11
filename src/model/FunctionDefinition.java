@@ -43,6 +43,9 @@ public class FunctionDefinition {
 
     public void setMain(boolean main) {
         isMain = main;
+        if (this.isMain) {
+            this.name = "main";
+        }
     }
 
     public List<DataFlowNode> getDataFlowNodes() {

@@ -51,7 +51,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
         //TODO file handling, create models
 
-        this.sidebarController.initialize(DummyData.emptyFunctionDefinitions(5));
+        this.sidebarController.initialize(DummyData.filledFunctionDefinitions(5,0,5));
         this.workspaceController.initialize();
     }
 
