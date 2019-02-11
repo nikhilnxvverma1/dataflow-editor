@@ -9,16 +9,21 @@ import model.DataFlowNode;
  */
 public class ArithmeticNodeView extends DataFlowView{
 
-    // TODO write their positions and radii
-    private Circle mainCircle = new Circle();
-    private Circle inputHandle1 = new Circle();
-    private Circle inputHandle2 = new Circle();
-    private Circle outputHandle = new Circle();
+    // radii
+    private static final double MAIN_RADIUS = 50;
+    private static final double INPUT_RADIUS = 10;
+    private static final double OUTPUT_RADIUS = 10;
+
+    private Circle mainCircle = new Circle(MAIN_RADIUS);
+    private Circle inputHandle1 = new Circle(INPUT_RADIUS);
+    private Circle inputHandle2 = new Circle(INPUT_RADIUS);
+    private Circle outputHandle = new Circle(OUTPUT_RADIUS);
 
     private ArithmeticNode arithmeticNode;
 
-    public ArithmeticNodeView(DataFlowViewListener dataFlowViewListener) {
+    public ArithmeticNodeView(ArithmeticNode arithmeticNode, DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
+        this.arithmeticNode = arithmeticNode;
         initialize();
     }
 
@@ -28,6 +33,11 @@ public class ArithmeticNodeView extends DataFlowView{
     }
 
     private void initialize(){
+
+        // position is based on the position of the arithmetic node
+        this.setLayoutX(arithmeticNode.getX());
+        this.setLayoutY(arithmeticNode.getY());
+
         this.getChildren().addAll(mainCircle,inputHandle1,inputHandle2,outputHandle);
         //TODO setup event handling appropriately
     }

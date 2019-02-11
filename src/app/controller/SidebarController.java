@@ -97,7 +97,7 @@ public class SidebarController {
     }
 
     //==================================================================================================================
-    //  Event received from the parent controller
+    //  Events received from the parent controller
     //==================================================================================================================
 
     void functionListEditStarted(ListView.EditEvent<String> e){
@@ -146,5 +146,9 @@ public class SidebarController {
         }
 
         // TODO create a new delete command and commit it
+    }
+
+    List<FunctionDefinitionStructure> getFunctionStructureList(){
+        return this.functionStructureList;
     }
 }

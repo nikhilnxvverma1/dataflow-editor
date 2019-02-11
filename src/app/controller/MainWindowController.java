@@ -61,7 +61,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @Override
     public void selectionChangedTo(FunctionDefinitionStructure newSelection, FunctionDefinitionStructure oldSelection) {
-        // TODO pass the message down to workspace controller
+        // pass the message down to workspace controller
+        workspaceController.functionDefinitionChanged(newSelection,oldSelection);
         Logger.debug("Function definition Selection changed");
     }
 
@@ -72,6 +73,11 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @Override
     public FunctionDefinitionStructure getCurrentFunctionDefinitionStructure(){
         return sidebarController.getCurrentFunctionDefinitionStructure();
+    }
+
+    @Override
+    public List<FunctionDefinitionStructure> getAllFunctionDefinitionStructure() {
+        return sidebarController.getFunctionStructureList();
     }
 
     //==================================================================================================================
