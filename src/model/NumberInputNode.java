@@ -2,10 +2,10 @@ package model;
 
 public class NumberInputNode extends DataFlowNode {
 
-    double value;
+    double value = 0;
 
-    public NumberInputNode(double value) {
-        this.value = value;
+    public NumberInputNode(double x, double y) {
+        super(x, y);
     }
 
     @Override

@@ -8,7 +8,8 @@ public class FunctionNode extends DataFlowNode {
     private ArrayList<DataValueType> arguments = new ArrayList<>();
     private ArrayList<DataValueType> output = new ArrayList<>();
 
-    public FunctionNode(String name) {
+    public FunctionNode(double x, double y, String name) {
+        super(x, y);
         this.name = name;
     }
 

@@ -69,18 +69,31 @@ public class SidebarController {
             functionListView.getItems().add(functionDefinitionStructure.functionDefinition.getName());
         }
 
-        functionListView.getSelectionModel().select(selectionIndex);
-
         // track selection every time it changes in list view
         functionListView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                FunctionDefinitionStructure oldSelection = functionStructureList.get(oldValue.intValue());
+                int oldSelectionIndex = oldValue.intValue();
+                FunctionDefinitionStructure oldSelection;
+                if(oldSelectionIndex==-1){
+                    oldSelection = null;
+                }else{
+                    oldSelection = functionStructureList.get(oldSelectionIndex);
+                }
                 selectedDefinitionStructure = functionStructureList.get(newValue.intValue());
                 Logger.debug("Selection will change");
                 sidebarListener.selectionChangedTo(selectedDefinitionStructure,oldSelection);
             }
         });
+
+        // select the main function
+        // IMPORTANT: this should only be done AFTER the selection change callback has been registered
+        functionListView.getSelectionModel().select(selectionIndex);
+    }
+
+    FunctionDefinitionStructure getCurrentFunctionDefinitionStructure(){
+        int selectedIndex = functionListView.getSelectionModel().getSelectedIndex();
+        return functionStructureList.get(selectedIndex);
     }
 
     //==================================================================================================================

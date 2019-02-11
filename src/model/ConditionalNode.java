@@ -14,6 +14,10 @@ public class ConditionalNode extends DataFlowNode {
         NOT
     }
 
+    public ConditionalNode(double x, double y) {
+        super(x, y);
+    }
+
     @Override
     public int getNumberOfInputs() {
         if(type==Type.NOT){

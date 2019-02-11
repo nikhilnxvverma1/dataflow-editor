@@ -12,4 +12,13 @@ public class Logger {
     public static void info(String string){
         System.out.println(string);
     }
+    public static void warn(String string){
+        System.out.println(string);
+    }
+    public static void error(String string){
+        System.out.println(string);
+    }
+    public static void critical(String string){
+        System.out.println(string);
+    }
 }

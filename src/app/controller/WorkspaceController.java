@@ -1,7 +1,9 @@
 package app.controller;
 
 import app.delegate.WorkspaceListener;
+import editor.container.FunctionDefinitionStructure;
 import javafx.scene.SubScene;
+import model.FunctionDefinition;
 
 /**
  * Responds to all (delegated) canvas related events and managing the business workflow
@@ -16,6 +18,11 @@ public class WorkspaceController {
     public WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
+    }
+
+    void initialize(){
+        FunctionDefinitionStructure currentStructure = workspaceListener.getCurrentFunctionDefinitionStructure();
+
     }
 
     //==================================================================================================================

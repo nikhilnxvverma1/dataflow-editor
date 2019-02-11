@@ -12,6 +12,11 @@ public abstract class DataFlowNode {
     List<DataFlowEdge> incomingEdges = new LinkedList<DataFlowEdge>();
     List<DataFlowEdge> outgoingEdges = new LinkedList<DataFlowEdge>();
 
+    public DataFlowNode(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public abstract int getNumberOfInputs();
     public abstract DataValueType inputTypeFor(int index);
     public abstract int getNumberOfOutputs();

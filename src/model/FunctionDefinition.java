@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -10,9 +11,9 @@ public class FunctionDefinition {
 
     private String name;
     private boolean isMain;
-    List<DataFlowNode> dataFlowNodes;
-    List<DataFlowNode> startingDataFlowNodes;
-    List<DataFlowNode> endingDataFlowNodes;
+    List<DataFlowNode> dataFlowNodes = new LinkedList<>();
+    List<DataFlowNode> startingDataFlowNodes = new LinkedList<>();
+    List<DataFlowNode> endingDataFlowNodes = new LinkedList<>();
 
     public FunctionDefinition(boolean isMain,String name) {
         this.isMain = isMain;

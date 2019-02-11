@@ -2,10 +2,10 @@ package model;
 
 public class BooleanInputNode extends DataFlowNode {
 
-    private boolean value;
+    private boolean value = false;
 
-    public BooleanInputNode(boolean value) {
-        this.value = value;
+    public BooleanInputNode(double x, double y) {
+        super(x, y);
     }
 
     @Override

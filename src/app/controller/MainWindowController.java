@@ -3,6 +3,7 @@ package app.controller;
 import app.delegate.SidebarListener;
 import app.delegate.WorkspaceListener;
 import editor.container.FunctionDefinitionStructure;
+import editor.data.DummyData;
 import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,14 +51,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
         //TODO file handling, create models
 
-
-        List<FunctionDefinition> test = new LinkedList<FunctionDefinition>();
-        test.add(new FunctionDefinition(true, "main"));
-        test.add(new FunctionDefinition(false, "first"));
-        test.add(new FunctionDefinition(false, "second"));
-        test.add(new FunctionDefinition(false, "third"));
-        test.add(new FunctionDefinition(false, "nth method"));
-        this.sidebarController.initialize(test);
+        this.sidebarController.initialize(DummyData.emptyFunctionDefinitions(5));
+        this.workspaceController.initialize();
     }
 
     //==================================================================================================================
@@ -71,12 +66,20 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     }
 
     //==================================================================================================================
+    //  Workspace callbacks
+    //==================================================================================================================
+
+    @Override
+    public FunctionDefinitionStructure getCurrentFunctionDefinitionStructure(){
+        return sidebarController.getCurrentFunctionDefinitionStructure();
+    }
+
+    //==================================================================================================================
     //  Event handlers (for static UI)
     //==================================================================================================================
 
     @FXML
     private void mouseClickOnCanvas(MouseEvent mouseEvent){
-
         System.out.println("Mouse click registered");
     }
 
