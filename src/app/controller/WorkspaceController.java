@@ -20,9 +20,10 @@ import java.util.List;
  */
 public class WorkspaceController implements DataFlowViewListener {
 
-    private static final double CLOSEST_CAMERA_Z = 10;
-    private static final double FARTHEST_CAMERA_Z = 100;
-    private static final double DEFAULT_CAMERA_Z = 40;
+    private static final double CLOSEST_CAMERA_Z = -10;
+    public static final double DEFAULT_CAMERA_Z = -100;
+    private static final double FARTHEST_CAMERA_Z = -10000;
+    public static final double ZOOM_DELTA_Z = 50;
 
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
@@ -120,7 +121,7 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void zoomCanvas(ZoomEvent zoomEvent){
-        Logger.debug("Zooming on canvas dz:"+zoomEvent.getZoomFactor());
+
 
         // get the current camera z
         double cameraZ = canvas.getCamera().getTranslateZ();
@@ -128,12 +129,14 @@ public class WorkspaceController implements DataFlowViewListener {
         // compute new camera position
         double newCameraZ = cameraZ;
         if(zoomEvent.getZoomFactor()>=1){ // zoom in
-            if(cameraZ > CLOSEST_CAMERA_Z){  // don't go beyond threshold
-                newCameraZ = cameraZ - 1;
+            Logger.debug("Zooming IN (factor):"+zoomEvent.getZoomFactor());
+            if(cameraZ + ZOOM_DELTA_Z < CLOSEST_CAMERA_Z){  // don't go beyond threshold
+                newCameraZ = cameraZ + ZOOM_DELTA_Z;
             }
         }else{ // zoom out
-            if(cameraZ < FARTHEST_CAMERA_Z){ // don't go beyond threshold
-                newCameraZ = cameraZ + 1;
+            Logger.debug("Zooming OUT (factor):"+zoomEvent.getZoomFactor());
+            if(cameraZ - ZOOM_DELTA_Z > FARTHEST_CAMERA_Z){ // don't go beyond threshold
+                newCameraZ = cameraZ - ZOOM_DELTA_Z;
             }
         }
 

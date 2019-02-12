@@ -1,5 +1,6 @@
 package editor.container;
 
+import app.controller.WorkspaceController;
 import app.view.DataFlowView;
 import javafx.scene.Group;
 import model.FunctionDefinition;
@@ -22,5 +23,8 @@ public class FunctionDefinitionStructure{
     public FunctionDefinitionStructure(FunctionDefinition functionDefinition) {
         this.functionDefinition = functionDefinition;
         this.group = new Group();
+        this.cameraX = 0;
+        this.cameraY = 0;
+        this.cameraZ = WorkspaceController.DEFAULT_CAMERA_Z;
     }
 }
