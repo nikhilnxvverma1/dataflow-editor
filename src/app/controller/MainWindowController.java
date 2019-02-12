@@ -9,14 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
-import model.FunctionDefinition;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -51,7 +46,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
         //TODO file handling, create models
 
-        this.sidebarController.initialize(DummyData.filledFunctionDefinitions(5,0,5));
+        this.sidebarController.initialize(DummyData.filledFunctionDefinitions(5,1,5));
         this.workspaceController.initialize();
     }
 
@@ -103,6 +98,16 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     private void mouseReleasedOnCanvas(MouseEvent mouseEvent){
         Logger.debug("Mouse release registered");
+    }
+
+    @FXML
+    private void scrollCanvas(ScrollEvent scrollEvent){
+        workspaceController.panCanvas(scrollEvent);
+    }
+
+    @FXML
+    private void zoomCanvas(ZoomEvent zoomEvent){
+        workspaceController.zoomCanvas(zoomEvent);
     }
 
     @FXML
