@@ -1,8 +1,11 @@
 package app.view;
 
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import model.ArithmeticNode;
 import model.DataFlowNode;
 
@@ -26,6 +29,9 @@ public class ArithmeticNodeView extends DataFlowView{
     private Circle inputHandle2 = new Circle(INPUT_RADIUS);
     private Circle outputHandle = new Circle(OUTPUT_RADIUS);
 
+    private static final Font FONT = new Font(80);
+    private Label label = new Label();
+
     private ArithmeticNode arithmeticNode;
 
     public ArithmeticNodeView(ArithmeticNode arithmeticNode, DataFlowViewListener dataFlowViewListener) {
@@ -42,33 +48,62 @@ public class ArithmeticNodeView extends DataFlowView{
     private void initialize(){
 
         // position is based on the position of the arithmetic node
-        this.setLayoutX(arithmeticNode.getX());
-        this.setLayoutY(arithmeticNode.getY());
+        this.setTranslateX(arithmeticNode.getX());
+        this.setTranslateY(arithmeticNode.getY());
 
         // main circle
-        mainCircle.setLayoutX(-MAIN_RADIUS);
-        mainCircle.setLayoutY(-MAIN_RADIUS);
         mainCircle.setFill(MAIN_COLOR);
-        mainCircle.setOpacity(0.3);
+
+        final double PADDED_RADIUS = MAIN_RADIUS + INPUT_RADIUS/3;
 
         // input handle 1
-        inputHandle1.setLayoutX(0);
-        inputHandle1.setLayoutY(0);
-        inputHandle1.setFill(MAIN_COLOR);
+        inputHandle1.setLayoutX(Math.cos(Math.toRadians(210)) * PADDED_RADIUS);
+        inputHandle1.setLayoutY(Math.sin(Math.toRadians(210)) * PADDED_RADIUS);
+        inputHandle1.setFill(INPUT_COLOR);
 
         // input handle 2
-        inputHandle2.setLayoutX(-INPUT_RADIUS);
-        inputHandle2.setLayoutY(-INPUT_RADIUS);
+        inputHandle2.setLayoutX(Math.cos(Math.toRadians(150)) * PADDED_RADIUS);
+        inputHandle2.setLayoutY(Math.sin(Math.toRadians(150)) * PADDED_RADIUS);
         inputHandle2.setFill(INPUT_COLOR);
 
         // output handle
-        outputHandle.setLayoutX(MAIN_RADIUS);
-        outputHandle.setLayoutY(-MAIN_RADIUS);
+        outputHandle.setLayoutX(MAIN_RADIUS + OUTPUT_RADIUS/3);
+        outputHandle.setLayoutY(0);
         outputHandle.setFill(OUTPUT_COLOR);
 
-        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle);
+        //label
+        label = new Label(getLabelBasedOnType());
+        label.setLayoutX(-MAIN_RADIUS/2);
+        label.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
+        label.setFont(FONT);
+//        label.setStyle("-fx-background-color: red;"); //debugging purposes only
+
+        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
         //TODO setup event handling appropriately
 
-        this.setStyle("-fx-border-color: red;"); //debugging purposes only(doesn't work)
+
+    }
+
+    private String getLabelBasedOnType(){
+        String label = null;
+        switch (arithmeticNode.getType()){
+
+            case ADD:
+                label = "+";
+                break;
+            case SUBTRACT:
+                label = "-";
+                break;
+            case MULTIPLY:
+                label = "X";
+                break;
+            case DIVIDE:
+                label = "/";
+                break;
+            case MODULO:
+                label = "%";
+                break;
+        }
+        return label;
     }
 }

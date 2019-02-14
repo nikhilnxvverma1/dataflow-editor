@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class WorkspaceController implements DataFlowViewListener {
 
-    private static final double CLOSEST_CAMERA_Z = -10;
+    private static final double CLOSEST_CAMERA_Z = -1;
     public static final double DEFAULT_CAMERA_Z = -100;
     private static final double FARTHEST_CAMERA_Z = -10000;
     public static final double ZOOM_DELTA_Z = 50;
