@@ -105,6 +105,11 @@ public class WorkspaceController implements DataFlowViewListener {
         canvas.getCamera().setTranslateZ(newSelection.cameraZ);
     }
 
+    /**
+     * Responsible for panning the canvas by a scroll event and subsequently saving that information in the current
+     * function structure
+     * @param scrollEvent the event that occurred on canvas that initiated this event
+     */
     void panCanvas(ScrollEvent scrollEvent){
         Logger.debug("Canvas scrolled(dx,dy): ("+scrollEvent.getDeltaX()+","+(scrollEvent.getDeltaY())+")");
 
@@ -120,6 +125,11 @@ public class WorkspaceController implements DataFlowViewListener {
         current.cameraY = newY;
     }
 
+    /**
+     * Responsible for zooming the canvas (withing limits) by a zoom event and subsequently saving that
+     * information in the current function structure
+     * @param zoomEvent the event that occurred on canvas that initiated this event
+     */
     void zoomCanvas(ZoomEvent zoomEvent){
 
 

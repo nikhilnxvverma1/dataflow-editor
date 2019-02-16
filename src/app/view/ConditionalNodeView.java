@@ -5,14 +5,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import model.ArithmeticNode;
+import model.ConditionalNode;
 import model.DataFlowNode;
 
-/**
- * View for arithmetic data flow node having 2 inputs and one output
- */
-public class ArithmeticNodeView extends DataFlowView{
+public class ConditionalNodeView extends DataFlowView{
 
     // radii
     private static final double MAIN_RADIUS = 50;
@@ -32,17 +29,17 @@ public class ArithmeticNodeView extends DataFlowView{
     private static final Font FONT = new Font(80);
     private Label label = new Label();
 
-    private ArithmeticNode arithmeticNode;
+    private ConditionalNode conditionalNode;
 
-    public ArithmeticNodeView(ArithmeticNode arithmeticNode, DataFlowViewListener dataFlowViewListener) {
+    public ConditionalNodeView(ConditionalNode conditionalNode, DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
-        this.arithmeticNode = arithmeticNode;
+        this.conditionalNode = conditionalNode;
         initialize();
     }
 
     @Override
     public DataFlowNode getDataFlowNode() {
-        return arithmeticNode;
+        return conditionalNode;
     }
 
     /**
@@ -51,8 +48,8 @@ public class ArithmeticNodeView extends DataFlowView{
     private void initialize(){
 
         // position is based on the position of the arithmetic node
-        this.setTranslateX(arithmeticNode.getX());
-        this.setTranslateY(arithmeticNode.getY());
+        this.setTranslateX(conditionalNode.getX());
+        this.setTranslateY(conditionalNode.getY());
 
         // main circle
         mainCircle.setFill(MAIN_COLOR);
@@ -93,22 +90,30 @@ public class ArithmeticNodeView extends DataFlowView{
      */
     private String getLabelBasedOnType(){
         String label = null;
-        switch (arithmeticNode.getType()){
-
-            case ADD:
-                label = "+";
+        switch (conditionalNode.getType()){
+            case LESS_THAN:
+                label = "<";
                 break;
-            case SUBTRACT:
-                label = "-";
+            case LESS_THAN_EQUAL_TO:
+                label = "<=";
                 break;
-            case MULTIPLY:
-                label = "X";
+            case GREATER_THAN:
+                label = ">";
                 break;
-            case DIVIDE:
-                label = "/";
+            case GREATER_THAN_EQUAL_TO:
+                label = ">=";
                 break;
-            case MODULO:
-                label = "%";
+            case EQUALS:
+                label = "==";
+                break;
+            case AND:
+                label = "&&";
+                break;
+            case OR:
+                label = "||";
+                break;
+            case NOT:
+                label = "!";
                 break;
         }
         return label;
