@@ -62,7 +62,7 @@ public class DummyData {
 
             // random function definition with random number of node
             int randomNodeCount = lowerLimitOfNodeCount + random.nextInt(upperLimitOfNodeCount);
-            FunctionDefinition randomDefinition = randomNodesInADefinition(randomNodeCount,DataFlowNodeType.ARITHMETIC);
+            FunctionDefinition randomDefinition = randomNodesInADefinition(randomNodeCount,DataFlowNodeType.BOOLEAN_INPUT);
 
             // naming
             if(i==0){

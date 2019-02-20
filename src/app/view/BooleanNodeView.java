@@ -1,18 +1,16 @@
 package app.view;
 
-import javafx.scene.control.Spinner;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import model.BooleanInputNode;
 import model.DataFlowNode;
-import model.NumberInputNode;
 
-/**
- * Data flow View with a text field that allows for number input
- */
-public class NumberInputView extends DataFlowView{
+public class BooleanNodeView extends DataFlowView{
+
     // radii
     private static final double MAIN_RECT_LENGTH = 100;
     private static final double MAIN_RECT_HEIGHT= 60;
@@ -27,11 +25,11 @@ public class NumberInputView extends DataFlowView{
 
     private static final Font FONT = new Font(80);
 
-    private NumberInputNode numberInputNode;
+    private BooleanInputNode booleanInputNode;
 
-    public NumberInputView(NumberInputNode numberInputNode,DataFlowViewListener dataFlowViewListener) {
+    public BooleanNodeView(BooleanInputNode booleanInputNode,DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
-        this.numberInputNode = numberInputNode;
+        this.booleanInputNode = booleanInputNode;
         initialize();
     }
 
@@ -41,8 +39,8 @@ public class NumberInputView extends DataFlowView{
     private void initialize(){
 
         // position is based on the position of the arithmetic node
-        this.setTranslateX(numberInputNode.getX());
-        this.setTranslateY(numberInputNode.getY());
+        this.setTranslateX(booleanInputNode.getX());
+        this.setTranslateY(booleanInputNode.getY());
 
         // main circle
         mainRect.setFill(MAIN_COLOR);
@@ -55,7 +53,7 @@ public class NumberInputView extends DataFlowView{
 
         // input field
 
-        Spinner<Integer> field = new Spinner<>();
+        ToggleButton field = new ToggleButton(trueOrFalse(booleanInputNode.isValue()));
         field.setPrefWidth(MAIN_RECT_LENGTH);
         field.setPrefHeight(MAIN_RECT_HEIGHT/2);
         field.setLayoutX(0);
@@ -67,8 +65,12 @@ public class NumberInputView extends DataFlowView{
 
     }
 
+    private String trueOrFalse(boolean t){
+        return t?"True":"False";
+    }
+
     @Override
     public DataFlowNode getDataFlowNode() {
-        return numberInputNode;
+        return booleanInputNode;
     }
 }

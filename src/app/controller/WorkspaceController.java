@@ -1,9 +1,7 @@
 package app.controller;
 
 import app.delegate.WorkspaceListener;
-import app.view.ArithmeticNodeView;
-import app.view.DataFlowView;
-import app.view.DataFlowViewListener;
+import app.view.*;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.scene.PerspectiveCamera;
@@ -73,11 +71,11 @@ public class WorkspaceController implements DataFlowViewListener {
             if(node.getClass()== ArithmeticNode.class){
                 nodeView = new ArithmeticNodeView((ArithmeticNode)node,this);
             }else if(node.getClass()== ConditionalNode.class){
-
+                nodeView = new ConditionalNodeView((ConditionalNode)node,this);
             }else if(node.getClass()== BooleanInputNode.class){
-
+                nodeView = new BooleanNodeView((BooleanInputNode)node,this);
             }else if(node.getClass()== NumberInputNode.class){
-
+                nodeView = new NumberInputView((NumberInputNode)node,this);
             }else if(node.getClass()== FunctionNode.class){
 
             }
