@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootContainer" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainWindowController">
+<AnchorPane fx:id="rootContainer" onKeyPressed="#keyPressedOnAnchorPane" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainWindowController">
    <children>
       <SubScene fx:id="canvas" fill="#3156c6" focusTraversable="true" height="900.0" layoutX="270.0" onMouseClicked="#mouseClickOnCanvas" onMouseDragged="#mouseDraggedOnCanvas" onMousePressed="#mousePressedOnCanvas" onMouseReleased="#mouseReleasedOnCanvas" onScroll="#scrollCanvas" onZoom="#zoomCanvas" style="-fx-background-color: blue;" width="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <root>

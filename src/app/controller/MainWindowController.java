@@ -2,6 +2,7 @@ package app.controller;
 
 import app.delegate.SidebarListener;
 import app.delegate.WorkspaceListener;
+import editor.command.Command;
 import editor.container.FunctionDefinitionStructure;
 import editor.data.DummyData;
 import editor.util.Logger;
@@ -13,12 +14,16 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Main controller that receives all outer static UI events. This controller does not hold and state
  * and is not responsible for any business logic.
  */
 public class MainWindowController implements SidebarListener, WorkspaceListener {
+
+    Stack<Command> undoStack = new Stack<>();
+    Stack<Command> redoStack = new Stack<>();
 
     //==================================================================================================================
     //  UI references
@@ -143,6 +148,18 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
         }
 
+    }
+
+    @FXML
+    private void keyPressedOnAnchorPane(KeyEvent keyEvent){
+
+        if(keyEvent.isMetaDown() && keyEvent.getCode() == KeyCode.Z){
+            if(keyEvent.isShiftDown()){
+                Logger.info("Redo");
+            }else{
+                Logger.info("Undo");
+            }
+        }
     }
 
 }
