@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -22,8 +23,8 @@ import java.util.Stack;
  */
 public class MainWindowController implements SidebarListener, WorkspaceListener {
 
-    Stack<Command> undoStack = new Stack<>();
-    Stack<Command> redoStack = new Stack<>();
+    private Stack<Command> undoStack = new Stack<>();
+    private Stack<Command> redoStack = new Stack<>();
 
     //==================================================================================================================
     //  UI references
@@ -55,6 +56,39 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         this.workspaceController.initialize();
     }
 
+    private void undo(){
+        try{
+            Command lastCommand = undoStack.pop();
+            lastCommand.undo();
+            redoStack.push(lastCommand);
+        }catch(EmptyStackException e){
+            Logger.info("Undo stack is empty");
+        }
+    }
+
+    private void redo(){
+        try{
+            Command revertedCommand = redoStack.pop();
+            revertedCommand.undo();
+            undoStack.push(revertedCommand);
+        }catch(EmptyStackException e){
+            Logger.info("Redo stack is empty");
+        }
+    }
+
+    //==================================================================================================================
+    //  Common children controller callbacks
+    //==================================================================================================================
+
+    @Override
+    public void registerCommand(Command command, boolean executeBeforeRegistering){
+        redoStack.removeAllElements();
+        if(executeBeforeRegistering){
+            command.redo();
+        }
+        undoStack.push(command);
+    }
+
     //==================================================================================================================
     //  Sidebar callbacks
     //==================================================================================================================
@@ -83,6 +117,23 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     //==================================================================================================================
     //  Event handlers (for static UI)
     //==================================================================================================================
+
+
+    // Anchor pane event(s)
+
+    @FXML
+    private void keyPressedOnAnchorPane(KeyEvent keyEvent){
+
+        if(keyEvent.isMetaDown() && keyEvent.getCode() == KeyCode.Z){
+            if(keyEvent.isShiftDown()){
+                this.redo();
+            }else{
+                this.undo();
+            }
+        }
+    }
+
+    // Canvas events
 
     @FXML
     private void mouseClickOnCanvas(MouseEvent mouseEvent){
@@ -114,6 +165,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private void zoomCanvas(ZoomEvent zoomEvent){
         workspaceController.zoomCanvas(zoomEvent);
     }
+
+    // Function List View events
 
     @FXML
     private void functionListEditStarted(ListView.EditEvent<String> e){
@@ -149,17 +202,4 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         }
 
     }
-
-    @FXML
-    private void keyPressedOnAnchorPane(KeyEvent keyEvent){
-
-        if(keyEvent.isMetaDown() && keyEvent.getCode() == KeyCode.Z){
-            if(keyEvent.isShiftDown()){
-                Logger.info("Redo");
-            }else{
-                Logger.info("Undo");
-            }
-        }
-    }
-
 }
