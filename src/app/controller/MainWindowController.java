@@ -69,7 +69,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private void redo(){
         try{
             Command revertedCommand = redoStack.pop();
-            revertedCommand.undo();
+            revertedCommand.redo();
             undoStack.push(revertedCommand);
         }catch(EmptyStackException e){
             Logger.info("Redo stack is empty");
@@ -142,18 +142,18 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     private void mousePressedOnCanvas(MouseEvent mouseEvent){
-        Logger.debug("Mouse press registered for target" + mouseEvent.getTarget());
+//        Logger.debug("Mouse press registered for target" + mouseEvent.getTarget());
         canvas.requestFocus();
     }
 
     @FXML
     private void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-        Logger.debug("Mouse drag registered for target" + mouseEvent.getTarget());
+//        Logger.debug("Mouse drag registered for target" + mouseEvent.getTarget());
     }
 
     @FXML
     private void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-        Logger.debug("Mouse release registered for target" + mouseEvent.getTarget());
+//        Logger.debug("Mouse release registered for target" + mouseEvent.getTarget());
     }
 
     @FXML

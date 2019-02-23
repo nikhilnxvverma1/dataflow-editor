@@ -26,8 +26,10 @@ public abstract class DataFlowView extends Group {
     protected EventHandler<MouseEvent> dragged = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            DataFlowView.this.setTranslateX(event.getX());
-            DataFlowView.this.setTranslateY(event.getY());
+            double newX = DataFlowView.this.getTranslateX() + event.getX();
+            double newY = DataFlowView.this.getTranslateY() + event.getY();
+            DataFlowView.this.setTranslateX(newX);
+            DataFlowView.this.setTranslateY(newY);
             moveCommand.setFinalX(DataFlowView.this.getTranslateX());
             moveCommand.setFinalY(DataFlowView.this.getTranslateY());
         }
@@ -37,6 +39,8 @@ public abstract class DataFlowView extends Group {
         @Override
         public void handle(MouseEvent event) {
             if(moveCommand.didMakeMovement()){
+                DataFlowView.this.getDataFlowNode().setX(moveCommand.getFinalX());
+                DataFlowView.this.getDataFlowNode().setY(moveCommand.getFinalY());
                 DataFlowView.this.dataFlowViewListener.registerCommand(moveCommand,false);
             }
         }
