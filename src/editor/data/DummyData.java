@@ -57,12 +57,12 @@ public class DummyData {
     public static List<FunctionDefinition> filledFunctionDefinitions(int count,
                                                                      int lowerLimitOfNodeCount,
                                                                      int upperLimitOfNodeCount){
-        List<FunctionDefinition> definitionList = new LinkedList<FunctionDefinition>();
+        List<FunctionDefinition> definitionList = new LinkedList<>();
         for(int i=0;i<count;i++){
 
             // random function definition with random number of node
             int randomNodeCount = lowerLimitOfNodeCount + random.nextInt(upperLimitOfNodeCount);
-            FunctionDefinition randomDefinition = randomNodesInADefinition(randomNodeCount,DataFlowNodeType.BOOLEAN_INPUT);
+            FunctionDefinition randomDefinition = randomNodesInADefinition(randomNodeCount,DataFlowNodeType.CONDITIONAL);
 
             // naming
             if(i==0){

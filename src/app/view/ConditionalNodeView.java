@@ -1,6 +1,8 @@
 package app.view;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -76,11 +78,8 @@ public class ConditionalNodeView extends DataFlowView{
         label.setLayoutX(-MAIN_RADIUS/2);
         label.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
         label.setFont(FONT);
-//        label.setStyle("-fx-background-color: red;"); //debugging purposes only
 
         this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
-        //TODO setup event handling appropriately
-
 
     }
 

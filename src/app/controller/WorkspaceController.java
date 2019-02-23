@@ -2,6 +2,7 @@ package app.controller;
 
 import app.delegate.WorkspaceListener;
 import app.view.*;
+import editor.command.Command;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.scene.PerspectiveCamera;
@@ -160,4 +161,8 @@ public class WorkspaceController implements DataFlowViewListener {
     //  Events received from the data flow views
     //==================================================================================================================
 
+    @Override
+    public void registerCommand(Command command, boolean executeBeforeRegistering) {
+        workspaceListener.registerCommand(command,executeBeforeRegistering);
+    }
 }
