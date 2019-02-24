@@ -105,6 +105,9 @@ public class ConditionalNodeView extends DataFlowView{
             case EQUALS:
                 label = "==";
                 break;
+            case NOT_EQUALS:
+                label = "!=";
+                break;
             case AND:
                 label = "&&";
                 break;

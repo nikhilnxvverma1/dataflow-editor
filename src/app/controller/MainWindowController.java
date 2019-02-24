@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.controller.util.NodeTool;
 import app.delegate.SidebarListener;
 import app.delegate.WorkspaceListener;
 import editor.command.Command;
@@ -9,7 +10,9 @@ import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
@@ -202,4 +205,45 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         }
 
     }
+
+    // Toolset events
+
+    @FXML
+    void plusClicked(ActionEvent event){
+        Logger.debug("plus  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.PLUS, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void minusClicked(ActionEvent event){
+        Logger.debug("minus  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MINUS, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void multiplyClicked(ActionEvent event){
+        Logger.debug("multiply  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MULTIPLY, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void divideClicked(ActionEvent event){
+        Logger.debug("divide  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.DIVIDE, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void moduloClicked(ActionEvent event){
+        Logger.debug("modulo  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MODULO, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void numberInputClicked(ActionEvent event){
+        Logger.debug("number input  clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.NUMBER_INPUT, (ToggleButton) event.getSource());
+    }
+
+
+
 }

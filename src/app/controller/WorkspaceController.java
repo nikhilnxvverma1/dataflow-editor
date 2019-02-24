@@ -1,10 +1,12 @@
 package app.controller;
 
+import app.controller.util.NodeTool;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.Command;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
+import javafx.event.ActionEvent;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
 import javafx.scene.input.ScrollEvent;
@@ -22,16 +24,19 @@ public class WorkspaceController implements DataFlowViewListener {
     private static final double CLOSEST_CAMERA_Z = -1;
     public static final double DEFAULT_CAMERA_Z = -100;
     private static final double FARTHEST_CAMERA_Z = -10000;
-    public static final double ZOOM_DELTA_Z = 50;
+    private static final double ZOOM_DELTA_Z = 50;
 
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
+    private FunctionDefinitionStructure currentStructure;
+    private NodeTool tool;
 
 
-    public WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
+    WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
+        this.tool = new NodeTool(this);
 
         // create a Camera to view the 3D Shapes
         // this needs to be done before any callbacks fire off that may have a dependency on camera
@@ -86,6 +91,14 @@ public class WorkspaceController implements DataFlowViewListener {
         }
     }
 
+    FunctionDefinitionStructure getCurrentStructure(){
+        return currentStructure;
+    }
+
+    NodeTool getTool() {
+        return tool;
+    }
+
     //==================================================================================================================
     //  Events received from the parent controller
     //==================================================================================================================
@@ -102,6 +115,9 @@ public class WorkspaceController implements DataFlowViewListener {
         canvas.getCamera().setTranslateX(newSelection.cameraX);
         canvas.getCamera().setTranslateY(newSelection.cameraY);
         canvas.getCamera().setTranslateZ(newSelection.cameraZ);
+
+        // set the newSelection as the current structure
+        currentStructure = newSelection;
     }
 
     /**
@@ -155,6 +171,12 @@ public class WorkspaceController implements DataFlowViewListener {
         // save the Z axis in the current structure
         FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
         current.cameraZ = newCameraZ;
+    }
+
+    // Toolset
+
+    void plusToolClicked(ActionEvent event){
+        Logger.debug("Clicked plus button");
     }
 
     //==================================================================================================================

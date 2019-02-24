@@ -9,6 +9,7 @@ public class ConditionalNode extends DataFlowNode {
         GREATER_THAN,
         GREATER_THAN_EQUAL_TO,
         EQUALS,
+        NOT_EQUALS,
         AND,
         OR,
         NOT
