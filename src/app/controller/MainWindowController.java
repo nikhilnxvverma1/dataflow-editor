@@ -169,19 +169,19 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     // Function List View events
 
     @FXML
-    private void functionListEditStarted(ListView.EditEvent<String> e){
+    private void functionListEditStarted(ListView.EditEvent<FunctionDefinitionStructure> e){
         Logger.debug("Function list edit started");
         sidebarController.functionListEditStarted(e);
     }
 
     @FXML
-    private void functionListEditCommit(ListView.EditEvent<String> e){
+    private void functionListEditCommit(ListView.EditEvent<FunctionDefinitionStructure> e){
         Logger.debug("Function list edit commit");
         sidebarController.functionListEditCommit(e);
     }
 
     @FXML
-    private void functionListEditCancel(ListView.EditEvent<String> e){
+    private void functionListEditCancel(ListView.EditEvent<FunctionDefinitionStructure> e){
         Logger.debug("Function list edit cancel");
         sidebarController.functionListEditCancel(e);
     }

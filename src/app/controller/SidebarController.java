@@ -2,7 +2,9 @@ package app.controller;
 
 import app.delegate.SidebarListener;
 import editor.command.DeleteFunctionDefinition;
+import editor.command.RenameFunctionDefinition;
 import editor.container.FunctionDefinitionStructure;
+import editor.util.FunctionDefinitionConverter;
 import editor.util.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.Callback;
 import model.FunctionDefinition;
 import java.util.List;
 
@@ -64,18 +68,25 @@ class SidebarController {
         }
 
         // add the names of the function definitions in the list view
-        functionListView.setCellFactory(param-> new ListCell<FunctionDefinitionStructure>(){
-            @Override
-            protected void updateItem(FunctionDefinitionStructure item, boolean empty) {
-                super.updateItem(item, empty);
+//        functionListView.setCellFactory(new Callback<ListView<FunctionDefinitionStructure>, ListCell<FunctionDefinitionStructure>>() {
+//            @Override
+//            public ListCell<FunctionDefinitionStructure> call(ListView<FunctionDefinitionStructure> param) {
+//                return new ListCell<FunctionDefinitionStructure>() {
+//                    @Override
+//                    protected void updateItem(FunctionDefinitionStructure item, boolean empty) {
+//                        super.updateItem(item, empty);
+//
+//                        if (empty || item == null || item.functionDefinition == null) {
+//                            setText(null);
+//                        } else {
+//                            setText(item.functionDefinition.getName());
+//                        }
+//                    }
+//                };
+//            }
+//        });
 
-                if (empty || item == null || item.functionDefinition == null) {
-                    setText(null);
-                } else {
-                    setText(item.functionDefinition.getName());
-                }
-            }
-        });
+        functionListView.setCellFactory(TextFieldListCell.forListView(new FunctionDefinitionConverter()));
 
         functionListView.setItems(functionStructureList);
 
@@ -113,21 +124,34 @@ class SidebarController {
     //  Events received from the parent controller
     //==================================================================================================================
 
-    void functionListEditStarted(ListView.EditEvent<String> e){
+    void functionListEditStarted(ListView.EditEvent<FunctionDefinitionStructure> e){
         // TODO initialize the function name command
+
     }
 
-    void functionListEditCommit(ListView.EditEvent<String> e){
+    void functionListEditCommit(ListView.EditEvent<FunctionDefinitionStructure> e){
+
+        // get the index
         int index = e.getIndex();
-        FunctionDefinition target = functionStructureList.get(index).functionDefinition;
-        if(!target.isMain()){
-            target.setName(e.getNewValue());
-//            functionListView.getItems().set(index,target.getName());
+        FunctionDefinitionStructure target = functionStructureList.get(index);
+
+        // renaming main not allowed
+        if(!target.functionDefinition.isMain()){
+
+            String newName = e.getNewValue().functionDefinition.getName();
+
+            // commit the edit function name command
+            sidebarListener.registerCommand(
+                    new RenameFunctionDefinition(target,
+                    newName,
+                    index,
+                    functionListView),
+                    true);
+
         }//else show a notice saying you can't rename main method
-        // TODO commit the edit function name command
     }
 
-    void functionListEditCancel(ListView.EditEvent<String> e){
+    void functionListEditCancel(ListView.EditEvent<FunctionDefinitionStructure> e){
         // TODO cancel the edit function name command
     }
 
