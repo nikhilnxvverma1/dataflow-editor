@@ -16,43 +16,29 @@ public abstract class DataFlowView extends Group {
 
     private MoveDataFlowView moveCommand;
 
-    protected EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            moveCommand = new MoveDataFlowView(DataFlowView.this);
-        }
-    };
-
-    protected EventHandler<MouseEvent> dragged = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            double newX = DataFlowView.this.getTranslateX() + event.getX();
-            double newY = DataFlowView.this.getTranslateY() + event.getY();
-            DataFlowView.this.setTranslateX(newX);
-            DataFlowView.this.setTranslateY(newY);
-            moveCommand.setFinalX(DataFlowView.this.getTranslateX());
-            moveCommand.setFinalY(DataFlowView.this.getTranslateY());
-        }
-    };
-
-    protected EventHandler<MouseEvent> released = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            if(moveCommand.didMakeMovement()){
-                DataFlowView.this.getDataFlowNode().setX(moveCommand.getFinalX());
-                DataFlowView.this.getDataFlowNode().setY(moveCommand.getFinalY());
-                DataFlowView.this.dataFlowViewListener.registerCommand(moveCommand,false);
-            }
-        }
-    };
-
     public DataFlowView(DataFlowViewListener dataFlowViewListener) {
         this.dataFlowViewListener = dataFlowViewListener;
 
-        // event handling for dragging (moving) the node
-        this.setOnMousePressed(pressed);
-        this.setOnMouseDragged(dragged);
-        this.setOnMouseReleased(released);
+        // event handling for dragging (moving) the node (Mouse press, drag, release)
+
+        this.setOnMousePressed(event -> moveCommand = new MoveDataFlowView(this));
+
+        this.setOnMouseDragged(event -> {
+            double newX = this.getTranslateX() + event.getX();
+            double newY = this.getTranslateY() + event.getY();
+            this.setTranslateX(newX);
+            this.setTranslateY(newY);
+            moveCommand.setFinalX(this.getTranslateX());
+            moveCommand.setFinalY(this.getTranslateY());
+        });
+
+        this.setOnMouseReleased(event -> {
+            if (moveCommand.didMakeMovement()) {
+                this.getDataFlowNode().setX(moveCommand.getFinalX());
+                this.getDataFlowNode().setY(moveCommand.getFinalY());
+                this.dataFlowViewListener.registerCommand(moveCommand, false);
+            }
+        });
     }
 
     public abstract DataFlowNode getDataFlowNode();
