@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Binded function list view to FXCollections, added delete command">
-      <change afterPath="$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor/util/FunctionDefinitionConverter.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Undo Redo for renaming functions, switched back to textfield listcell&#10;Added a new string converter utility to output and input purposes">
+      <change afterPath="$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/SidebarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/SidebarController.java" afterDir="false" />
@@ -74,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="171" column="85" selection-start-line="171" selection-start-column="85" selection-end-line="171" selection-end-column="85" />
+            <state relative-caret-position="-1036">
+              <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4642#4925#0" />
@@ -90,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+            <state relative-caret-position="160">
+              <caret line="160" column="95" lean-forward="true" selection-start-line="160" selection-start-column="95" selection-end-line="160" selection-end-column="95" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,11 +101,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#912#913#0" expanded="true" />
+                <element signature="e#985#986#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="315">
+              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -201,7 +214,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/editor/shapes/Line.java" />
         <option value="$PROJECT_DIR$/src/editor/shapes/Circle.java" />
         <option value="$PROJECT_DIR$/src/model/Node.java" />
         <option value="$PROJECT_DIR$/src/model/Edge.java" />
@@ -249,9 +261,10 @@
         <option value="$PROJECT_DIR$/src/editor/command/DeleteFunctionDefinition.java" />
         <option value="$PROJECT_DIR$/src/editor/util/FunctionDefinitionStringConverter.java" />
         <option value="$PROJECT_DIR$/src/editor/util/FunctionDefinitionConverter.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/SidebarController.java" />
         <option value="$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/SidebarController.java" />
       </list>
     </option>
   </component>
@@ -363,7 +376,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550975038507" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550975847680" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
@@ -696,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1550971834135</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Undo Redo for renaming functions, switched back to textfield listcell&#10;Added a new string converter utility to output and input purposes">
+      <created>1550975148764</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1550975148764</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -706,7 +726,7 @@
     <frame x="0" y="23" width="1680" height="1024" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.17032968" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.17032968" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -716,7 +736,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32725322" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39914164" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -784,7 +804,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Full base model class for dataflow node and extended for arithmetic nodes" />
     <MESSAGE value="Model classes for conditional(including relational),input and function nodes" />
     <MESSAGE value="Visual design and static UI through the FXML file(mainly the toolbar)" />
     <MESSAGE value="Fixed canvas size bug, controller setup, basic mouse event handling" />
@@ -809,7 +828,8 @@
     <MESSAGE value="Event handling for moving node with command. Still needs refinement" />
     <MESSAGE value="Finished moving node with undo redo command, Fixed small redo bug" />
     <MESSAGE value="Binded function list view to FXCollections, added delete command" />
-    <option name="LAST_COMMIT_MESSAGE" value="Binded function list view to FXCollections, added delete command" />
+    <MESSAGE value="Undo Redo for renaming functions, switched back to textfield listcell&#10;Added a new string converter utility to output and input purposes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Undo Redo for renaming functions, switched back to textfield listcell&#10;Added a new string converter utility to output and input purposes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1212,10 +1232,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/util/FunctionDefinitionConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#286#287#0" expanded="true" />
+            <element signature="e#313#314#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="171" column="85" selection-start-line="171" selection-start-column="85" selection-end-line="171" selection-end-column="85" />
+        <state relative-caret-position="-1036">
+          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4642#4925#0" />
@@ -1229,32 +1271,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/util/FunctionDefinitionConverter.java">
+    <entry file="file://$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="330">
+          <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-            <element signature="e#313#314#0" expanded="true" />
+            <element signature="e#912#913#0" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="160">
+          <caret line="160" column="95" lean-forward="true" selection-start-line="160" selection-start-column="95" selection-end-line="160" selection-end-column="95" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

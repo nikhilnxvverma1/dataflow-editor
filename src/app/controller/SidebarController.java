@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.delegate.SidebarListener;
+import editor.command.AddFunctionDefinition;
 import editor.command.DeleteFunctionDefinition;
 import editor.command.RenameFunctionDefinition;
 import editor.container.FunctionDefinitionStructure;
@@ -125,7 +126,6 @@ class SidebarController {
     //==================================================================================================================
 
     void functionListEditStarted(ListView.EditEvent<FunctionDefinitionStructure> e){
-        // TODO initialize the function name command
 
     }
 
@@ -152,17 +152,21 @@ class SidebarController {
     }
 
     void functionListEditCancel(ListView.EditEvent<FunctionDefinitionStructure> e){
-        // TODO cancel the edit function name command
+
     }
 
     void newFunctionDefinition(ActionEvent actionEvent){
 
         FunctionDefinition newDefinition = new FunctionDefinition(false,getValidNewName());
-        FunctionDefinitionStructure contained = new FunctionDefinitionStructure(newDefinition);
-        functionStructureList.add(contained);
-//        functionListView.getItems().add(newDefinition.getName());
-        functionListView.getSelectionModel().selectLast();
-        // TODO create a new function definition command and use that instead
+        FunctionDefinitionStructure structure = new FunctionDefinitionStructure(newDefinition);
+
+        // create a new function definition command and use that instead
+        sidebarListener.registerCommand(
+                new AddFunctionDefinition(
+                        structure,
+                        functionListView,
+                        functionStructureList),
+                true);
     }
 
     private String getValidNewName(){

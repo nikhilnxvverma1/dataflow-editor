@@ -35,7 +35,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     private SubScene canvas;
     @FXML
-    private ListView functionListView;
+    private ListView<FunctionDefinitionStructure> functionListView;
 
     //==================================================================================================================
     //  Descendant controllers and their initialization
