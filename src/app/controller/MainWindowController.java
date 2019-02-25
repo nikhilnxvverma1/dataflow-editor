@@ -140,7 +140,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     private void mouseClickOnCanvas(MouseEvent mouseEvent){
-        System.out.println("Mouse click registered");
+
     }
 
     @FXML
@@ -157,6 +157,11 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     private void mouseReleasedOnCanvas(MouseEvent mouseEvent){
 //        Logger.debug("Mouse release registered for target" + mouseEvent.getTarget());
+    }
+
+    @FXML
+    private void mouseMovedOnCanvas(MouseEvent mouseEvent){
+
     }
 
     @FXML

@@ -29,7 +29,6 @@ public class DeleteFunctionDefinition implements Command {
     @Override
     public void undo() {
         functionStructureList.add(index,objectToDelete);
-        listView.getSelectionModel().select(index);
     }
 
     @Override
@@ -38,5 +37,15 @@ public class DeleteFunctionDefinition implements Command {
         // only deletes items that are not main (checked in the constructor above)
         functionStructureList.remove(objectToDelete);
 
+    }
+
+    @Override
+    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
+        if(undoOrRedo){
+            return index;
+        }else{
+            // since main can never be deleted and is always going to be on position 0, this is safe
+            return index - 1;
+        }
     }
 }

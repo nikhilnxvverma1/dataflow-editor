@@ -2,7 +2,7 @@ package editor.command;
 
 import app.view.DataFlowView;
 
-public class MoveDataFlowView implements Command {
+public class MoveDataFlowView extends CanvasCommand {
 
     private DataFlowView dataFlowView;
     private double initialX;
@@ -32,6 +32,11 @@ public class MoveDataFlowView implements Command {
         dataFlowView.getDataFlowNode().setY(finalY);
         dataFlowView.setTranslateX(finalX);
         dataFlowView.setTranslateY(finalY);
+    }
+
+    @Override
+    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
+        return functionDefinitionIndex;
     }
 
     public double getInitialX() {

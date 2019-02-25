@@ -1,6 +1,6 @@
 package app.view;
 
-import editor.command.Command;
+import editor.command.CanvasCommand;
 
 /**
  * Delegate that handles business callbacks as they occur on dataflow views
@@ -12,5 +12,5 @@ public interface DataFlowViewListener {
      * @param command the command to push to the undo stack
      * @param executeBeforeRegistering if true the command will be executed before registering.
      */
-    void registerCommand(Command command, boolean executeBeforeRegistering);
+    void registerCommand(CanvasCommand command, boolean executeBeforeRegistering);
 }

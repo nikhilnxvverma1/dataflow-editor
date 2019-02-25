@@ -17,13 +17,18 @@ public class NodeTool {
     private WorkspaceController backReference;
     private ToggleButton source = null;
     private DataFlowView nodePreview = null;
+    private Type type = null;
 
     public NodeTool(WorkspaceController backReference) {
         this.backReference = backReference;
 
     }
 
-    public boolean toggleNodeCreationFor(Type type,ToggleButton source){
+    public DataFlowView getNodePreview() {
+        return nodePreview;
+    }
+
+    public boolean toggleNodeCreationFor(Type type, ToggleButton source){
         boolean creationMode;
 
         // go back to normal mode
@@ -31,6 +36,7 @@ public class NodeTool {
             this.source = null;
             source.setSelected(false);
             creationMode = false;
+            this.type = null;
         }else{
 
             // if existing source exists, set it to false
@@ -39,7 +45,8 @@ public class NodeTool {
             }
 
             // set a new data flow view and enable its creation
-            nodePreview = buildPreviewDataFlowView(type);
+            this.type = type;
+            nodePreview = buildPreviewDataFlowView();
             this.source = source;
             this.source.setSelected(true);
             creationMode = true;
@@ -47,7 +54,8 @@ public class NodeTool {
         return creationMode;
     }
 
-    private DataFlowView buildPreviewDataFlowView(Type type){
+
+    private DataFlowView buildPreviewDataFlowView(){
         switch (type){
 
             case PLUS:

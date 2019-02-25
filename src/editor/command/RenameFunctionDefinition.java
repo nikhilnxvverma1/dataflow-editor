@@ -24,14 +24,17 @@ public class RenameFunctionDefinition implements Command{
     @Override
     public void undo() {
         objectToRename.functionDefinition.setName(oldName);
-        listView.getSelectionModel().select(index);
         listView.refresh();
     }
 
     @Override
     public void redo() {
         objectToRename.functionDefinition.setName(newName);
-        listView.getSelectionModel().select(index);
         listView.refresh();
+    }
+
+    @Override
+    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
+        return index;
     }
 }

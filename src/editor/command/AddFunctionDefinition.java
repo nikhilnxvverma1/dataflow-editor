@@ -26,6 +26,10 @@ public class AddFunctionDefinition implements Command {
     @Override
     public void redo() {
         functionStructureList.add(functionDefinitionStructure);
-        listView.getSelectionModel().selectLast();
+    }
+
+    @Override
+    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
+        return listView.getItems().size() - 1;
     }
 }

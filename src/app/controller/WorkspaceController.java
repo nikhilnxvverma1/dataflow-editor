@@ -3,12 +3,15 @@ package app.controller;
 import app.controller.util.NodeTool;
 import app.delegate.WorkspaceListener;
 import app.view.*;
+import editor.command.CanvasCommand;
 import editor.command.Command;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import model.*;
@@ -29,7 +32,6 @@ public class WorkspaceController implements DataFlowViewListener {
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
-    private FunctionDefinitionStructure currentStructure;
     private NodeTool tool;
 
 
@@ -92,7 +94,7 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     FunctionDefinitionStructure getCurrentStructure(){
-        return currentStructure;
+        return workspaceListener.getCurrentFunctionDefinitionStructure();
     }
 
     NodeTool getTool() {
@@ -116,8 +118,6 @@ public class WorkspaceController implements DataFlowViewListener {
         canvas.getCamera().setTranslateY(newSelection.cameraY);
         canvas.getCamera().setTranslateZ(newSelection.cameraZ);
 
-        // set the newSelection as the current structure
-        currentStructure = newSelection;
     }
 
     /**
@@ -173,10 +173,26 @@ public class WorkspaceController implements DataFlowViewListener {
         current.cameraZ = newCameraZ;
     }
 
-    // Toolset
+    // Mouse Events
 
-    void plusToolClicked(ActionEvent event){
-        Logger.debug("Clicked plus button");
+    void mouseMovedOnCanvas(MouseEvent mouseEvent){
+
+    }
+
+    void mousePressedOnCanvas(MouseEvent mouseEvent){
+        canvas.requestFocus();
+    }
+
+    void mouseDraggedOnCanvas(MouseEvent mouseEvent){
+
+    }
+
+    void mouseReleasedOnCanvas(MouseEvent mouseEvent){
+
+    }
+
+    void mouseClickOnCanvas(MouseEvent mouseEvent){
+
     }
 
     //==================================================================================================================
@@ -184,7 +200,14 @@ public class WorkspaceController implements DataFlowViewListener {
     //==================================================================================================================
 
     @Override
-    public void registerCommand(Command command, boolean executeBeforeRegistering) {
+    public void registerCommand(CanvasCommand command, boolean executeBeforeRegistering) {
+
+        // find and set the index of the current function definition structure on the canvas command
+        FunctionDefinitionStructure currentStructure = workspaceListener.getCurrentFunctionDefinitionStructure();
+        List<FunctionDefinitionStructure> structureList = workspaceListener.getAllFunctionDefinitionStructure();
+        int index = structureList.indexOf(currentStructure);
+        command.setFunctionDefinitionIndex(index);
+
         workspaceListener.registerCommand(command,executeBeforeRegistering);
     }
 }
