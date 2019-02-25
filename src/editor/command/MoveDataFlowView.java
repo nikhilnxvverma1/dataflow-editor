@@ -34,11 +34,6 @@ public class MoveDataFlowView extends CanvasCommand {
         dataFlowView.setTranslateY(finalY);
     }
 
-    @Override
-    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
-        return functionDefinitionIndex;
-    }
-
     public double getInitialX() {
         return initialX;
     }

@@ -26,8 +26,7 @@ public abstract class DataFlowView extends Group {
         this.setOnMouseDragged(event -> {
             double newX = this.getTranslateX() + event.getX();
             double newY = this.getTranslateY() + event.getY();
-            this.setTranslateX(newX);
-            this.setTranslateY(newY);
+            this.setLocation(newX,newY);
             moveCommand.setFinalX(this.getTranslateX());
             moveCommand.setFinalY(this.getTranslateY());
         });
@@ -42,5 +41,12 @@ public abstract class DataFlowView extends Group {
     }
 
     public abstract DataFlowNode getDataFlowNode();
+
+    public void setLocation(double x,double y){
+        this.setTranslateX(x);
+        this.setTranslateY(y);
+        getDataFlowNode().setX(x);
+        getDataFlowNode().setY(y);
+    }
 
 }

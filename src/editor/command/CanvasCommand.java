@@ -6,4 +6,10 @@ public abstract class CanvasCommand implements Command{
     public void setFunctionDefinitionIndex(int functionDefinitionIndex) {
         this.functionDefinitionIndex = functionDefinitionIndex;
     }
+
+    @Override
+    public int getFunctionDefinitionIndex(boolean undoOrRedo) {
+        return functionDefinitionIndex;
+    }
+
 }

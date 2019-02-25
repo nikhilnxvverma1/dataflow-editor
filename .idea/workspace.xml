@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Groundwork for creating nodes through the toolset (includes a new class)">
-      <change afterPath="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added index method in command interface &amp; abstract canvas command">
+      <change afterPath="$PROJECT_DIR$/src/editor/command/CreateDataFlowNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/view/DataFlowViewListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/DataFlowViewListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/command/DeleteFunctionDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/DeleteFunctionDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/static-ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/static-ui.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/DataFlowView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/DataFlowView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,11 +78,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="530">
+              <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="27" selection-end-line="91" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4642#4925#0" />
+                <element signature="e#5329#5330#0" expanded="true" />
+                <element signature="e#5385#5386#0" expanded="true" />
+                <element signature="e#5994#5995#0" expanded="true" />
+                <element signature="e#6011#6012#0" expanded="true" />
+                <element signature="e#6243#6244#0" expanded="true" />
+                <element signature="e#6277#6278#0" expanded="true" />
+                <element signature="e#6383#6384#0" expanded="true" />
+                <element signature="e#6417#6418#0" expanded="true" />
                 <element signature="e#5678#5679#0" expanded="true" />
                 <element signature="e#5736#5737#0" expanded="true" />
                 <element signature="e#5797#5798#0" expanded="true" />
@@ -94,31 +99,74 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+            <state relative-caret-position="245">
+              <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3560#3561#0" expanded="true" />
                 <element signature="e#3587#3588#0" expanded="true" />
+                <element signature="e#6870#6871#0" expanded="true" />
+                <element signature="e#6903#6904#0" expanded="true" />
+                <element signature="e#6993#6994#0" expanded="true" />
+                <element signature="e#7029#7030#0" expanded="true" />
+                <element signature="e#7087#7088#0" expanded="true" />
+                <element signature="e#7123#7124#0" expanded="true" />
                 <element signature="e#7110#7111#0" expanded="true" />
                 <element signature="e#7147#7148#0" expanded="true" />
+                <element signature="e#7236#7237#0" expanded="true" />
+                <element signature="e#7255#7256#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+            <state relative-caret-position="34">
+              <caret line="100" column="9" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#798#799#0" expanded="true" />
-                <element signature="e#832#833#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/editor/command/CreateDataFlowNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/editor/command/CanvasCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+              <folding>
+                <element signature="e#336#337#0" expanded="true" />
+                <element signature="e#360#361#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="48" column="34" lean-forward="true" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,10 +193,12 @@
       <find>select</find>
       <find>tool</find>
       <find>Arithmetic</find>
+      <find>return</find>
     </findStrings>
     <replaceStrings>
       <replace>final</replace>
       <replace>Conditional</replace>
+      <replace>translucentView =</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -167,7 +217,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/Edge.java" />
         <option value="$PROJECT_DIR$/src/model/DataValueType.java" />
         <option value="$PROJECT_DIR$/src/model/ArithematicNode.java" />
         <option value="$PROJECT_DIR$/src/model/UniraryArithemeticNode.java" />
@@ -202,22 +251,23 @@
         <option value="$PROJECT_DIR$/src/app/delegate/SubControllerListener.java" />
         <option value="$PROJECT_DIR$/src/app/delegate/ChildControllerListener.java" />
         <option value="$PROJECT_DIR$/src/editor/data/DummyData.java" />
-        <option value="$PROJECT_DIR$/src/app/view/DataFlowView.java" />
         <option value="$PROJECT_DIR$/src/editor/util/FunctionDefinitionStringConverter.java" />
         <option value="$PROJECT_DIR$/src/editor/util/FunctionDefinitionConverter.java" />
         <option value="$PROJECT_DIR$/src/app/controller/SidebarController.java" />
         <option value="$PROJECT_DIR$/src/model/ConditionalNode.java" />
         <option value="$PROJECT_DIR$/src/app/view/ConditionalNodeView.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
         <option value="$PROJECT_DIR$/src/editor/command/Command.java" />
-        <option value="$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java" />
         <option value="$PROJECT_DIR$/src/editor/command/RenameFunctionDefinition.java" />
         <option value="$PROJECT_DIR$/src/app/view/DataFlowViewListener.java" />
-        <option value="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java" />
         <option value="$PROJECT_DIR$/src/editor/command/DeleteFunctionDefinition.java" />
+        <option value="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" />
+        <option value="$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java" />
+        <option value="$PROJECT_DIR$/src/app/view/DataFlowView.java" />
+        <option value="$PROJECT_DIR$/src/editor/command/CreateDataFlowNode.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
       </list>
     </option>
   </component>
@@ -337,7 +387,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551056605226" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551061784617" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
@@ -691,7 +741,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551036964404</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Added index method in command interface &amp; abstract canvas command">
+      <created>1551056687523</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1551056687523</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -701,7 +758,7 @@
     <frame x="0" y="23" width="1680" height="1024" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.17032968" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.17032968" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -709,9 +766,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32939914" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32725322" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -779,7 +836,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Fixed canvas size bug, controller setup, basic mouse event handling" />
     <MESSAGE value="Created new controllers for sidebar &amp; canvas with respective delegates" />
     <MESSAGE value="Function definition model, refactored name for dataflownode" />
     <MESSAGE value="Base class and delegate interface for views, one incomplete implementation" />
@@ -804,7 +860,8 @@
     <MESSAGE value="Undo Redo for renaming functions, switched back to textfield listcell&#10;Added a new string converter utility to output and input purposes" />
     <MESSAGE value="Undo redo for the add function definition" />
     <MESSAGE value="Groundwork for creating nodes through the toolset (includes a new class)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Groundwork for creating nodes through the toolset (includes a new class)" />
+    <MESSAGE value="Added index method in command interface &amp; abstract canvas command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added index method in command interface &amp; abstract canvas command" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1111,16 +1168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ConditionalNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1156,17 +1203,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
-          <folding>
-            <element signature="e#1097#1098#0" expanded="true" />
-            <element signature="e#1121#1122#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,13 +1247,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/command/CanvasCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/command/AddFunctionDefinition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -1226,21 +1255,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1021#1022#0" expanded="true" />
             <element signature="e#1091#1092#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4642#4925#0" />
-            <element signature="e#5678#5679#0" expanded="true" />
-            <element signature="e#5736#5737#0" expanded="true" />
-            <element signature="e#5797#5798#0" expanded="true" />
-            <element signature="e#5854#5855#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1255,28 +1269,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
+    <entry file="file://$PROJECT_DIR$/src/editor/command/CanvasCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+        <state relative-caret-position="165">
+          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <folding>
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#360#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="48" column="34" lean-forward="true" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3560#3561#0" expanded="true" />
-            <element signature="e#3587#3588#0" expanded="true" />
-            <element signature="e#7110#7111#0" expanded="true" />
-            <element signature="e#7147#7148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="27" selection-end-line="91" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5329#5330#0" expanded="true" />
+            <element signature="e#5385#5386#0" expanded="true" />
+            <element signature="e#5994#5995#0" expanded="true" />
+            <element signature="e#6011#6012#0" expanded="true" />
+            <element signature="e#6243#6244#0" expanded="true" />
+            <element signature="e#6277#6278#0" expanded="true" />
+            <element signature="e#6383#6384#0" expanded="true" />
+            <element signature="e#6417#6418#0" expanded="true" />
+            <element signature="e#5678#5679#0" expanded="true" />
+            <element signature="e#5736#5737#0" expanded="true" />
+            <element signature="e#5797#5798#0" expanded="true" />
+            <element signature="e#5854#5855#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/command/CreateDataFlowNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+        <state relative-caret-position="34">
+          <caret line="100" column="9" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#798#799#0" expanded="true" />
-            <element signature="e#832#833#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3560#3561#0" expanded="true" />
+            <element signature="e#3587#3588#0" expanded="true" />
+            <element signature="e#6870#6871#0" expanded="true" />
+            <element signature="e#6903#6904#0" expanded="true" />
+            <element signature="e#6993#6994#0" expanded="true" />
+            <element signature="e#7029#7030#0" expanded="true" />
+            <element signature="e#7087#7088#0" expanded="true" />
+            <element signature="e#7123#7124#0" expanded="true" />
+            <element signature="e#7110#7111#0" expanded="true" />
+            <element signature="e#7147#7148#0" expanded="true" />
+            <element signature="e#7236#7237#0" expanded="true" />
+            <element signature="e#7255#7256#0" expanded="true" />
           </folding>
         </state>
       </provider>

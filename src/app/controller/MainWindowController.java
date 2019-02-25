@@ -63,6 +63,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         try{
             Command lastCommand = undoStack.pop();
             lastCommand.undo();
+            functionListView.getSelectionModel().select(lastCommand.getFunctionDefinitionIndex(true));
             redoStack.push(lastCommand);
         }catch(EmptyStackException e){
             Logger.info("Undo stack is empty");
@@ -73,6 +74,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         try{
             Command revertedCommand = redoStack.pop();
             revertedCommand.redo();
+            functionListView.getSelectionModel().select(revertedCommand.getFunctionDefinitionIndex(false));
             undoStack.push(revertedCommand);
         }catch(EmptyStackException e){
             Logger.info("Redo stack is empty");
@@ -133,6 +135,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
             }else{
                 this.undo();
             }
+        } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
+            workspaceController.getTool().clear();
         }
     }
 
@@ -140,7 +144,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     private void mouseClickOnCanvas(MouseEvent mouseEvent){
-
+        workspaceController.mouseClickOnCanvas(mouseEvent);
     }
 
     @FXML
@@ -161,7 +165,17 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     private void mouseMovedOnCanvas(MouseEvent mouseEvent){
+        workspaceController.mouseMovedOnCanvas(mouseEvent);
+    }
 
+    @FXML
+    private void mouseEnteredOnCanvas(MouseEvent mouseEvent){
+        workspaceController.mouseEnteredOnCanvas(mouseEvent);
+    }
+
+    @FXML
+    private void mouseExitedOnCanvas(MouseEvent mouseEvent){
+        workspaceController.mouseExitedOnCanvas(mouseEvent);
     }
 
     @FXML

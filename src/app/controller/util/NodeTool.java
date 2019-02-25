@@ -2,7 +2,10 @@ package app.controller.util;
 
 import app.controller.WorkspaceController;
 import app.view.*;
+import editor.command.CreateDataFlowNode;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import model.ArithmeticNode;
 import model.BooleanInputNode;
 import model.ConditionalNode;
@@ -14,6 +17,8 @@ import model.NumberInputNode;
  */
 public class NodeTool {
 
+    private static final double TRANSLUCENCY = 0.5;
+
     private WorkspaceController backReference;
     private ToggleButton source = null;
     private DataFlowView nodePreview = null;
@@ -24,8 +29,23 @@ public class NodeTool {
 
     }
 
-    public DataFlowView getNodePreview() {
-        return nodePreview;
+    public void togglePreview(boolean visible){
+        if (nodePreview != null) {
+            nodePreview.setVisible(visible);
+        }
+    }
+
+    /** Switches off creation mode of a type of node and defaults back to a selection mode */
+    public void clear(){
+        if (source != null) {
+            source.setSelected(false);
+            source = null;
+        }
+        if (nodePreview != null) {
+            backReference.getCurrentStructure().group.getChildren().remove(nodePreview);
+            nodePreview = null;
+        }
+        type = null;
     }
 
     public boolean toggleNodeCreationFor(Type type, ToggleButton source){
@@ -33,10 +53,8 @@ public class NodeTool {
 
         // go back to normal mode
         if (source == this.source) {
-            this.source = null;
-            source.setSelected(false);
+            clear();
             creationMode = false;
-            this.type = null;
         }else{
 
             // if existing source exists, set it to false
@@ -47,6 +65,7 @@ public class NodeTool {
             // set a new data flow view and enable its creation
             this.type = type;
             nodePreview = buildPreviewDataFlowView();
+            backReference.getCurrentStructure().group.getChildren().add(nodePreview);
             this.source = source;
             this.source.setSelected(true);
             creationMode = true;
@@ -54,111 +73,164 @@ public class NodeTool {
         return creationMode;
     }
 
+    public void createNode(MouseEvent mouseEvent){
+        if (nodePreview != null) {
+
+            Point2D p = transformedAfterPan(mouseEvent);
+            nodePreview.setLocation(p.getX(),p.getY());
+
+            // get rid of the translucency
+            nodePreview.setOpacity(1);
+
+            // create the command and execute it through the workspace
+            CreateDataFlowNode createNode = new CreateDataFlowNode(nodePreview,backReference.getCurrentStructure());
+            backReference.registerCommand(createNode,true);
+
+            //set a new node preview at mouse position
+            nodePreview = buildPreviewDataFlowView();
+            backReference.getCurrentStructure().group.getChildren().add(nodePreview);
+            nodePreview.setLocation(p.getX(),p.getY());
+        }
+    }
+
+    public void mouseMoved(MouseEvent mouseEvent){
+        if (nodePreview != null) {
+
+            Point2D p = transformedAfterPan(mouseEvent);
+            nodePreview.setLocation(p.getX(),p.getY());
+        }
+    }
+
+    private Point2D transformedAfterPan(MouseEvent mouseEvent){
+        //get the location from the mouse event (cancel the camera pan)
+        double x = mouseEvent.getX() + backReference.getCurrentStructure().cameraX;
+        double y = mouseEvent.getY() + backReference.getCurrentStructure().cameraY;
+        return new Point2D(x,y);
+    }
 
     private DataFlowView buildPreviewDataFlowView(){
+        DataFlowView dataFlowView = null;
         switch (type){
 
             case PLUS:
             {
                 ArithmeticNode model = new ArithmeticNode(0, 0);
                 model.setType(ArithmeticNode.Type.ADD);
-                return new ArithmeticNodeView(model,backReference);
+                dataFlowView =  new ArithmeticNodeView(model,backReference);
             }
+            break;
             case MINUS:
             {
                 ArithmeticNode model = new ArithmeticNode(0, 0);
                 model.setType(ArithmeticNode.Type.SUBTRACT);
-                return new ArithmeticNodeView(model,backReference);
+                dataFlowView =  new ArithmeticNodeView(model,backReference);
             }
+            break;
             case MULTIPLY:
             {
                 ArithmeticNode model = new ArithmeticNode(0, 0);
                 model.setType(ArithmeticNode.Type.MULTIPLY);
-                return new ArithmeticNodeView(model,backReference);
+                dataFlowView =  new ArithmeticNodeView(model,backReference);
             }
+            break;
             case DIVIDE:
             {
                 ArithmeticNode model = new ArithmeticNode(0, 0);
                 model.setType(ArithmeticNode.Type.DIVIDE);
-                return new ArithmeticNodeView(model,backReference);
+                dataFlowView =  new ArithmeticNodeView(model,backReference);
             }
+            break;
             case MODULO:
             {
                 ArithmeticNode model = new ArithmeticNode(0, 0);
                 model.setType(ArithmeticNode.Type.MODULO);
-                return new ArithmeticNodeView(model,backReference);
+                dataFlowView =  new ArithmeticNodeView(model,backReference);
             }
+            break;
             case NUMBER_INPUT:
             {
                 NumberInputNode model = new NumberInputNode(0,0);
-                return new NumberInputView(model,backReference);
+                dataFlowView =  new NumberInputView(model,backReference);
             }
+            break;
             case BOOLEAN_INPUT:
             {
                 BooleanInputNode model = new BooleanInputNode(0,0);
-                return new BooleanNodeView(model,backReference);
+                dataFlowView =  new BooleanNodeView(model,backReference);
             }
+            break;
             case LESS_THAN:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.LESS_THAN);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case LESS_THAN_EQUAL_TO:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.LESS_THAN_EQUAL_TO);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case GREATER_THAN:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.GREATER_THAN);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case GREATER_THAN_EQUAL_TO:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.GREATER_THAN_EQUAL_TO);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case EQUAL_TO:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.EQUALS);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case NOT_EQUAL_TO:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.NOT_EQUALS);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case AND:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.AND);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case OR:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.OR);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case NOT:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
                 model.setType(ConditionalNode.Type.NOT);
-                return new ConditionalNodeView(model,backReference);
+                dataFlowView =  new ConditionalNodeView(model,backReference);
             }
+            break;
             case FUNCTION:
                 break;
             case MODULE:
                 break;
         }
 
-        return null;
+        dataFlowView.setOpacity(TRANSLUCENCY);
+
+        return dataFlowView;
     }
 
     public enum Type{

@@ -4,10 +4,8 @@ import app.controller.util.NodeTool;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.CanvasCommand;
-import editor.command.Command;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
@@ -93,7 +91,7 @@ public class WorkspaceController implements DataFlowViewListener {
         }
     }
 
-    FunctionDefinitionStructure getCurrentStructure(){
+    public FunctionDefinitionStructure getCurrentStructure(){
         return workspaceListener.getCurrentFunctionDefinitionStructure();
     }
 
@@ -176,7 +174,15 @@ public class WorkspaceController implements DataFlowViewListener {
     // Mouse Events
 
     void mouseMovedOnCanvas(MouseEvent mouseEvent){
+        tool.mouseMoved(mouseEvent);
+    }
 
+    void mouseEnteredOnCanvas(MouseEvent mouseEvent){
+        tool.togglePreview(true);
+    }
+
+    void mouseExitedOnCanvas(MouseEvent mouseEvent){
+        tool.togglePreview(false);
     }
 
     void mousePressedOnCanvas(MouseEvent mouseEvent){
@@ -192,7 +198,7 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
-
+        tool.createNode(mouseEvent);
     }
 
     //==================================================================================================================
