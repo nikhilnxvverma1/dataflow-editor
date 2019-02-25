@@ -18,6 +18,15 @@ capable of delivering all the node creation and manipulation needs.
  several actions are possible. Every user driven event is undoable. Here is a sample 
  walkthrough of the application.
  
+ ### Functions
+ ![Functions](preview/preview-milestone-2-functions.gif "Functions")
+ 
+ ### Node creation and movement
+ ![Node creation and movement](preview/preview-milestone-2-node-create-n-move.gif "Node creation and movement")
+ 
+ ### Undo/Redo
+ ![Undo](preview/preview-milestone-2-undo.gif "Undo")
+ 
  The sidebar comprises of two sections, the top part is the list of function definitions
  and the bottom part is the toolset. Function definitions allow users to modularize 
  part of the dataflow diagram and reuse it. Toolset at the bottom of the sidebar is 
