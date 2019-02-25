@@ -229,40 +229,81 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     void plusClicked(ActionEvent event){
-        Logger.debug("plus  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.PLUS, (ToggleButton) event.getSource());
     }
 
     @FXML
     void minusClicked(ActionEvent event){
-        Logger.debug("minus  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MINUS, (ToggleButton) event.getSource());
     }
 
     @FXML
     void multiplyClicked(ActionEvent event){
-        Logger.debug("multiply  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MULTIPLY, (ToggleButton) event.getSource());
     }
 
     @FXML
     void divideClicked(ActionEvent event){
-        Logger.debug("divide  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.DIVIDE, (ToggleButton) event.getSource());
     }
 
     @FXML
     void moduloClicked(ActionEvent event){
-        Logger.debug("modulo  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.MODULO, (ToggleButton) event.getSource());
     }
 
     @FXML
     void numberInputClicked(ActionEvent event){
-        Logger.debug("number input  clicked");
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.NUMBER_INPUT, (ToggleButton) event.getSource());
     }
 
+    @FXML
+    void lessThanClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.LESS_THAN, (ToggleButton) event.getSource());
+    }
 
+    @FXML
+    void lessThanEqualToClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.LESS_THAN_EQUAL_TO, (ToggleButton) event.getSource());
+    }
 
+    @FXML
+    void greaterThanClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.GREATER_THAN, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void greaterThanEqualToClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.GREATER_THAN_EQUAL_TO, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void equalToClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.EQUAL_TO, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void notEqualToClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.NOT_EQUAL_TO, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void andClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.AND, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void orClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.OR, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void notClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.NOT, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void booleanInputClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.BOOLEAN_INPUT, (ToggleButton) event.getSource());
+    }
 }

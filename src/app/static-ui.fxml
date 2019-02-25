@@ -44,7 +44,7 @@
                         </ToolBar>
                         <VBox layoutY="253.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <TitledPane animated="false" text="Arithemetic">
+                              <TitledPane animated="false" expanded="false" text="Arithemetic">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -55,41 +55,29 @@
                                                 <ToggleButton layoutX="57.0" layoutY="10.0" mnemonicParsing="false" onAction="#multiplyClicked" text="X" />
                                                 <ToggleButton layoutX="104.0" layoutY="10.0" mnemonicParsing="false" onAction="#divideClicked" text="/" />
                                                 <ToggleButton layoutX="151.0" layoutY="10.0" mnemonicParsing="false" onAction="#moduloClicked" text="\%" />
-                                                <ToggleButton layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#numberInputClicked" text="NumberInput" />
+                                                <ToggleButton layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#numberInputClicked" text="Number" />
                                              </children>
                                           </TilePane>
                                        </children>
                                     </AnchorPane>
                                 </content>
                               </TitledPane>
-                              <TitledPane animated="false" expanded="false" text="Conditional">
+                              <TitledPane animated="false" text="Conditional">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
                                           <TilePane hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-radius: 100;" text="&lt;" />
-                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="&lt;=" />
-                                                <Button layoutX="69.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="&gt;" />
-                                                <Button layoutX="128.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="&gt;=" />
-                                                <Button layoutX="187.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="==" />
-                                                <Button layoutX="88.0" layoutY="57.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="!=" />
-                                                <Button mnemonicParsing="false" text="Input" />
-                                             </children>
-                                          </TilePane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" expanded="false" text="Relational">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <TilePane hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-radius: 100;" text="&amp;&amp;" />
-                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="||" />
-                                                <Button layoutX="69.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="!" />
+                                                <ToggleButton mnemonicParsing="false" onAction="#lessThanClicked" text="&lt;" />
+                                                <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#lessThanEqualToClicked" text="&lt;=" />
+                                                <ToggleButton layoutX="57.0" layoutY="10.0" mnemonicParsing="false" onAction="#greaterThanClicked" text="&gt;" />
+                                                <ToggleButton layoutX="104.0" layoutY="10.0" mnemonicParsing="false" onAction="#greaterThanEqualToClicked" text="&gt;=" />
+                                                <ToggleButton layoutX="151.0" layoutY="10.0" mnemonicParsing="false" onAction="#equalToClicked" text="==" />
+                                                <ToggleButton layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#notEqualToClicked" text="!=" />
+                                                <ToggleButton layoutX="10.0" layoutY="57.0" mnemonicParsing="false" onAction="#andClicked" text="&amp;&amp;" />
+                                                <ToggleButton layoutX="57.0" layoutY="57.0" mnemonicParsing="false" onAction="#orClicked" text="||" />
+                                                <ToggleButton layoutX="104.0" layoutY="57.0" mnemonicParsing="false" onAction="#notClicked" text="!" />
+                                                <ToggleButton layoutX="151.0" layoutY="57.0" mnemonicParsing="false" onAction="#booleanInputClicked" text="Boolean" />
                                              </children>
                                           </TilePane>
                                        </children>
