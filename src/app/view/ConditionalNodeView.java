@@ -81,6 +81,12 @@ public class ConditionalNodeView extends DataFlowView{
 
         this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
 
+        outputHandle.setOnMousePressed(outputConnectorPressed);
+        outputHandle.setOnMouseDragged(outputConnectorDragged);
+        outputHandle.setOnMouseReleased(outputConnectorReleased);
+
+
+
     }
 
     /**

@@ -1,6 +1,7 @@
 package app.view;
 
 import editor.command.MoveDataFlowView;
+import editor.util.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
@@ -14,7 +15,30 @@ public abstract class DataFlowView extends Group {
 
     private DataFlowViewListener dataFlowViewListener;
 
+
     private MoveDataFlowView moveCommand;
+
+    EventHandler<MouseEvent> outputConnectorPressed = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            Logger.debug("pressed connection");
+            event.consume();
+        }
+    };
+    EventHandler<MouseEvent> outputConnectorDragged = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            Logger.debug("dragged connection");
+            event.consume();
+        }
+    };
+    EventHandler<MouseEvent> outputConnectorReleased = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            Logger.debug("released connection");
+            event.consume();
+        }
+    };
 
     public DataFlowView(DataFlowViewListener dataFlowViewListener) {
         this.dataFlowViewListener = dataFlowViewListener;
