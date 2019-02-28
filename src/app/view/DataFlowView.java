@@ -5,6 +5,7 @@ import editor.util.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 import model.DataFlowNode;
 
 /**
@@ -64,13 +65,25 @@ public abstract class DataFlowView extends Group {
         });
     }
 
-    public abstract DataFlowNode getDataFlowNode();
-
     public void setLocation(double x,double y){
         this.setTranslateX(x);
         this.setTranslateY(y);
         getDataFlowNode().setX(x);
         getDataFlowNode().setY(y);
     }
+
+    public abstract DataFlowNode getDataFlowNode();
+
+    public abstract int totalInputChannels();
+
+    public abstract int totalOutputChannels();
+
+    public abstract Circle getInputConnectorAt(int index);
+
+    public abstract Circle getOutputConnectorAt(int index);
+
+    public abstract Class getTypeForInput(int index);
+
+    public abstract Class getTypeForOutput(int index);
 
 }

@@ -4,6 +4,7 @@ import app.controller.util.NodeTool;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.CanvasCommand;
+import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import model.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -215,5 +217,20 @@ public class WorkspaceController implements DataFlowViewListener {
         command.setFunctionDefinitionIndex(index);
 
         workspaceListener.registerCommand(command,executeBeforeRegistering);
+    }
+
+    @Override
+    public List<ConnectionPoint> getInputConnectionPoints(DataFlowView exclude){
+        LinkedList<ConnectionPoint> connectionList = new LinkedList<>();
+
+        for(DataFlowView node : getCurrentStructure().nodeViewList){
+            if(node!=exclude){
+                int totalInputChannels = node.totalInputChannels();
+                for (int i = 0; i < totalInputChannels; i++) {
+                    connectionList.add(new ConnectionPoint(node,i,node.getInputConnectorAt(i)));
+                }
+            }
+        }
+        return connectionList;
     }
 }

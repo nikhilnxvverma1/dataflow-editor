@@ -71,4 +71,34 @@ public class NumberInputView extends DataFlowView{
     public DataFlowNode getDataFlowNode() {
         return numberInputNode;
     }
+
+    @Override
+    public int totalInputChannels() {
+        return 0;
+    }
+
+    @Override
+    public int totalOutputChannels() {
+        return 1;
+    }
+
+    @Override
+    public Circle getInputConnectorAt(int index) {
+        return null;
+    }
+
+    @Override
+    public Circle getOutputConnectorAt(int index) {
+        return index==0?outputHandle:null;
+    }
+
+    @Override
+    public Class getTypeForInput(int index) {
+        return null;
+    }
+
+    @Override
+    public Class getTypeForOutput(int index) {
+        return double.class;
+    }
 }

@@ -1,6 +1,9 @@
 package app.view;
 
 import editor.command.CanvasCommand;
+import editor.container.ConnectionPoint;
+
+import java.util.List;
 
 /**
  * Delegate that handles business callbacks as they occur on dataflow views
@@ -13,4 +16,11 @@ public interface DataFlowViewListener {
      * @param executeBeforeRegistering if true the command will be executed before registering.
      */
     void registerCommand(CanvasCommand command, boolean executeBeforeRegistering);
+
+    /**
+     * Gets all input connection points with ready input channels
+     * @param exclude excludes input connection points from this node
+     * @return list of connection points excluding the ones from specified dataflow view
+     */
+    List<ConnectionPoint> getInputConnectionPoints(DataFlowView exclude);
 }

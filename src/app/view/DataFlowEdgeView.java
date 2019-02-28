@@ -5,8 +5,19 @@ import model.DataFlowEdge;
 
 public class DataFlowEdgeView extends Line {
     private DataFlowEdge edge;
+    private DataFlowView fromView;
+    private DataFlowView toView;
 
-    public DataFlowEdgeView(DataFlowView from,DataFlowView to) {
+    public DataFlowEdgeView(DataFlowView fromView,int fromIndex, DataFlowView toView, int toIndex) {
+
+        this.fromView = fromView;
+        this.toView = toView;
+
+        this.edge = new DataFlowEdge();
+        this.edge.setFrom(fromView.getDataFlowNode());
+        this.edge.setFromOutputIndex(fromIndex);
+        this.edge.setTo(toView.getDataFlowNode());
+        this.edge.setToInputIndex(toIndex);
 
         initialize();
     }

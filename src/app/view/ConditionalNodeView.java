@@ -44,6 +44,54 @@ public class ConditionalNodeView extends DataFlowView{
         return conditionalNode;
     }
 
+    @Override
+    public int totalInputChannels() {
+        return 2;
+    }
+
+    @Override
+    public int totalOutputChannels() {
+        return 1;
+    }
+
+    @Override
+    public Circle getInputConnectorAt(int index) {
+        if(index==0){
+            return inputHandle1;
+        }else if(index == 1){
+            return inputHandle2;
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public Circle getOutputConnectorAt(int index) {
+        if(index==0){
+            return outputHandle;
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public Class getTypeForInput(int index) {
+        if(index == 0 || index == 1 ){
+            return boolean.class;
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public Class getTypeForOutput(int index) {
+        if(index == 0){
+            return boolean.class;
+        }else{
+            return null;
+        }
+    }
+
     /**
      * Setup of views and events in this group. All event logic is handled by the listener
      */
