@@ -8,12 +8,12 @@ import javafx.scene.shape.Circle;
  */
 public class ConnectionPoint {
     public DataFlowView node;
-    public int inputIndex;
+    public int index;
     public Circle connector;
 
-    public ConnectionPoint(DataFlowView node, int inputIndex, Circle connector) {
+    public ConnectionPoint(DataFlowView node, int index, Circle connector) {
         this.node = node;
-        this.inputIndex = inputIndex;
+        this.index = index;
         this.connector = connector;
     }
 }

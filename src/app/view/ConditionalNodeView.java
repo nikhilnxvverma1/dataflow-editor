@@ -15,8 +15,6 @@ public class ConditionalNodeView extends DataFlowView{
 
     // radii
     private static final double MAIN_RADIUS = 50;
-    private static final double INPUT_RADIUS = 10;
-    private static final double OUTPUT_RADIUS = 10;
 
     //color
     private static final Paint MAIN_COLOR = Color.WHITESMOKE;
@@ -129,12 +127,7 @@ public class ConditionalNodeView extends DataFlowView{
 
         this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
 
-        outputHandle.setOnMousePressed(outputConnectorPressed);
-        outputHandle.setOnMouseDragged(outputConnectorDragged);
-        outputHandle.setOnMouseReleased(outputConnectorReleased);
-
-
-
+        setupOutputHandlers();
     }
 
     /**

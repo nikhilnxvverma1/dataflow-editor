@@ -126,7 +126,7 @@ public class WorkspaceController implements DataFlowViewListener {
      * @param scrollEvent the event that occurred on canvas that initiated this event
      */
     void panCanvas(ScrollEvent scrollEvent){
-        Logger.debug("Canvas scrolled(dx,dy): ("+scrollEvent.getDeltaX()+","+(scrollEvent.getDeltaY())+")");
+//        Logger.debug("Canvas scrolled(dx,dy): ("+scrollEvent.getDeltaX()+","+(scrollEvent.getDeltaY())+")");
 
         //compute the new position of the camera based on the delta amount scrolled
         double newX = canvas.getCamera().getTranslateX() - scrollEvent.getDeltaX();
@@ -154,12 +154,12 @@ public class WorkspaceController implements DataFlowViewListener {
         // compute new camera position
         double newCameraZ = cameraZ;
         if(zoomEvent.getZoomFactor()>=1){ // zoom in
-            Logger.debug("Zooming IN (factor):"+zoomEvent.getZoomFactor());
+//            Logger.debug("Zooming IN (factor):"+zoomEvent.getZoomFactor());
             if(cameraZ + ZOOM_DELTA_Z < CLOSEST_CAMERA_Z){  // don't go beyond threshold
                 newCameraZ = cameraZ + ZOOM_DELTA_Z;
             }
         }else{ // zoom out
-            Logger.debug("Zooming OUT (factor):"+zoomEvent.getZoomFactor());
+//            Logger.debug("Zooming OUT (factor):"+zoomEvent.getZoomFactor());
             if(cameraZ - ZOOM_DELTA_Z > FARTHEST_CAMERA_Z){ // don't go beyond threshold
                 newCameraZ = cameraZ - ZOOM_DELTA_Z;
             }

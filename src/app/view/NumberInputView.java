@@ -16,7 +16,6 @@ public class NumberInputView extends DataFlowView{
     // radii
     private static final double MAIN_RECT_LENGTH = 100;
     private static final double MAIN_RECT_HEIGHT= 60;
-    private static final double OUTPUT_RADIUS = 10;
 
     // color
     private static final Paint MAIN_COLOR = Color.WHITESMOKE;
@@ -62,8 +61,8 @@ public class NumberInputView extends DataFlowView{
         field.setLayoutY(-MAIN_RECT_HEIGHT/4);
 
         this.getChildren().addAll(outputHandle, mainRect, field);
-        //TODO setup event handling appropriately
 
+        setupOutputHandlers();
 
     }
 
