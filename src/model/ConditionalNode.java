@@ -18,31 +18,7 @@ public class ConditionalNode extends DataFlowNode {
     public ConditionalNode(double x, double y) {
         super(x, y);
     }
-
-    @Override
-    public int getNumberOfInputs() {
-        if(type==Type.NOT){
-            return 1;
-        }else{
-            return 2;
-        }
-    }
-
-    @Override
-    public DataValueType inputTypeFor(int index) {
-        return DataValueType.BOOLEAN;
-    }
-
-    @Override
-    public int getNumberOfOutputs() {
-        return 1;
-    }
-
-    @Override
-    public DataValueType outputTypeFor(int index) {
-        return DataValueType.BOOLEAN;
-    }
-
+    
     public Type getType() {
         return type;
     }

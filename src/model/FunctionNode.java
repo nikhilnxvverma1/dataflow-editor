@@ -13,26 +13,6 @@ public class FunctionNode extends DataFlowNode {
         this.name = name;
     }
 
-    @Override
-    public int getNumberOfInputs() {
-        return arguments.size();
-    }
-
-    @Override
-    public DataValueType inputTypeFor(int index) {
-        return arguments.get(index);
-    }
-
-    @Override
-    public int getNumberOfOutputs() {
-        return output.size();
-    }
-
-    @Override
-    public DataValueType outputTypeFor(int index) {
-        return output.get(index);
-    }
-
     public String getName() {
         return name;
     }

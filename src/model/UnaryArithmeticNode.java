@@ -8,11 +8,6 @@ public class UnaryArithmeticNode extends ArithmeticNode{
         super(x, y);
     }
 
-    @Override
-    public int getNumberOfInputs() {
-        return 1;
-    }
-
     public double getSecondInput() {
         return secondInput;
     }

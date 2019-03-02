@@ -8,26 +8,6 @@ public class NumberInputNode extends DataFlowNode {
         super(x, y);
     }
 
-    @Override
-    public int getNumberOfInputs() {
-        return 0;
-    }
-
-    @Override
-    public DataValueType inputTypeFor(int index) {
-        return null;
-    }
-
-    @Override
-    public int getNumberOfOutputs() {
-        return 1;
-    }
-
-    @Override
-    public DataValueType outputTypeFor(int index) {
-        return DataValueType.NUMBER;
-    }
-
     public double getValue() {
         return value;
     }

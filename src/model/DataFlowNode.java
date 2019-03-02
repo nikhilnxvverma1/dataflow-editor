@@ -17,11 +17,6 @@ public abstract class DataFlowNode {
         this.y = y;
     }
 
-    public abstract int getNumberOfInputs();
-    public abstract DataValueType inputTypeFor(int index);
-    public abstract int getNumberOfOutputs();
-    public abstract DataValueType outputTypeFor(int index);
-
     public double getX() {
         return x;
     }
