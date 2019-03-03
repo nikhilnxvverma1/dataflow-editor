@@ -90,6 +90,9 @@ public class WorkspaceController implements DataFlowViewListener {
 
             // add this node view to the structure's group
             structure.group.getChildren().add(nodeView);
+
+            // also add this node view list to the structure for tracking later
+            structure.nodeViewList.add(nodeView);
         }
     }
 

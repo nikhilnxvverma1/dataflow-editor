@@ -53,7 +53,7 @@ public abstract class DataFlowView extends Group {
         for (int i = 0; i < totalOutputChannels(); i++) {
             final int outputIndex = i;
             Circle outputConnector = getOutputConnectorAt(outputIndex);
-            List<ConnectionPoint> inputConnectionPoints = dataFlowViewListener.getInputConnectionPoints(this);
+
 
             // mouse press
             outputConnector.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -67,6 +67,9 @@ public abstract class DataFlowView extends Group {
             outputConnector.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+
+                    List<ConnectionPoint> inputConnectionPoints = dataFlowViewListener.
+                            getInputConnectionPoints(DataFlowView.this);
 
                     for(ConnectionPoint inputConnectionPoint:inputConnectionPoints){
 
@@ -83,12 +86,12 @@ public abstract class DataFlowView extends Group {
                             if (inputType.isAssignableFrom(outputType)){
 
                                 // make the connection
-                                Logger.debug("compatible types");
+                                Logger.debug("YES compatible ");
                             }else{
-                                Logger.debug("incompatible types");
+                                Logger.debug("NO incompatible");
                             }
                         }else{
-                            Logger.debug("Not joining");
+                            Logger.debug("free");
                         }
                     }
 
@@ -97,7 +100,7 @@ public abstract class DataFlowView extends Group {
             });
 
             // mouse release
-            outputConnector.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            outputConnector.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     event.consume();

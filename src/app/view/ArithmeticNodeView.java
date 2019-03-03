@@ -130,7 +130,8 @@ public class ArithmeticNodeView extends DataFlowView{
 //        label.setStyle("-fx-background-color: red;"); //debugging purposes only
 
         this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
-        //TODO setup event handling appropriately
+
+        setupOutputHandlers();
 
 
     }

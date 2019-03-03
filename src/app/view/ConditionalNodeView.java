@@ -75,7 +75,7 @@ public class ConditionalNodeView extends DataFlowView{
     @Override
     public Class getTypeForInput(int index) {
         if(index == 0 || index == 1 ){
-            return boolean.class;
+            return double.class;
         }else{
             return null;
         }

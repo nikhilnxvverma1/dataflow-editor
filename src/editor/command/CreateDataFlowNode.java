@@ -21,6 +21,9 @@ public class CreateDataFlowNode extends CanvasCommand{
 
         // remove the view from the FunctionDefinitionStructure group
         structure.group.getChildren().remove(dataFlowView);
+
+        // remove from the structure's view list
+        structure.nodeViewList.remove(dataFlowView);
     }
 
     @Override
@@ -33,5 +36,8 @@ public class CreateDataFlowNode extends CanvasCommand{
         if (!structure.group.getChildren().contains(dataFlowView)){
             structure.group.getChildren().add(dataFlowView);
         }
+
+        // add to the structure's view list
+        structure.nodeViewList.add(dataFlowView);
     }
 }
