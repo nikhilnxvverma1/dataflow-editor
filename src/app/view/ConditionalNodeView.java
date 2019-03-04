@@ -1,13 +1,10 @@
 package app.view;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import model.ArithmeticNode;
 import model.ConditionalNode;
 import model.DataFlowNode;
 

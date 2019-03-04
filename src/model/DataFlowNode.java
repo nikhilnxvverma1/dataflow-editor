@@ -32,4 +32,20 @@ public abstract class DataFlowNode {
     public void setY(double y) {
         this.y = y;
     }
+
+    public List<DataFlowEdge> getIncomingEdges() {
+        return incomingEdges;
+    }
+
+    public void setIncomingEdges(List<DataFlowEdge> incomingEdges) {
+        this.incomingEdges = incomingEdges;
+    }
+
+    public List<DataFlowEdge> getOutgoingEdges() {
+        return outgoingEdges;
+    }
+
+    public void setOutgoingEdges(List<DataFlowEdge> outgoingEdges) {
+        this.outgoingEdges = outgoingEdges;
+    }
 }

@@ -13,8 +13,8 @@ import model.DataFlowNode;
 import java.util.List;
 
 /**
- * Base class for all data flow node views. This class holds a listener that handles all business logic
- * of the events.
+ * Base class for all data flow node views. This class holds a listener that provides context specific
+ * requirements to the events.
  */
 public abstract class DataFlowView extends Group {
 
