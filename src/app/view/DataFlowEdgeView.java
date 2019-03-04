@@ -108,11 +108,16 @@ public class DataFlowEdgeView extends Line {
             this.setStroke(DataFlowEdgeView.INCOMPATIBLE_TYPES_COLOR);
 
             // nullify input node
-            this.toView = null;
-            this.edge.setTo(null);
-            this.edge.setToInputIndex(-1);
+            nullifyInputNode();
             return false;
         }
+    }
+
+    /** Nulls out the input node and sets the input index to -1 */
+    void nullifyInputNode(){
+        this.toView = null;
+        this.edge.setTo(null);
+        this.edge.setToInputIndex(-1);
     }
 
     /**

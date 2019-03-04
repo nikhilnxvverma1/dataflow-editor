@@ -24,6 +24,9 @@ capable of delivering all the node creation and manipulation needs.
  ### Node creation and movement
  ![Node creation and movement](preview/preview-milestone-2-node-create-n-move.gif "Node creation and movement")
  
+ ### Type checked node connections
+  ![Node connections](preview/node-connections-milestone-2.gif "Node connections")
+ 
  ### Undo/Redo
  ![Undo](preview/preview-milestone-2-undo.gif "Undo")
  

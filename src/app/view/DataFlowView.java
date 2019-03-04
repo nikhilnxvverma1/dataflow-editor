@@ -90,6 +90,7 @@ public abstract class DataFlowView extends Group {
                             getInputConnectionPoints(DataFlowView.this);
 
                     edgeView.setStroke(DataFlowEdgeView.UNCONNECTED_TYPES_COLOR);
+                    edgeView.nullifyInputNode();
                     for(ConnectionPoint inputConnectionPoint:inputConnectionPoints){
 
                         // transform input connection point to scene space
