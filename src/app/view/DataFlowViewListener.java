@@ -2,6 +2,7 @@ package app.view;
 
 import editor.command.CanvasCommand;
 import editor.container.ConnectionPoint;
+import editor.container.FunctionDefinitionStructure;
 
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface DataFlowViewListener {
      * @return list of connection points excluding the ones from specified dataflow view
      */
     List<ConnectionPoint> getInputConnectionPoints(DataFlowView exclude);
+
+    /**
+     * Only one function definition can be active at any time, this method retrieves the active structure.
+     * @return The function definition structure that currently exists on canvas
+     */
+    FunctionDefinitionStructure getCurrentStructure();
 }

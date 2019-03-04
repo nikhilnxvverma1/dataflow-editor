@@ -71,8 +71,29 @@ public class ConditionalNodeView extends DataFlowView{
 
     @Override
     public Class getTypeForInput(int index) {
+        ConditionalNode.Type type = conditionalNode.getType();
+
+        // possibly 2 inputs
         if(index == 0 || index == 1 ){
-            return double.class;
+
+            // we need to be mindful of the input type between not equals and not operators
+            if((type == ConditionalNode.Type.AND)||(type == ConditionalNode.Type.OR)||(type == ConditionalNode.Type.NOT)) {
+
+                // relational operators need boolean inputs
+                if(type== ConditionalNode.Type.NOT ){
+                    if(index == 0){
+                        return boolean.class;
+                    }else{
+                        return null;
+                    }
+                }else{
+                    return boolean.class;
+                }
+
+            }else {
+                return double.class;
+            }
+
         }else{
             return null;
         }

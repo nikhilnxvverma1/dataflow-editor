@@ -96,10 +96,6 @@ public class WorkspaceController implements DataFlowViewListener {
         }
     }
 
-    public FunctionDefinitionStructure getCurrentStructure(){
-        return workspaceListener.getCurrentFunctionDefinitionStructure();
-    }
-
     NodeTool getTool() {
         return tool;
     }
@@ -235,5 +231,10 @@ public class WorkspaceController implements DataFlowViewListener {
             }
         }
         return connectionList;
+    }
+
+    @Override
+    public FunctionDefinitionStructure getCurrentStructure(){
+        return workspaceListener.getCurrentFunctionDefinitionStructure();
     }
 }

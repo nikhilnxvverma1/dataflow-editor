@@ -1,13 +1,22 @@
 package app.view;
 
+import editor.util.Logger;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import model.DataFlowEdge;
+import model.DataFlowNode;
 
 public class DataFlowEdgeView extends Line {
+
+    public static final Paint INCOMPATIBLE_TYPES_COLOR = Color.RED;
+    public static final Paint COMPATIBLE_TYPES_COLOR = Color.LIGHTGREEN;
+    public static final Paint UNCONNECTED_TYPES_COLOR = new Color(1,1,1,0.3);
+    public static final Paint CONNECTED_TYPES_COLOR = Color.WHITE;
+    public static final double STROKE_WIDTH = 2;
     private DataFlowEdge edge;
     private DataFlowView fromView;
     private DataFlowView toView;
@@ -22,10 +31,14 @@ public class DataFlowEdgeView extends Line {
      * @param fromView the data flow node view from which this event originated
      * @param fromIndex the index of the output connector of the said data flow node
      */
-    public DataFlowEdgeView(DataFlowView fromView, int fromIndex) {
+    DataFlowEdgeView(DataFlowView fromView, int fromIndex) {
         this.fromView = fromView;
         this.edge = new DataFlowEdge();
+        this.edge.setFrom(fromView.getDataFlowNode());
         this.edge.setFromOutputIndex(fromIndex);
+        this.setStroke(UNCONNECTED_TYPES_COLOR);
+        this.setStrokeWidth(DataFlowEdgeView.STROKE_WIDTH);
+
     }
 
     /**
@@ -46,13 +59,9 @@ public class DataFlowEdgeView extends Line {
         this.edge.setTo(toView.getDataFlowNode());
         this.edge.setToInputIndex(toIndex);
 
-        initialize();
-    }
-
-    private void initialize(){
-        // TODO get the position of the output node of from
-
-        // TODO get the position fo the input node of to
+        this.setStroke(CONNECTED_TYPES_COLOR);
+        this.setStrokeWidth(DataFlowEdgeView.STROKE_WIDTH);
+        addPositionalChangeListeners();
     }
 
     public DataFlowEdge getEdge() {
@@ -71,8 +80,39 @@ public class DataFlowEdgeView extends Line {
         return toView;
     }
 
-    public void setToView(DataFlowView toView) {
-        this.toView = toView;
+    /**
+     * Attempts to set the input node if the types match. If the types don't match, it simply sets it to null.
+     * Also colors the edge appropriately to suggest the status of the type match.
+     * @param inputNode the input node
+     * @param inputIndex the index of the channel of the input node
+     * @return true if the types match and the node is set, false otherwise
+     */
+    boolean checkAndSetInputNode(DataFlowView inputNode, int inputIndex) {
+
+        // check if the types are compatible or not
+        Class inputType = inputNode.getTypeForInput(inputIndex);
+        Class outputType = fromView.getTypeForOutput(edge.getFromOutputIndex());
+        if (inputType.isAssignableFrom(outputType)){ // compatible
+
+            //change the color of the edge to indicate compatibility
+            this.setStroke(DataFlowEdgeView.COMPATIBLE_TYPES_COLOR);
+
+            // make the connection
+            this.toView = inputNode;
+            this.edge.setTo(inputNode.getDataFlowNode());
+            this.edge.setToInputIndex(inputIndex);
+            return true;
+        }else{ // incompatible
+
+            // change the color of the edge to indicate incompatibility
+            this.setStroke(DataFlowEdgeView.INCOMPATIBLE_TYPES_COLOR);
+
+            // nullify input node
+            this.toView = null;
+            this.edge.setTo(null);
+            this.edge.setToInputIndex(-1);
+            return false;
+        }
     }
 
     /**
@@ -99,16 +139,29 @@ public class DataFlowEdgeView extends Line {
         inputXListener = (observable, oldValue, newValue) -> {
             Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
             Point2D connectorPositionInScene = inputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setStartX(connectorPositionInScene.getX());
+            DataFlowEdgeView.this.setEndX(connectorPositionInScene.getX());
         };
         toView.translateXProperty().addListener(inputXListener);
 
         inputYListener = (observable, oldValue, newValue) -> {
             Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
             Point2D connectorPositionInScene = inputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setStartY(connectorPositionInScene.getY());
+            DataFlowEdgeView.this.setEndY(connectorPositionInScene.getY());
         };
         toView.translateYProperty().addListener(inputYListener);
+
+    }
+
+    private void updatePositionEndpoints(){
+        Circle outputConnector = fromView.getOutputConnectorAt(edge.getFromOutputIndex());
+        Point2D outputPositionInScene = outputConnector.localToScene(0, 0);
+        DataFlowEdgeView.this.setStartX(outputPositionInScene.getX());
+        DataFlowEdgeView.this.setStartY(outputPositionInScene.getY());
+
+        Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
+        Point2D inputPositionInScene = inputConnector.localToScene(0, 0);
+        DataFlowEdgeView.this.setEndX(inputPositionInScene.getX());
+        DataFlowEdgeView.this.setEndY(inputPositionInScene.getY());
 
     }
 
@@ -120,5 +173,28 @@ public class DataFlowEdgeView extends Line {
         fromView.translateYProperty().removeListener(outputYListener);
         toView.translateXProperty().removeListener(inputXListener);
         toView.translateYProperty().removeListener(inputYListener);
+    }
+
+    /**
+     * Adds the edge model to the edge list of associated nodes
+     */
+    public void connectToNodeModels(){
+        // add the edge model to the edge list of associated nodes
+        DataFlowNode fromNode = edge.getFrom();
+        fromNode.getOutgoingEdges().add(edge);
+
+        DataFlowNode toNode = edge.getTo();
+        toNode.getIncomingEdges().add(edge);
+    }
+
+    /**
+     * Removes the edge model from the edge list of associated nodes
+     */
+    public void disconnectFromNodeModels(){
+        DataFlowNode fromNode = edge.getFrom();
+        fromNode.getOutgoingEdges().remove(edge);
+
+        DataFlowNode toNode = edge.getTo();
+        toNode.getIncomingEdges().remove(edge);
     }
 }
