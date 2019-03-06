@@ -2,7 +2,6 @@ package editor.command;
 
 import app.view.DataFlowEdgeView;
 import editor.container.FunctionDefinitionStructure;
-import model.DataFlowNode;
 
 public class CreateDataFlowEdge extends CanvasCommand{
 
@@ -17,7 +16,7 @@ public class CreateDataFlowEdge extends CanvasCommand{
     @Override
     public void undo() {
 
-        edgeView.disconnectFromNodeModels();
+        edgeView.disconnectFromNodes();
 
         // remove the view from the function's group
         if(structure.group.getChildren().contains(edgeView)){
@@ -32,7 +31,7 @@ public class CreateDataFlowEdge extends CanvasCommand{
     @Override
     public void redo() {
 
-        edgeView.connectToNodeModels();
+        edgeView.connectToNodes();
 
         // add the edge view to the function's group
         structure.group.getChildren().add(edgeView);

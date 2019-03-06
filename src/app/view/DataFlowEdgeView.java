@@ -181,25 +181,35 @@ public class DataFlowEdgeView extends Line {
     }
 
     /**
-     * Adds the edge model to the edge list of associated nodes
+     * Adds the edge view and model to the edge list of associated nodes (for both node models and node views)
      */
-    public void connectToNodeModels(){
-        // add the edge model to the edge list of associated nodes
+    public void connectToNodes(){
+        // add the edge model to the edge list of associated node models
         DataFlowNode fromNode = edge.getFrom();
         fromNode.getOutgoingEdges().add(edge);
 
         DataFlowNode toNode = edge.getTo();
         toNode.getIncomingEdges().add(edge);
+
+        // add the edge view (this) to the edge list of associated node views
+        fromView.getOutgoingEdges().add(this);
+        toView.getIncomingEdges().add(this);
     }
 
     /**
-     * Removes the edge model from the edge list of associated nodes
+     * Removes the edge view and model from the edge list of associated nodes (for both node models and views)
      */
-    public void disconnectFromNodeModels(){
+    public void disconnectFromNodes(){
+
+        // remove the edge model from the edge list of associated node models
         DataFlowNode fromNode = edge.getFrom();
         fromNode.getOutgoingEdges().remove(edge);
 
         DataFlowNode toNode = edge.getTo();
         toNode.getIncomingEdges().remove(edge);
+
+        // remove the edge view (this) from the edge list of associated node views
+        fromView.getOutgoingEdges().remove(this);
+        toView.getIncomingEdges().remove(this);
     }
 }

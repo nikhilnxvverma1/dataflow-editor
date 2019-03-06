@@ -3,7 +3,6 @@ package app.view;
 import editor.command.CreateDataFlowEdge;
 import editor.command.MoveDataFlowView;
 import editor.container.ConnectionPoint;
-import editor.util.Logger;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -11,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import model.DataFlowNode;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,6 +26,8 @@ public abstract class DataFlowView extends Group {
     private MoveDataFlowView moveCommand;
     private CreateDataFlowEdge createEdge;
 
+    private List<DataFlowEdgeView> incomingEdges = new LinkedList<>();
+    private List<DataFlowEdgeView> outgoingEdges = new LinkedList<>();
 
     public DataFlowView(DataFlowViewListener dataFlowViewListener) {
         this.dataFlowViewListener = dataFlowViewListener;
@@ -87,7 +89,7 @@ public abstract class DataFlowView extends Group {
                     edgeView.setEndY(eventScenePoint.getY());
 
                     List<ConnectionPoint> inputConnectionPoints = dataFlowViewListener.
-                            getInputConnectionPoints(DataFlowView.this);
+                            getAvailableInputConnectionPoints(DataFlowView.this);
 
                     edgeView.setStroke(DataFlowEdgeView.UNCONNECTED_TYPES_COLOR);
                     edgeView.nullifyInputNode();
@@ -115,7 +117,7 @@ public abstract class DataFlowView extends Group {
                     if(edgeView.getToView()!=null){
                         edgeView.setStroke(DataFlowEdgeView.CONNECTED_TYPES_COLOR);
                         edgeView.addPositionalChangeListeners();
-                        edgeView.connectToNodeModels();
+                        edgeView.connectToNodes();
                         dataFlowViewListener.registerCommand(createEdge,false);
                     }else{
 
@@ -133,6 +135,14 @@ public abstract class DataFlowView extends Group {
         this.setTranslateY(y);
         getDataFlowNode().setX(x);
         getDataFlowNode().setY(y);
+    }
+
+    public List<DataFlowEdgeView> getIncomingEdges() {
+        return incomingEdges;
+    }
+
+    public List<DataFlowEdgeView> getOutgoingEdges() {
+        return outgoingEdges;
     }
 
     public abstract DataFlowNode getDataFlowNode();

@@ -23,7 +23,7 @@ public interface DataFlowViewListener {
      * @param exclude excludes input connection points from this node
      * @return list of connection points excluding the ones from specified dataflow view
      */
-    List<ConnectionPoint> getInputConnectionPoints(DataFlowView exclude);
+    List<ConnectionPoint> getAvailableInputConnectionPoints(DataFlowView exclude);
 
     /**
      * Only one function definition can be active at any time, this method retrieves the active structure.

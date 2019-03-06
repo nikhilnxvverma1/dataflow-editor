@@ -219,14 +219,28 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     @Override
-    public List<ConnectionPoint> getInputConnectionPoints(DataFlowView exclude){
+    public List<ConnectionPoint> getAvailableInputConnectionPoints(DataFlowView exclude){
         LinkedList<ConnectionPoint> connectionList = new LinkedList<>();
 
+        // collect all input connection points in the current structure excluding the parameter
         for(DataFlowView node : getCurrentStructure().nodeViewList){
             if(node!=exclude){
                 int totalInputChannels = node.totalInputChannels();
                 for (int i = 0; i < totalInputChannels; i++) {
-                    connectionList.add(new ConnectionPoint(node,i,node.getInputConnectorAt(i)));
+
+                    // check if this connection point is already consumed/occupied
+                    boolean occupied = false;
+                    for(DataFlowEdgeView edgeView : node.getIncomingEdges()){
+                        if(edgeView.getEdge().getToInputIndex() == i){
+                            occupied = true;
+                            break;
+                        }
+                    }
+
+                    // only add a connection point if it is not occupied by an edge
+                    if(!occupied){
+                        connectionList.add(new ConnectionPoint(node,i,node.getInputConnectorAt(i)));
+                    }
                 }
             }
         }
