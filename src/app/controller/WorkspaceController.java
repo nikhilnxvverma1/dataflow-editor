@@ -8,11 +8,15 @@ import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import model.*;
 
 import java.util.LinkedList;
@@ -28,17 +32,22 @@ public class WorkspaceController implements DataFlowViewListener {
     public static final double DEFAULT_CAMERA_Z = -100;
     private static final double FARTHEST_CAMERA_Z = -10000;
     private static final double ZOOM_DELTA_Z = 50;
+    private static final Paint HIGHLIGHT_FILL = new Color(1,1,1,0.1);
+    private static final Paint HIGHLIGHT_OUTLINE = Color.WHITE;
 
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
     private NodeTool tool;
+    private Rectangle highlightRect = new Rectangle();
 
 
     WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
         this.tool = new NodeTool(this);
+        highlightRect.setFill(HIGHLIGHT_FILL);
+        highlightRect.setStroke(HIGHLIGHT_OUTLINE);
 
         // create a Camera to view the 3D Shapes
         // this needs to be done before any callbacks fire off that may have a dependency on camera
@@ -187,15 +196,22 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mousePressedOnCanvas(MouseEvent mouseEvent){
-        canvas.requestFocus();
+        getCurrentStructure().group.getChildren().add(highlightRect);
+//        Point2D sceneSpace = getCurrentStructure().group.localToScene(mouseEvent.getX(), mouseEvent.getY());
+        highlightRect.setX(mouseEvent.getX());
+        highlightRect.setY(mouseEvent.getY());
+        highlightRect.setWidth(0);
+        highlightRect.setHeight(0);
     }
 
     void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-
+//        Point2D dragInScene = getCurrentStructure().group.localToScene(mouseEvent.getX(), mouseEvent.getY());
+        highlightRect.setWidth(mouseEvent.getX()-highlightRect.getX());
+        highlightRect.setHeight(mouseEvent.getY()-highlightRect.getY());
     }
 
     void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-
+        getCurrentStructure().group.getChildren().remove(highlightRect);
     }
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
