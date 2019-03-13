@@ -34,9 +34,13 @@ public abstract class DataFlowView extends Group {
 
         // event handling for dragging (moving) the node (Mouse press, drag, release)
 
-        this.setOnMousePressed(event -> moveCommand = new MoveDataFlowView(this));
+        this.setOnMousePressed(event -> {
+            this.dataFlowViewListener.requestSoleSelection(this);
+            moveCommand = new MoveDataFlowView(this);
+        });
 
         this.setOnMouseDragged(event -> {
+            this.dataFlowViewListener.movedBy(event.getX(),event.getY());
             double newX = this.getTranslateX() + event.getX();
             double newY = this.getTranslateY() + event.getY();
             this.setLocation(newX,newY);

@@ -6,9 +6,13 @@ import app.view.*;
 import editor.command.CanvasCommand;
 import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
-import editor.util.Logger;
-import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
 import javafx.scene.input.MouseEvent;
@@ -34,20 +38,31 @@ public class WorkspaceController implements DataFlowViewListener {
     private static final double ZOOM_DELTA_Z = 50;
     private static final Paint HIGHLIGHT_FILL = new Color(1,1,1,0.1);
     private static final Paint HIGHLIGHT_OUTLINE = Color.WHITE;
+    private static final Paint SELECTION_OUTLINE = Color.WHITE;
+    private static final Paint SELECTION_FILL = new Color(1,1,1,0.0);
 
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
     private NodeTool tool;
     private Rectangle highlightRect = new Rectangle();
+    private ObservableList<DataFlowView> selectionSet = FXCollections.observableList(new LinkedList<>());
+    private Rectangle selectionRect = new Rectangle();
 
 
     WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
         this.tool = new NodeTool(this);
+
+        // selection
+        SelectionManagement selectionManager = new SelectionManagement();
         highlightRect.setFill(HIGHLIGHT_FILL);
         highlightRect.setStroke(HIGHLIGHT_OUTLINE);
+        highlightRect.layoutBoundsProperty().addListener(selectionManager);
+        selectionSet.addListener(selectionManager);
+        selectionRect.setStroke(SELECTION_OUTLINE);
+        selectionRect.setFill(SELECTION_FILL);
 
         // create a Camera to view the 3D Shapes
         // this needs to be done before any callbacks fire off that may have a dependency on camera
@@ -59,6 +74,79 @@ public class WorkspaceController implements DataFlowViewListener {
         camera.setTranslateY(0);
         camera.setTranslateZ(DEFAULT_CAMERA_Z);
         canvas.setCamera(camera);
+    }
+
+    /**
+     * Manages selection/deselection of nodes by listening to change events on the selectionSet and adding observers
+     * to the layout bound property of the highlight rect
+     */
+    private class SelectionManagement implements ListChangeListener<DataFlowView>, ChangeListener<Bounds> {
+        @Override
+        public void onChanged(Change<? extends DataFlowView> c) {
+
+            if(selectionSet.size()==0){
+                getCurrentStructure().group.getChildren().remove(selectionRect);
+            }else{
+                if(!getCurrentStructure().group.getChildren().contains(selectionRect)){
+                    getCurrentStructure().group.getChildren().add(selectionRect);
+                    selectionRect.toBack();
+                }
+                //recompute the dimensions for the selection rect
+                BoundingBox bounds = computeBoundsForSelection();
+                selectionRect.setX(bounds.getMinX());
+                selectionRect.setY(bounds.getMinY());
+                selectionRect.setWidth(bounds.getWidth());
+                selectionRect.setHeight(bounds.getHeight());
+            }
+        }
+
+        /**
+         * Compute the dimensions for the selected items
+         * @return Bounding box describing the bounds in the current structure's group coordinate system
+         */
+        private BoundingBox computeBoundsForSelection() {
+            double lowX = 0;
+            double lowY = 0;
+            double highX = 0;
+            double highY = 0;
+            boolean unset = true;
+
+            for(DataFlowView each : selectionSet){
+                Bounds bounds = each.getBoundsInParent();
+                if(unset || bounds.getMinX() < lowX){
+                    lowX = bounds.getMinX();
+                }
+                if(unset || bounds.getMinY() < lowY){
+                    lowY = bounds.getMinY();
+                }
+                if(unset || bounds.getMaxX() > highX){
+                    highX = bounds.getMaxX();
+                }
+                if(unset || bounds.getMaxY() > highY){
+                    highY = bounds.getMaxY();
+                }
+                unset = false;
+            }
+
+            return new BoundingBox(lowX,lowY,highX-lowX,highY-lowY);
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+
+            FunctionDefinitionStructure structure = getCurrentStructure();
+            for(DataFlowView each : structure.nodeViewList){
+                Bounds viewBounds = each.getBoundsInParent();
+                Bounds highlightBounds = highlightRect.getBoundsInParent();
+                if(highlightBounds.intersects(viewBounds) || highlightBounds.contains(viewBounds)){
+                    if(!selectionSet.contains(each)){
+                        selectionSet.add(each);
+                    }
+                }else{
+                    selectionSet.remove(each);
+                }
+            }
+        }
     }
 
     void initialize(){
@@ -119,6 +207,9 @@ public class WorkspaceController implements DataFlowViewListener {
         if(oldSelection!=null){
             // do any transient de-allocation if needed
         }
+
+        // clear the selection set for this new entry
+        selectionSet.clear();
 
         // set the root of the canvas to be that of new selection
         canvas.setRoot(newSelection.group);
@@ -197,7 +288,7 @@ public class WorkspaceController implements DataFlowViewListener {
 
     void mousePressedOnCanvas(MouseEvent mouseEvent){
         getCurrentStructure().group.getChildren().add(highlightRect);
-//        Point2D sceneSpace = getCurrentStructure().group.localToScene(mouseEvent.getX(), mouseEvent.getY());
+        selectionSet.clear();
         highlightRect.setX(mouseEvent.getX());
         highlightRect.setY(mouseEvent.getY());
         highlightRect.setWidth(0);
@@ -205,7 +296,6 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-//        Point2D dragInScene = getCurrentStructure().group.localToScene(mouseEvent.getX(), mouseEvent.getY());
         highlightRect.setWidth(mouseEvent.getX()-highlightRect.getX());
         highlightRect.setHeight(mouseEvent.getY()-highlightRect.getY());
     }
@@ -266,5 +356,20 @@ public class WorkspaceController implements DataFlowViewListener {
     @Override
     public FunctionDefinitionStructure getCurrentStructure(){
         return workspaceListener.getCurrentFunctionDefinitionStructure();
+    }
+
+    @Override
+    public boolean requestSoleSelection(DataFlowView sole) {
+        if(selectionSet.size()==0){
+            selectionSet.add(sole);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void movedBy(double deltaX, double deltaY) {
+        selectionRect.setX(selectionRect.getX() + deltaX);
+        selectionRect.setY(selectionRect.getY() + deltaY);
     }
 }

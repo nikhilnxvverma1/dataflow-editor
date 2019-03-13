@@ -30,4 +30,19 @@ public interface DataFlowViewListener {
      * @return The function definition structure that currently exists on canvas
      */
     FunctionDefinitionStructure getCurrentStructure();
+
+    /**
+     * Request for being selected as the only {@link DataFlowView} by the delegate. This method will be invoked on any mouse
+     * press based events.
+     * @param sole the only {@link DataFlowView} that should exist in the selection set.
+     * @return true if sole selection was allowed, false otherwise
+     */
+    boolean requestSoleSelection(DataFlowView sole);
+
+    /**
+     * Notification for drag event during movement of node(s)
+     * @param deltaX change in x movement
+     * @param deltaY change in y movement
+     */
+    void movedBy(double deltaX,double deltaY);
 }
