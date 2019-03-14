@@ -10,7 +10,6 @@ import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
@@ -137,6 +136,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
             }
         } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
             workspaceController.getTool().clear();
+        } else if (keyEvent.getCode() == KeyCode.DELETE || keyEvent.getCode() == KeyCode.BACK_SPACE){
+            workspaceController.deleteSelectedViews();
         }
     }
 

@@ -5,6 +5,7 @@ import app.controller.util.SelectionManager;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.CanvasCommand;
+import editor.command.DeleteDataFlowNodes;
 import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
 import javafx.collections.ObservableList;
@@ -117,6 +118,15 @@ public class WorkspaceController implements DataFlowViewListener {
         }
     }
 
+    /**
+     * @return finds the index of the current function definition structure
+     */
+    private int getCurrentStructureIndex(){
+        FunctionDefinitionStructure currentStructure = workspaceListener.getCurrentFunctionDefinitionStructure();
+        List<FunctionDefinitionStructure> structureList = workspaceListener.getAllFunctionDefinitionStructure();
+        return structureList.indexOf(currentStructure);
+    }
+
     NodeTool getTool() {
         return tool;
     }
@@ -194,6 +204,18 @@ public class WorkspaceController implements DataFlowViewListener {
         current.cameraZ = newCameraZ;
     }
 
+    void deleteSelectedViews(){
+        List<DataFlowView> currentSelection = selectionManager.cloneSelection();
+        if(currentSelection.size()>0){
+            DeleteDataFlowNodes deleteNodes = new DeleteDataFlowNodes(
+                    currentSelection,
+                    getCurrentStructure(),
+                    getCurrentStructureIndex());
+            workspaceListener.registerCommand(deleteNodes,true);
+            selectionManager.getSelectionSet().clear();
+        }
+    }
+
     // Mouse Events
 
     void mouseMovedOnCanvas(MouseEvent mouseEvent){
@@ -231,13 +253,13 @@ public class WorkspaceController implements DataFlowViewListener {
     @Override
     public void registerCommand(CanvasCommand command, boolean executeBeforeRegistering) {
 
-        // find and set the index of the current function definition structure on the canvas command
-        FunctionDefinitionStructure currentStructure = workspaceListener.getCurrentFunctionDefinitionStructure();
-        List<FunctionDefinitionStructure> structureList = workspaceListener.getAllFunctionDefinitionStructure();
-        int index = structureList.indexOf(currentStructure);
-        command.setFunctionDefinitionIndex(index);
-
+        //set the current structure's index
+        command.setFunctionDefinitionIndex(getCurrentStructureIndex(getCurrentStructureIndex()));
         workspaceListener.registerCommand(command,executeBeforeRegistering);
+    }
+
+    private int getCurrentStructureIndex(int index) {
+        return index;
     }
 
     @Override
