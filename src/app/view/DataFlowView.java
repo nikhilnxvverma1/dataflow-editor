@@ -37,6 +37,7 @@ public abstract class DataFlowView extends Group {
         this.setOnMousePressed(event -> {
             this.dataFlowViewListener.requestSoleSelection(this);
             moveCommand = new MoveDataFlowView(this);
+            event.consume();
         });
 
         this.setOnMouseDragged(event -> {
@@ -46,6 +47,7 @@ public abstract class DataFlowView extends Group {
             this.setLocation(newX,newY);
             moveCommand.setFinalX(this.getTranslateX());
             moveCommand.setFinalY(this.getTranslateY());
+            event.consume();
         });
 
         this.setOnMouseReleased(event -> {
@@ -54,6 +56,7 @@ public abstract class DataFlowView extends Group {
                 this.getDataFlowNode().setY(moveCommand.getFinalY());
                 this.dataFlowViewListener.registerCommand(moveCommand, false);
             }
+            event.consume();
         });
     }
 

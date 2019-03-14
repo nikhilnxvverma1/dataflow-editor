@@ -76,7 +76,7 @@ public class NodeTool {
     public void createNode(MouseEvent mouseEvent){
         if (nodePreview != null) {
 
-            Point2D p = transformedAfterPan(mouseEvent);
+            Point2D p = backReference.transformedAfterPan(mouseEvent);
             nodePreview.setLocation(p.getX(),p.getY());
 
             // get rid of the translucency
@@ -96,16 +96,9 @@ public class NodeTool {
     public void mouseMoved(MouseEvent mouseEvent){
         if (nodePreview != null) {
 
-            Point2D p = transformedAfterPan(mouseEvent);
+            Point2D p = backReference.transformedAfterPan(mouseEvent);
             nodePreview.setLocation(p.getX(),p.getY());
         }
-    }
-
-    private Point2D transformedAfterPan(MouseEvent mouseEvent){
-        //get the location from the mouse event (cancel the camera pan)
-        double x = mouseEvent.getX() + backReference.getCurrentStructure().cameraX;
-        double y = mouseEvent.getY() + backReference.getCurrentStructure().cameraY;
-        return new Point2D(x,y);
     }
 
     private DataFlowView buildPreviewDataFlowView(){

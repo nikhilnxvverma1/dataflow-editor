@@ -10,12 +10,14 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Manages selection/deselection of nodes by listening to change events on the selectionSet and adding observers
@@ -30,6 +32,8 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
     private Rectangle highlightRect = new Rectangle();
     private ObservableList<DataFlowView> selectionSet = FXCollections.observableList(new LinkedList<>());
     private Rectangle selectionRect = new Rectangle();
+
+    private double initialX = 0, initialY = 0;
 
     public SelectionManager(WorkspaceController backReference) {
         this.backReference = backReference;
@@ -118,20 +122,46 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
     }
 
     public void mousePressedOnCanvas(MouseEvent mouseEvent){
-        backReference.getCurrentStructure().group.getChildren().add(highlightRect);
         selectionSet.clear();
-        highlightRect.setX(mouseEvent.getX());
-        highlightRect.setY(mouseEvent.getY());
+        Point2D local = backReference.transformedAfterPan(mouseEvent);
+        initialX = local.getX();
+        initialY = local.getY();
+        backReference.getCurrentStructure().group.getChildren().add(highlightRect);
+        highlightRect.setX(initialX);
+        highlightRect.setY(initialY);
         highlightRect.setWidth(0);
         highlightRect.setHeight(0);
     }
 
     public void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-        highlightRect.setWidth(mouseEvent.getX()-highlightRect.getX());
-        highlightRect.setHeight(mouseEvent.getY()-highlightRect.getY());
+        Point2D local = backReference.transformedAfterPan(mouseEvent);
+        double width = Math.abs(local.getX() - initialX);
+        double height = Math.abs(local.getY() - initialY);
+        if( local.getX() > initialX ){
+            highlightRect.setX(initialX);
+        }else{
+            highlightRect.setX(local.getX());
+        }
+
+        if( local.getY() > initialY ){
+            highlightRect.setY(initialY);
+        }else{
+            highlightRect.setY(local.getY());
+        }
+
+        highlightRect.setWidth(width);
+        highlightRect.setHeight(height);
+
     }
 
     public void mouseReleasedOnCanvas(MouseEvent mouseEvent){
         backReference.getCurrentStructure().group.getChildren().remove(highlightRect);
+    }
+
+    /**
+     * @return returns a copy of the current selection
+     */
+    public List<DataFlowView> cloneSelection(){
+        return new LinkedList<>(selectionSet);
     }
 }

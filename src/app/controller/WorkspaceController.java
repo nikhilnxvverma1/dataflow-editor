@@ -7,6 +7,8 @@ import app.view.*;
 import editor.command.CanvasCommand;
 import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
+import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
 import javafx.scene.input.MouseEvent;
@@ -57,6 +59,18 @@ public class WorkspaceController implements DataFlowViewListener {
         camera.setTranslateY(0);
         camera.setTranslateZ(DEFAULT_CAMERA_Z);
         canvas.setCamera(camera);
+    }
+
+    /**
+     * Gets the location from the mouse event after cancelling any camera pan
+     * @param mouseEvent mouse event that occurred on the sub scene
+     * @return transformed point that can be used in structure's group space
+     */
+    public Point2D transformedAfterPan(MouseEvent mouseEvent){
+        FunctionDefinitionStructure structure = getCurrentStructure();
+        double x = mouseEvent.getX() + structure.cameraX;
+        double y = mouseEvent.getY() + structure.cameraY;
+        return new Point2D(x,y);
     }
 
     void initialize(){
@@ -262,8 +276,11 @@ public class WorkspaceController implements DataFlowViewListener {
 
     @Override
     public boolean requestSoleSelection(DataFlowView sole) {
-        if(selectionManager.getSelectionSet().size()==0){
-            selectionManager.getSelectionSet().add(sole);
+        ObservableList<DataFlowView> selectionSet = selectionManager.getSelectionSet();
+        int size = selectionSet.size();
+        if(size ==0 || !selectionSet.contains(sole)){
+            selectionSet.clear();
+            selectionSet.add(sole);
             return true;
         }
         return false;

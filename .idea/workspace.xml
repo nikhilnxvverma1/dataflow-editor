@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Buggy selection management with rect &amp; without collective event handling">
-      <change afterPath="$PROJECT_DIR$/src/app/controller/util/SelectionManager.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Refactored selection management to be done outside of controller class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controller/util/SelectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/util/SelectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/view/DataFlowView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/view/DataFlowView.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,12 +74,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="73" selection-start-line="42" selection-start-column="73" selection-end-line="42" selection-end-column="73" />
+            <state relative-caret-position="43">
+              <caret line="37" column="56" lean-forward="true" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6148#6149#0" expanded="true" />
-                <element signature="e#6240#6241#0" expanded="true" />
+                <element signature="e#6235#6236#0" expanded="true" />
+                <element signature="e#6327#6328#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,20 +100,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2041">
-              <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+            <state relative-caret-position="285">
+              <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6316#6317#0" expanded="true" />
-                <element signature="e#6343#6344#0" expanded="true" />
+                <element signature="e#4607#4608#0" expanded="true" />
+                <element signature="e#4634#4635#0" expanded="true" />
                 <element signature="e#7824#7825#0" expanded="true" />
                 <element signature="e#7889#7890#0" expanded="true" />
                 <element signature="e#7944#7945#0" expanded="true" />
                 <element signature="e#8009#8010#0" expanded="true" />
                 <element signature="e#8065#8066#0" expanded="true" />
                 <element signature="e#8114#8115#0" expanded="true" />
-                <element signature="e#11251#11252#0" expanded="true" />
-                <element signature="e#11308#11309#0" expanded="true" />
+                <element signature="e#11520#11521#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,12 +121,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/controller/util/SelectionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="93" lean-forward="true" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
+            <state relative-caret-position="421">
+              <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4356#4357#0" expanded="true" />
                 <element signature="e#4391#4392#0" expanded="true" />
+                <element signature="e#6103#6104#0" expanded="true" />
+                <element signature="e#6156#6157#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1522">
-              <caret line="119" column="25" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
+            <state relative-caret-position="187">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#8327#8328#0" expanded="true" />
@@ -146,22 +161,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowViewListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="46" column="45" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="236">
-              <caret line="155" selection-start-line="155" selection-end-line="155" />
+              <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -219,12 +222,14 @@
       <find>Arithmetic</find>
       <find>return</find>
       <find>Fill</find>
+      <find>mouseEvent</find>
     </findStrings>
     <replaceStrings>
       <replace>final</replace>
       <replace>Conditional</replace>
       <replace>translucentView =</replace>
       <replace>Stroke</replace>
+      <replace>local</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -270,7 +275,6 @@
         <option value="$PROJECT_DIR$/src/editor/command/DeleteFunctionDefinition.java" />
         <option value="$PROJECT_DIR$/src/editor/command/CanvasCommand.java" />
         <option value="$PROJECT_DIR$/src/editor/command/MoveDataFlowView.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" />
         <option value="$PROJECT_DIR$/src/app/view/DataFlowEdge.java" />
         <option value="$PROJECT_DIR$/src/model/DataFlowEdge.java" />
         <option value="$PROJECT_DIR$/src/editor/container/ConnectionPoint.java" />
@@ -292,6 +296,7 @@
         <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
         <option value="$PROJECT_DIR$/src/app/view/DataFlowViewListener.java" />
         <option value="$PROJECT_DIR$/src/app/view/DataFlowView.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" />
         <option value="$PROJECT_DIR$/src/app/controller/WorkspaceController.java" />
         <option value="$PROJECT_DIR$/src/app/controller/util/SelectionManager.java" />
       </list>
@@ -411,7 +416,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552534449681" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552536816741" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -518,13 +523,6 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-    </task>
-    <task id="LOCAL-00004" summary="Created Line and DirectedRectangle Meshes and placed them on scene">
-      <created>1548815231349</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1548815231349</updated>
     </task>
     <task id="LOCAL-00005" summary="Created a (buggy) Circle mesh class, added to scene">
       <created>1548820913345</created>
@@ -862,7 +860,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552445083450</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Refactored selection management to be done outside of controller class">
+      <created>1552534488490</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1552534488490</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -951,7 +956,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Buggy implementation of number input view and boolean input view" />
     <MESSAGE value="Basic setup of undo redo including shortcuts, command interface &amp; stacks" />
     <MESSAGE value="Undo redo related methods, new base class for controller delegates" />
     <MESSAGE value="Event handling for moving node with command. Still needs refinement" />
@@ -976,7 +980,8 @@
     <MESSAGE value="Restricted multiple edge connections to single input using edge lists.&#10;Introduced edge view list in data flow node views. Refactored method names and propagated changes across commands, controllers and views." />
     <MESSAGE value="Added a buggy highlight box, offsets after panning, supports 1 quadrant" />
     <MESSAGE value="Buggy selection management with rect &amp; without collective event handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Buggy selection management with rect &amp; without collective event handling" />
+    <MESSAGE value="Refactored selection management to be done outside of controller class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored selection management to be done outside of controller class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1165,16 +1170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="100" column="9" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1395,44 +1390,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="155" selection-start-line="155" selection-end-line="155" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/delegate/WorkspaceListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowViewListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="46" column="45" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1522">
-          <caret line="119" column="25" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8327#8328#0" expanded="true" />
-            <element signature="e#8376#8377#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1461,44 +1424,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="73" selection-start-line="42" selection-start-column="73" selection-end-line="42" selection-end-column="73" />
+        <state relative-caret-position="43">
+          <caret line="37" column="56" lean-forward="true" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6148#6149#0" expanded="true" />
-            <element signature="e#6240#6241#0" expanded="true" />
+            <element signature="e#6235#6236#0" expanded="true" />
+            <element signature="e#6327#6328#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/view/DataFlowViewListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/SidebarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8327#8328#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/WorkspaceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2041">
-          <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+        <state relative-caret-position="285">
+          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6316#6317#0" expanded="true" />
-            <element signature="e#6343#6344#0" expanded="true" />
+            <element signature="e#4607#4608#0" expanded="true" />
+            <element signature="e#4634#4635#0" expanded="true" />
             <element signature="e#7824#7825#0" expanded="true" />
             <element signature="e#7889#7890#0" expanded="true" />
             <element signature="e#7944#7945#0" expanded="true" />
             <element signature="e#8009#8010#0" expanded="true" />
             <element signature="e#8065#8066#0" expanded="true" />
             <element signature="e#8114#8115#0" expanded="true" />
-            <element signature="e#11251#11252#0" expanded="true" />
-            <element signature="e#11308#11309#0" expanded="true" />
+            <element signature="e#11520#11521#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/util/SelectionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="93" lean-forward="true" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
+        <state relative-caret-position="421">
+          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4356#4357#0" expanded="true" />
             <element signature="e#4391#4392#0" expanded="true" />
+            <element signature="e#6103#6104#0" expanded="true" />
+            <element signature="e#6156#6157#0" expanded="true" />
           </folding>
         </state>
       </provider>
