@@ -312,4 +312,9 @@ public class WorkspaceController implements DataFlowViewListener {
     public void movedBy(double deltaX, double deltaY) {
         selectionManager.moveSelectionOutlineBy(deltaX,deltaY);
     }
+
+    @Override
+    public List<DataFlowView> currentSelection() {
+        return selectionManager.cloneSelection();
+    }
 }

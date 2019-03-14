@@ -33,31 +33,30 @@ public abstract class DataFlowView extends Group {
         this.dataFlowViewListener = dataFlowViewListener;
 
         // event handling for dragging (moving) the node (Mouse press, drag, release)
-
         this.setOnMousePressed(event -> {
             this.dataFlowViewListener.requestSoleSelection(this);
-            moveCommand = new MoveDataFlowView(this);
+            moveCommand = new MoveDataFlowView(this.dataFlowViewListener);
             event.consume();
         });
 
         this.setOnMouseDragged(event -> {
-            this.dataFlowViewListener.movedBy(event.getX(),event.getY());
-            double newX = this.getTranslateX() + event.getX();
-            double newY = this.getTranslateY() + event.getY();
-            this.setLocation(newX,newY);
-            moveCommand.setFinalX(this.getTranslateX());
-            moveCommand.setFinalY(this.getTranslateY());
+            moveCommand.moveAllNodesBy(event.getX(),event.getY());
             event.consume();
         });
 
         this.setOnMouseReleased(event -> {
             if (moveCommand.didMakeMovement()) {
-                this.getDataFlowNode().setX(moveCommand.getFinalX());
-                this.getDataFlowNode().setY(moveCommand.getFinalY());
                 this.dataFlowViewListener.registerCommand(moveCommand, false);
             }
             event.consume();
         });
+    }
+
+    public void setLocation(double x,double y){
+        this.setTranslateX(x);
+        this.setTranslateY(y);
+        getDataFlowNode().setX(x);
+        getDataFlowNode().setY(y);
     }
 
     void setupOutputHandlers(){
@@ -135,13 +134,6 @@ public abstract class DataFlowView extends Group {
                 }
             });
         }
-    }
-
-    public void setLocation(double x,double y){
-        this.setTranslateX(x);
-        this.setTranslateY(y);
-        getDataFlowNode().setX(x);
-        getDataFlowNode().setY(y);
     }
 
     public List<DataFlowEdgeView> getIncomingEdges() {

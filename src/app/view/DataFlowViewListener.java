@@ -40,9 +40,16 @@ public interface DataFlowViewListener {
     boolean requestSoleSelection(DataFlowView sole);
 
     /**
-     * Notification for drag event during movement of node(s)
+     * Notification for drag event during movement of node(s), this can also be used during in
+     * move command during undo operations.
      * @param deltaX change in x movement
      * @param deltaY change in y movement
      */
     void movedBy(double deltaX,double deltaY);
+
+    /**
+     * Called on requirement of currently selected nodes
+     * @return Copy of the currently selected data flow views
+     */
+    List<DataFlowView> currentSelection();
 }

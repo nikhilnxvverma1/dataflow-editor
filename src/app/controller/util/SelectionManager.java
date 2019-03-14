@@ -126,7 +126,9 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
         Point2D local = backReference.transformedAfterPan(mouseEvent);
         initialX = local.getX();
         initialY = local.getY();
-        backReference.getCurrentStructure().group.getChildren().add(highlightRect);
+        if(!backReference.getCurrentStructure().group.getChildren().contains(highlightRect)){
+            backReference.getCurrentStructure().group.getChildren().add(highlightRect);
+        }
         highlightRect.setX(initialX);
         highlightRect.setY(initialY);
         highlightRect.setWidth(0);
