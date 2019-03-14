@@ -1,18 +1,12 @@
 package app.controller;
 
 import app.controller.util.NodeTool;
+import app.controller.util.SelectionManager;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.CanvasCommand;
 import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
 import javafx.scene.input.MouseEvent;
@@ -45,24 +39,13 @@ public class WorkspaceController implements DataFlowViewListener {
     private WorkspaceListener workspaceListener;
     private SubScene canvas;
     private NodeTool tool;
-    private Rectangle highlightRect = new Rectangle();
-    private ObservableList<DataFlowView> selectionSet = FXCollections.observableList(new LinkedList<>());
-    private Rectangle selectionRect = new Rectangle();
-
+    private SelectionManager selectionManager;
 
     WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
         this.workspaceListener = workspaceListener;
         this.canvas = canvas;
         this.tool = new NodeTool(this);
-
-        // selection
-        SelectionManagement selectionManager = new SelectionManagement();
-        highlightRect.setFill(HIGHLIGHT_FILL);
-        highlightRect.setStroke(HIGHLIGHT_OUTLINE);
-        highlightRect.layoutBoundsProperty().addListener(selectionManager);
-        selectionSet.addListener(selectionManager);
-        selectionRect.setStroke(SELECTION_OUTLINE);
-        selectionRect.setFill(SELECTION_FILL);
+        this.selectionManager = new SelectionManager(this);
 
         // create a Camera to view the 3D Shapes
         // this needs to be done before any callbacks fire off that may have a dependency on camera
@@ -74,79 +57,6 @@ public class WorkspaceController implements DataFlowViewListener {
         camera.setTranslateY(0);
         camera.setTranslateZ(DEFAULT_CAMERA_Z);
         canvas.setCamera(camera);
-    }
-
-    /**
-     * Manages selection/deselection of nodes by listening to change events on the selectionSet and adding observers
-     * to the layout bound property of the highlight rect
-     */
-    private class SelectionManagement implements ListChangeListener<DataFlowView>, ChangeListener<Bounds> {
-        @Override
-        public void onChanged(Change<? extends DataFlowView> c) {
-
-            if(selectionSet.size()==0){
-                getCurrentStructure().group.getChildren().remove(selectionRect);
-            }else{
-                if(!getCurrentStructure().group.getChildren().contains(selectionRect)){
-                    getCurrentStructure().group.getChildren().add(selectionRect);
-                    selectionRect.toBack();
-                }
-                //recompute the dimensions for the selection rect
-                BoundingBox bounds = computeBoundsForSelection();
-                selectionRect.setX(bounds.getMinX());
-                selectionRect.setY(bounds.getMinY());
-                selectionRect.setWidth(bounds.getWidth());
-                selectionRect.setHeight(bounds.getHeight());
-            }
-        }
-
-        /**
-         * Compute the dimensions for the selected items
-         * @return Bounding box describing the bounds in the current structure's group coordinate system
-         */
-        private BoundingBox computeBoundsForSelection() {
-            double lowX = 0;
-            double lowY = 0;
-            double highX = 0;
-            double highY = 0;
-            boolean unset = true;
-
-            for(DataFlowView each : selectionSet){
-                Bounds bounds = each.getBoundsInParent();
-                if(unset || bounds.getMinX() < lowX){
-                    lowX = bounds.getMinX();
-                }
-                if(unset || bounds.getMinY() < lowY){
-                    lowY = bounds.getMinY();
-                }
-                if(unset || bounds.getMaxX() > highX){
-                    highX = bounds.getMaxX();
-                }
-                if(unset || bounds.getMaxY() > highY){
-                    highY = bounds.getMaxY();
-                }
-                unset = false;
-            }
-
-            return new BoundingBox(lowX,lowY,highX-lowX,highY-lowY);
-        }
-
-        @Override
-        public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-
-            FunctionDefinitionStructure structure = getCurrentStructure();
-            for(DataFlowView each : structure.nodeViewList){
-                Bounds viewBounds = each.getBoundsInParent();
-                Bounds highlightBounds = highlightRect.getBoundsInParent();
-                if(highlightBounds.intersects(viewBounds) || highlightBounds.contains(viewBounds)){
-                    if(!selectionSet.contains(each)){
-                        selectionSet.add(each);
-                    }
-                }else{
-                    selectionSet.remove(each);
-                }
-            }
-        }
     }
 
     void initialize(){
@@ -209,7 +119,7 @@ public class WorkspaceController implements DataFlowViewListener {
         }
 
         // clear the selection set for this new entry
-        selectionSet.clear();
+        selectionManager.getSelectionSet().clear();
 
         // set the root of the canvas to be that of new selection
         canvas.setRoot(newSelection.group);
@@ -253,12 +163,10 @@ public class WorkspaceController implements DataFlowViewListener {
         // compute new camera position
         double newCameraZ = cameraZ;
         if(zoomEvent.getZoomFactor()>=1){ // zoom in
-//            Logger.debug("Zooming IN (factor):"+zoomEvent.getZoomFactor());
             if(cameraZ + ZOOM_DELTA_Z < CLOSEST_CAMERA_Z){  // don't go beyond threshold
                 newCameraZ = cameraZ + ZOOM_DELTA_Z;
             }
         }else{ // zoom out
-//            Logger.debug("Zooming OUT (factor):"+zoomEvent.getZoomFactor());
             if(cameraZ - ZOOM_DELTA_Z > FARTHEST_CAMERA_Z){ // don't go beyond threshold
                 newCameraZ = cameraZ - ZOOM_DELTA_Z;
             }
@@ -287,21 +195,15 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mousePressedOnCanvas(MouseEvent mouseEvent){
-        getCurrentStructure().group.getChildren().add(highlightRect);
-        selectionSet.clear();
-        highlightRect.setX(mouseEvent.getX());
-        highlightRect.setY(mouseEvent.getY());
-        highlightRect.setWidth(0);
-        highlightRect.setHeight(0);
+        selectionManager.mousePressedOnCanvas(mouseEvent);
     }
 
     void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-        highlightRect.setWidth(mouseEvent.getX()-highlightRect.getX());
-        highlightRect.setHeight(mouseEvent.getY()-highlightRect.getY());
+        selectionManager.mouseDraggedOnCanvas(mouseEvent);
     }
 
     void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-        getCurrentStructure().group.getChildren().remove(highlightRect);
+        selectionManager.mouseReleasedOnCanvas(mouseEvent);
     }
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
@@ -360,8 +262,8 @@ public class WorkspaceController implements DataFlowViewListener {
 
     @Override
     public boolean requestSoleSelection(DataFlowView sole) {
-        if(selectionSet.size()==0){
-            selectionSet.add(sole);
+        if(selectionManager.getSelectionSet().size()==0){
+            selectionManager.getSelectionSet().add(sole);
             return true;
         }
         return false;
@@ -369,7 +271,6 @@ public class WorkspaceController implements DataFlowViewListener {
 
     @Override
     public void movedBy(double deltaX, double deltaY) {
-        selectionRect.setX(selectionRect.getX() + deltaX);
-        selectionRect.setY(selectionRect.getY() + deltaY);
+        selectionManager.moveSelectionOutlineBy(deltaX,deltaY);
     }
 }
