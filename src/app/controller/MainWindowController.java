@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import model.Root;
 
 import java.util.EmptyStackException;
 import java.util.List;
@@ -46,6 +47,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private SidebarController sidebarController;
     private WorkspaceController workspaceController;
 
+    private Root root;
+
     public void initialize(){
         canvas.widthProperty().bind(rootContainer.widthProperty());
         canvas.heightProperty().bind(rootContainer.heightProperty());
@@ -54,7 +57,9 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
         //TODO file handling, create models
 
-        this.sidebarController.initialize(DummyData.filledFunctionDefinitions(5,1,5));
+//        DummyData.filledFunctionDefinitions(5,1,5)
+        root = getEmptyModel();
+        this.sidebarController.initialize(root.getFunctionDefinitionList());
         this.workspaceController.initialize();
     }
 
@@ -78,6 +83,12 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         }catch(EmptyStackException e){
             Logger.info("Redo stack is empty");
         }
+    }
+
+    private Root getEmptyModel(){
+        Root emptyModel = new Root();
+        emptyModel.setFunctionDefinitionList(DummyData.emptyFunctionDefinitions(1));
+        return emptyModel;
     }
 
     //==================================================================================================================
