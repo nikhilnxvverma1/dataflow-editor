@@ -6,10 +6,7 @@ import editor.command.CreateDataFlowNode;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
-import model.ArithmeticNode;
-import model.BooleanInputNode;
-import model.ConditionalNode;
-import model.NumberInputNode;
+import model.*;
 
 /**
  * Utility used by workspace controller to drive the toolset in creating nodes on the canvas under the current
@@ -27,6 +24,14 @@ public class NodeTool {
     public NodeTool(WorkspaceController backReference) {
         this.backReference = backReference;
 
+    }
+
+    /**
+     * Creation mode is when the workspace is actually creating nodes on mouse click
+     * @return true if the workspace is in creation mode
+     */
+    public boolean inCreationMode(){
+        return nodePreview!=null;
     }
 
     public void togglePreview(boolean visible){
@@ -73,7 +78,7 @@ public class NodeTool {
         return creationMode;
     }
 
-    public void createNode(MouseEvent mouseEvent){
+    public DataFlowView createNode(MouseEvent mouseEvent){
         if (nodePreview != null) {
 
             Point2D p = backReference.transformedAfterPan(mouseEvent);
@@ -83,14 +88,18 @@ public class NodeTool {
             nodePreview.setOpacity(1);
 
             // create the command and execute it through the workspace
-            CreateDataFlowNode createNode = new CreateDataFlowNode(nodePreview,backReference.getCurrentStructure());
+            DataFlowView newNodeCreated = nodePreview;
+            CreateDataFlowNode createNode = new CreateDataFlowNode(newNodeCreated,backReference.getCurrentStructure());
             backReference.registerCommand(createNode,true);
 
             //set a new node preview at mouse position
             nodePreview = buildPreviewDataFlowView();
             backReference.getCurrentStructure().group.getChildren().add(nodePreview);
             nodePreview.setLocation(p.getX(),p.getY());
+
+            return newNodeCreated;
         }
+        return null;
     }
 
     public void mouseMoved(MouseEvent mouseEvent){

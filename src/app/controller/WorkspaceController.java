@@ -231,19 +231,27 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mousePressedOnCanvas(MouseEvent mouseEvent){
-        selectionManager.mousePressedOnCanvas(mouseEvent);
+        if(!tool.inCreationMode()){
+            selectionManager.mousePressedOnCanvas(mouseEvent);
+        }
     }
 
     void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-        selectionManager.mouseDraggedOnCanvas(mouseEvent);
+        if(!tool.inCreationMode()){
+            selectionManager.mouseDraggedOnCanvas(mouseEvent);
+        }
     }
 
     void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-        selectionManager.mouseReleasedOnCanvas(mouseEvent);
+        if(!tool.inCreationMode()){
+            selectionManager.mouseReleasedOnCanvas(mouseEvent);
+        }
     }
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
-        tool.createNode(mouseEvent);
+        DataFlowView newNodeCreated = tool.createNode(mouseEvent);
+        selectionManager.getSelectionSet().clear();
+        selectionManager.getSelectionSet().add(newNodeCreated);
     }
 
     //==================================================================================================================
