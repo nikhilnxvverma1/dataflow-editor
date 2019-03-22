@@ -75,7 +75,7 @@ public abstract class DataFlowView extends Group {
                     edgeView.setStartY(outputConnectorScenePoint.getY());
                     edgeView.setEndX(outputConnectorScenePoint.getX());
                     edgeView.setEndY(outputConnectorScenePoint.getY());
-                    dataFlowViewListener.getCurrentStructure().group.getChildren().add(edgeView);
+                    dataFlowViewListener.getCurrentStructure().pane.getChildren().add(edgeView);
                     edgeView.toBack();
 
                     createEdge = new CreateDataFlowEdge(edgeView,dataFlowViewListener.getCurrentStructure());
@@ -127,8 +127,8 @@ public abstract class DataFlowView extends Group {
                         dataFlowViewListener.registerCommand(createEdge,false);
                     }else{
 
-                        //remove the view from function definition's group
-                        dataFlowViewListener.getCurrentStructure().group.getChildren().remove(edgeView);
+                        //remove the view from function definition's pane
+                        dataFlowViewListener.getCurrentStructure().pane.getChildren().remove(edgeView);
                     }
                     event.consume();
                 }

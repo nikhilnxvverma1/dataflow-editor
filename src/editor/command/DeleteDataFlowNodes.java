@@ -4,6 +4,7 @@ import app.view.DataFlowEdgeView;
 import app.view.DataFlowView;
 import editor.container.FunctionDefinitionStructure;
 import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class DeleteDataFlowNodes implements Command{
 
     @Override
     public void undo() {
-        Group parent = structure.group;
+        Pane parent = structure.pane;
         // for each node
         for(DataFlowView each : nodesToDelete){
 
@@ -58,7 +59,7 @@ public class DeleteDataFlowNodes implements Command{
 
     @Override
     public void redo() {
-        Group parent = structure.group;
+        Pane parent = structure.pane;
         // for each node remove view, model and
         for(DataFlowView each : nodesToDelete){
 

@@ -49,10 +49,10 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
     public void onChanged(Change<? extends DataFlowView> c) {
 
         if(selectionSet.size()==0){
-            backReference.getCurrentStructure().group.getChildren().remove(selectionRect);
+            backReference.getCurrentStructure().pane.getChildren().remove(selectionRect);
         }else{
-            if(!backReference.getCurrentStructure().group.getChildren().contains(selectionRect)){
-                backReference.getCurrentStructure().group.getChildren().add(selectionRect);
+            if(!backReference.getCurrentStructure().pane.getChildren().contains(selectionRect)){
+                backReference.getCurrentStructure().pane.getChildren().add(selectionRect);
                 selectionRect.toBack();
             }
             //recompute the dimensions for the selection rect
@@ -66,7 +66,7 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
 
     /**
      * Compute the dimensions for the selected items
-     * @return Bounding box describing the bounds in the current structure's group coordinate system
+     * @return Bounding box describing the bounds in the current structure's pane coordinate system
      */
     private BoundingBox computeBoundsForSelection() {
         double lowX = 0;
@@ -126,8 +126,8 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
         Point2D local = backReference.transformedAfterPan(mouseEvent);
         initialX = local.getX();
         initialY = local.getY();
-        if(!backReference.getCurrentStructure().group.getChildren().contains(highlightRect)){
-            backReference.getCurrentStructure().group.getChildren().add(highlightRect);
+        if(!backReference.getCurrentStructure().pane.getChildren().contains(highlightRect)){
+            backReference.getCurrentStructure().pane.getChildren().add(highlightRect);
         }
         highlightRect.setX(initialX);
         highlightRect.setY(initialY);
@@ -157,7 +157,7 @@ public class SelectionManager implements ListChangeListener<DataFlowView>, Chang
     }
 
     public void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-        backReference.getCurrentStructure().group.getChildren().remove(highlightRect);
+        backReference.getCurrentStructure().pane.getChildren().remove(highlightRect);
     }
 
     /**

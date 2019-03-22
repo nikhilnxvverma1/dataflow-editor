@@ -14,6 +14,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.Root;
 
 import java.util.EmptyStackException;
@@ -52,6 +54,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     public void initialize(){
         canvas.widthProperty().bind(rootContainer.widthProperty());
         canvas.heightProperty().bind(rootContainer.heightProperty());
+//        Window window = rootContainer.getScene().getWindow(); // will not work
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,canvas);
 

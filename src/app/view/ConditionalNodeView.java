@@ -109,7 +109,7 @@ public class ConditionalNodeView extends DataFlowView{
     }
 
     /**
-     * Setup of views and events in this group. All event logic is handled by the listener
+     * Setup of views and events in this pane. All event logic is handled by the listener
      */
     private void initialize(){
 

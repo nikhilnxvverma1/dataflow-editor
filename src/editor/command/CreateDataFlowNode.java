@@ -19,8 +19,8 @@ public class CreateDataFlowNode extends CanvasCommand{
         // remove the node from the model
         structure.functionDefinition.getDataFlowNodes().remove(dataFlowView.getDataFlowNode());
 
-        // remove the view from the FunctionDefinitionStructure group
-        structure.group.getChildren().remove(dataFlowView);
+        // remove the view from the FunctionDefinitionStructure pane
+        structure.pane.getChildren().remove(dataFlowView);
 
         // remove from the structure's view list
         structure.nodeViewList.remove(dataFlowView);
@@ -32,9 +32,9 @@ public class CreateDataFlowNode extends CanvasCommand{
         //add the model
         structure.functionDefinition.getDataFlowNodes().add(dataFlowView.getDataFlowNode());
 
-        // add the view in the FunctionDefinitionStructure group
-        if (!structure.group.getChildren().contains(dataFlowView)){
-            structure.group.getChildren().add(dataFlowView);
+        // add the view in the FunctionDefinitionStructure pane
+        if (!structure.pane.getChildren().contains(dataFlowView)){
+            structure.pane.getChildren().add(dataFlowView);
         }
 
         // add to the structure's view list
