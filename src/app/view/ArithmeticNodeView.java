@@ -29,8 +29,7 @@ public class ArithmeticNodeView extends DataFlowView{
     private Circle inputHandle2 = new Circle(INPUT_RADIUS);
     private Circle outputHandle = new Circle(OUTPUT_RADIUS);
 
-    private static final Font FONT = new Font(80);
-    private Label label = new Label();
+    private static final Font FONT = new Font(MAIN_RADIUS);
 
     private ArithmeticNode arithmeticNode;
 
@@ -122,14 +121,15 @@ public class ArithmeticNodeView extends DataFlowView{
         outputHandle.setLayoutY(0);
         outputHandle.setFill(OUTPUT_COLOR);
 
-        //label
-        label = new Label(getLabelBasedOnType());
-        label.setLayoutX(-MAIN_RADIUS/2);
-        label.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
-        label.setFont(FONT);
+        // text
+        Text text = new Text(getLabelBasedOnType());
+        text.setLayoutX(-MAIN_RADIUS/3);
+//        text.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
+        text.setLayoutY(MAIN_RADIUS/4);
+        text.setFont(FONT);
 //        label.setStyle("-fx-background-color: red;"); //debugging purposes only
 
-        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
+        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,text);
 
         setupOutputHandlers();
 

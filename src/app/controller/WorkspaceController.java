@@ -250,8 +250,10 @@ public class WorkspaceController implements DataFlowViewListener {
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
         DataFlowView newNodeCreated = tool.createNode(mouseEvent);
-        selectionManager.getSelectionSet().clear();
-        selectionManager.getSelectionSet().add(newNodeCreated);
+        if(newNodeCreated!=null){
+            selectionManager.getSelectionSet().clear();
+            selectionManager.getSelectionSet().add(newNodeCreated);
+        }
     }
 
     //==================================================================================================================

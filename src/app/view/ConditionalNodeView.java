@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import model.ConditionalNode;
 import model.DataFlowNode;
 
@@ -23,8 +24,7 @@ public class ConditionalNodeView extends DataFlowView{
     private Circle inputHandle2 = new Circle(INPUT_RADIUS);
     private Circle outputHandle = new Circle(OUTPUT_RADIUS);
 
-    private static final Font FONT = new Font(80);
-    private Label label = new Label();
+    private static final Font FONT = new Font(MAIN_RADIUS);
 
     private ConditionalNode conditionalNode;
 
@@ -137,13 +137,14 @@ public class ConditionalNodeView extends DataFlowView{
         outputHandle.setLayoutY(0);
         outputHandle.setFill(OUTPUT_COLOR);
 
-        //label
-        label = new Label(getLabelBasedOnType());
-        label.setLayoutX(-MAIN_RADIUS/2);
-        label.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
-        label.setFont(FONT);
+        // text
+        Text text = new Text(getLabelBasedOnType());
+        text.setLayoutX(-MAIN_RADIUS/3);
+//        text.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
+        text.setLayoutY(MAIN_RADIUS/4);
+        text.setFont(FONT);
 
-        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,label);
+        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,text);
 
         setupOutputHandlers();
     }
