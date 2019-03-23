@@ -1,11 +1,11 @@
 package app.view;
 
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import model.ArithmeticNode;
 import model.DataFlowNode;
 
@@ -15,14 +15,12 @@ import model.DataFlowNode;
 public class ArithmeticNodeView extends DataFlowView{
 
     // radii
-    private static final double MAIN_RADIUS = 50;
-    private static final double INPUT_RADIUS = 10;
-    private static final double OUTPUT_RADIUS = 10;
+    private static final double MAIN_RADIUS = 20;
 
     //color
-    private static final Paint MAIN_COLOR = Color.DODGERBLUE;
+    private static final Paint MAIN_COLOR = Color.DARKGRAY;
     private static final Paint INPUT_COLOR = Color.GRAY;
-    private static final Paint OUTPUT_COLOR = Color.BISQUE;
+    private static final Paint OUTPUT_COLOR = Color.GRAY;
 
     private Circle mainCircle = new Circle(MAIN_RADIUS);
     private Circle inputHandle1 = new Circle(INPUT_RADIUS);
@@ -123,13 +121,16 @@ public class ArithmeticNodeView extends DataFlowView{
 
         // text
         Text text = new Text(getLabelBasedOnType());
-        text.setLayoutX(-MAIN_RADIUS/3);
+        text.setLayoutX(-MAIN_RADIUS);
 //        text.setLayoutY(-MAIN_RADIUS - 7); //extra estimated hard coded shift because of x-height
         text.setLayoutY(MAIN_RADIUS/4);
         text.setFont(FONT);
+        text.setFill(Color.WHITE);
+        text.setWrappingWidth(2*MAIN_RADIUS);
+        text.setTextAlignment(TextAlignment.CENTER);
 //        label.setStyle("-fx-background-color: red;"); //debugging purposes only
 
-        this.getChildren().addAll(inputHandle1,inputHandle2,outputHandle,mainCircle,text);
+        this.getChildren().addAll(mainCircle,inputHandle1,inputHandle2,outputHandle,text);
 
         setupOutputHandlers();
 

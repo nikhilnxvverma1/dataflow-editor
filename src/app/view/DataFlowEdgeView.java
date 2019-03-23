@@ -14,8 +14,8 @@ public class DataFlowEdgeView extends Line {
 
     public static final Paint INCOMPATIBLE_TYPES_COLOR = Color.RED;
     public static final Paint COMPATIBLE_TYPES_COLOR = Color.LIGHTGREEN;
-    public static final Paint UNCONNECTED_TYPES_COLOR = new Color(1,1,1,0.3);
-    public static final Paint CONNECTED_TYPES_COLOR = Color.WHITE;
+    public static final Paint UNCONNECTED_TYPES_COLOR = new Color(0,0,0,0.3);
+    public static final Paint CONNECTED_TYPES_COLOR = Color.BLACK;
     public static final double STROKE_WIDTH = 2;
     private DataFlowEdge edge;
     private DataFlowView fromView;

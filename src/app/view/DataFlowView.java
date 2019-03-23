@@ -20,8 +20,8 @@ import java.util.List;
 public abstract class DataFlowView extends Group {
 
     private DataFlowViewListener dataFlowViewListener;
-    protected static final double INPUT_RADIUS = 10;
-    protected static final double OUTPUT_RADIUS = 10;
+    protected static final double INPUT_RADIUS = 5;
+    protected static final double OUTPUT_RADIUS = 5;
 
     private MoveDataFlowView moveCommand;
     private CreateDataFlowEdge createEdge;
