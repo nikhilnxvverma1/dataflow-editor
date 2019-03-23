@@ -150,9 +150,6 @@ public class WorkspaceController implements DataFlowViewListener {
 
         // set the root of the canvas to be that of new selection
         canvas.setRoot(newSelection.pane);
-//        newSelection.pane.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-//        newSelection.pane.setMinSize(Double.MAX_VALUE,Double.MAX_VALUE);
-//        newSelection.pane.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
         canvas.getCamera().setTranslateX(newSelection.cameraX);
         canvas.getCamera().setTranslateY(newSelection.cameraY);
         canvas.getCamera().setTranslateZ(newSelection.cameraZ);
@@ -171,16 +168,16 @@ public class WorkspaceController implements DataFlowViewListener {
         double newX = canvas.getCamera().getTranslateX() - scrollEvent.getDeltaX();
         double newY = canvas.getCamera().getTranslateY() - scrollEvent.getDeltaY();
         FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
-//        Logger.debug("New Canvas scroll(x,y): ("+newX+","+newY+")");
+//        Logger.debug("New Canvas scroll(x,y): ("+newX+","+newY+") Canvas size :"+canvas.getWidth()+","+canvas.getHeight());
 
         // within limits, change x and save the new position in the current structure
-        if(newX > 0){
+        if(newX > 0 && newX < canvas.getWidth()){
             canvas.getCamera().setTranslateX(newX);
             current.cameraX = newX;
         }
 
         // within limits, change x and save the new position in the current structure
-        if(newY > TITLE_BAR_HEIGHT){
+        if(newY > TITLE_BAR_HEIGHT && newY < canvas.getHeight()){
             canvas.getCamera().setTranslateY(newY);
             current.cameraY = newY;
         }

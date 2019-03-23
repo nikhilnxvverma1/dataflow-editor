@@ -15,7 +15,7 @@ public class ConditionalNodeView extends DataFlowView{
     private static final double MAIN_RADIUS = 50;
 
     //color
-    private static final Paint MAIN_COLOR = Color.WHITESMOKE;
+    private static final Paint MAIN_COLOR = Color.DODGERBLUE;
     private static final Paint INPUT_COLOR = Color.GRAY;
     private static final Paint OUTPUT_COLOR = Color.BISQUE;
 

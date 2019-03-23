@@ -20,7 +20,7 @@ public class ArithmeticNodeView extends DataFlowView{
     private static final double OUTPUT_RADIUS = 10;
 
     //color
-    private static final Paint MAIN_COLOR = Color.WHITESMOKE;
+    private static final Paint MAIN_COLOR = Color.DODGERBLUE;
     private static final Paint INPUT_COLOR = Color.GRAY;
     private static final Paint OUTPUT_COLOR = Color.BISQUE;
 

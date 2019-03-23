@@ -52,9 +52,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private Root root;
 
     public void initialize(){
-        canvas.widthProperty().bind(rootContainer.widthProperty());
-        canvas.heightProperty().bind(rootContainer.heightProperty());
-//        Window window = rootContainer.getScene().getWindow(); // will not work
+        canvas.widthProperty().bind(rootContainer.widthProperty().multiply(3));
+        canvas.heightProperty().bind(rootContainer.heightProperty().multiply(3));
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,canvas);
 

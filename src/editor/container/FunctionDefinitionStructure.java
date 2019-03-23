@@ -14,6 +14,7 @@ import java.util.List;
  * and current camera position of the scene
  */
 public class FunctionDefinitionStructure{
+
     public FunctionDefinition functionDefinition;
     public Pane pane;
     public List<DataFlowView> nodeViewList = new LinkedList<>();
@@ -24,9 +25,10 @@ public class FunctionDefinitionStructure{
     public FunctionDefinitionStructure(FunctionDefinition functionDefinition) {
         this.functionDefinition = functionDefinition;
         this.pane = new Pane();
-        this.pane.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        this.pane.setMinSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        this.pane.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
+//        this.pane.setPrefSize(PANE_WIDTH,PANE_HEIGHT);
+//        pane.setStyle("-fx-background-color: red;"); //debugging purposes only
+//        pane.setStyle("-fx-pref-width: 999px;"); //debugging purposes only
+//        pane.setStyle("-fx-pref-height: 999px;"); //debugging purposes only
         this.cameraX = 0;
         this.cameraY = WorkspaceController.TITLE_BAR_HEIGHT;
         this.cameraZ = WorkspaceController.DEFAULT_CAMERA_Z;

@@ -24,9 +24,9 @@ import java.util.List;
  * to the layout bound property of the highlight rect. These views are internal to the class.
  */
 public class SelectionManager implements ListChangeListener<DataFlowView>, ChangeListener<Bounds> {
-    private static final Paint HIGHLIGHT_FILL = new Color(1,1,1,0.1);
-    private static final Paint HIGHLIGHT_OUTLINE = Color.WHITE;
-    private static final Paint SELECTION_OUTLINE = Color.WHITE;
+    private static final Paint HIGHLIGHT_FILL = new Color(0,0,1,0.1);
+    private static final Paint HIGHLIGHT_OUTLINE = Color.BLUE;
+    private static final Paint SELECTION_OUTLINE = Color.BLUE;
     private static final Paint SELECTION_FILL = new Color(1,1,1,0.0);
     private WorkspaceController backReference;
     private Rectangle highlightRect = new Rectangle();
