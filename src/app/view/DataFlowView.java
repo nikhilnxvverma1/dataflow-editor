@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import model.DataFlowNode;
 
@@ -22,6 +24,12 @@ public abstract class DataFlowView extends Group {
     private DataFlowViewListener dataFlowViewListener;
     protected static final double INPUT_RADIUS = 5;
     protected static final double OUTPUT_RADIUS = 5;
+
+    protected static final Paint INPUT_COLOR = Color.GRAY;
+    protected static final Paint OUTPUT_COLOR = Color.GRAY;
+
+    // arc
+    protected static final double CORNER_ARC = 40;
 
     private MoveDataFlowView moveCommand;
     private CreateDataFlowEdge createEdge;

@@ -1,6 +1,9 @@
 package app.view;
 
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -12,12 +15,12 @@ import model.DataFlowNode;
 public class BooleanNodeView extends DataFlowView{
 
     // radii
-    private static final double MAIN_RECT_LENGTH = 100;
+    private static final double MAIN_RECT_LENGTH = 70;
     private static final double MAIN_RECT_HEIGHT= 60;
 
     // color
-    private static final Paint MAIN_COLOR = Color.WHITESMOKE;
-    private static final Paint OUTPUT_COLOR = Color.BISQUE;
+    private static final Paint MAIN_COLOR = Color.DARKGRAY;
+//    private static final Paint OUTPUT_COLOR = Color.BISQUE;
 
     private Rectangle mainRect = new Rectangle(MAIN_RECT_LENGTH,MAIN_RECT_HEIGHT);
     private Circle outputHandle = new Circle(OUTPUT_RADIUS);
@@ -43,6 +46,8 @@ public class BooleanNodeView extends DataFlowView{
 
         // main circle
         mainRect.setFill(MAIN_COLOR);
+        mainRect.setArcHeight(CORNER_ARC);
+        mainRect.setArcWidth(CORNER_ARC);
         mainRect.setLayoutY(-MAIN_RECT_HEIGHT/2);
 
         // output handle
@@ -50,19 +55,28 @@ public class BooleanNodeView extends DataFlowView{
         outputHandle.setLayoutY(0);
         outputHandle.setFill(OUTPUT_COLOR);
 
-        // input field
-
-        ToggleButton field = new ToggleButton(trueOrFalse(booleanInputNode.isValue()));
-        field.setPrefWidth(MAIN_RECT_LENGTH);
-        field.setPrefHeight(MAIN_RECT_HEIGHT/2);
+        // Toggle input field with image state buttons
+        ToggleButton field = buildSwitch();
+//        field.setPrefWidth(MAIN_RECT_LENGTH);
+//        field.setPrefHeight(MAIN_RECT_HEIGHT/2);
         field.setLayoutX(0);
         field.setLayoutY(-MAIN_RECT_HEIGHT/4);
+        field.setStyle("-fx-background-color: transparent;");
 
-        this.getChildren().addAll(outputHandle, mainRect, field);
+        this.getChildren().addAll(mainRect,outputHandle, field);
 
         setupOutputHandlers();
 
+    }
 
+    private ToggleButton buildSwitch(){
+        ToggleButton switchField = new ToggleButton();
+        Image off = new Image("images/switch-off.png");
+        Image on = new Image("images/switch-on.png");
+        ImageView toggleView = new ImageView();
+        toggleView.imageProperty().bind(Bindings.when(switchField.selectedProperty()).then(on).otherwise(off));
+        switchField.setGraphic(toggleView);
+        return switchField;
     }
 
     private String trueOrFalse(boolean t){
