@@ -28,6 +28,7 @@ public class BooleanNodeView extends DataFlowView{
     private static final Font FONT = new Font(80);
 
     private BooleanInputNode booleanInputNode;
+    private final ToggleButton field = buildSwitch();
 
     public BooleanNodeView(BooleanInputNode booleanInputNode,DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
@@ -56,8 +57,7 @@ public class BooleanNodeView extends DataFlowView{
         outputHandle.setFill(OUTPUT_COLOR);
 
         // Toggle input field with image state buttons
-        ToggleButton field = buildSwitch();
-//        field.setPrefWidth(MAIN_RECT_LENGTH);
+        //        field.setPrefWidth(MAIN_RECT_LENGTH);
 //        field.setPrefHeight(MAIN_RECT_HEIGHT/2);
         field.setLayoutX(0);
         field.setLayoutY(-MAIN_RECT_HEIGHT/4);
@@ -76,7 +76,13 @@ public class BooleanNodeView extends DataFlowView{
         ImageView toggleView = new ImageView();
         toggleView.imageProperty().bind(Bindings.when(switchField.selectedProperty()).then(on).otherwise(off));
         switchField.setGraphic(toggleView);
+        switchField.setDisable(true);
         return switchField;
+    }
+
+    @Override
+    public void postViewCreation() {
+        field.setDisable(false);
     }
 
     private String trueOrFalse(boolean t){

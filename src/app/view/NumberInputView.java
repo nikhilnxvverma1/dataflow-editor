@@ -3,6 +3,7 @@ package app.view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -59,16 +60,11 @@ public class NumberInputView extends DataFlowView{
 
         // input field
 
-        field.setOnKeyPressed( event -> {
-            System.out.println("Key pressed "+event.getCode());
-                }
-        );
+        field.setOnKeyReleased(this::onKeyReleased);
         field.setPrefWidth(MAIN_RECT_LENGTH-2*OUTPUT_RADIUS);
         field.setPrefHeight(MAIN_RECT_HEIGHT/2);
-        field.setLayoutX(0);
+        field.setLayoutX(OUTPUT_RADIUS);
         field.setLayoutY(-MAIN_RECT_HEIGHT/4);
-
-        field.setPrefHeight(100);
         field.setAlignment(Pos.CENTER_RIGHT);
         field.setDisable(true);
 
@@ -76,6 +72,25 @@ public class NumberInputView extends DataFlowView{
 
         setupOutputHandlers();
 
+    }
+
+    private void onKeyReleased(KeyEvent event){
+        // validate if the text is a number or not
+        String text = field.getText();
+        if(isDouble(text)){
+            field.setStyle("-fx-text-fill: green;");
+        }else{
+            field.setStyle("-fx-text-fill: red;");
+        }
+    }
+
+    private boolean isDouble(String text){
+        try{
+            Double.parseDouble(text.trim());
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
     }
 
     @Override
