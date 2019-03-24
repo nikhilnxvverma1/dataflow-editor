@@ -2,6 +2,7 @@ package app.controller;
 
 import app.controller.util.NodeTool;
 import app.controller.util.SelectionManager;
+import app.controller.util.EditSpace;
 import app.delegate.WorkspaceListener;
 import app.view.*;
 import editor.command.CanvasCommand;
@@ -11,14 +12,10 @@ import editor.container.FunctionDefinitionStructure;
 import editor.util.Logger;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.SubScene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.stage.Window;
+import javafx.scene.layout.AnchorPane;
 import model.*;
 
 import java.util.LinkedList;
@@ -43,37 +40,55 @@ public class WorkspaceController implements DataFlowViewListener {
 
     /** Usually the main window controller will be the listener. This is a decoupled back reference */
     private WorkspaceListener workspaceListener;
-    private SubScene canvas;
+//    private SubScene canvas;
+    private EditSpace editSpace;
     private NodeTool tool;
     private SelectionManager selectionManager;
 
-    WorkspaceController(WorkspaceListener workspaceListener, SubScene canvas) {
+    WorkspaceController(WorkspaceListener workspaceListener, AnchorPane parent) {
         this.workspaceListener = workspaceListener;
-        this.canvas = canvas;
+//        this.canvas = canvas;
         this.tool = new NodeTool(this);
         this.selectionManager = new SelectionManager(this);
 
-        // create a Camera to view the 3D Shapes
-        // this needs to be done before any callbacks fire off that may have a dependency on camera
-        PerspectiveCamera camera = new PerspectiveCamera();
-        camera.setNearClip(1);
-        camera.setFarClip(1000);
-        camera.setFieldOfView(35);
-        camera.setTranslateX(0);
-        camera.setTranslateY(0);
-        camera.setTranslateZ(DEFAULT_CAMERA_Z);
-        canvas.setCamera(camera);
+        setupEditSpace(parent);
+    }
+
+    private void setupEditSpace(AnchorPane parent){
+
+        // create an edit space (which would hold the contents of the current structure)
+        this.editSpace =  new EditSpace();
+//        this.editSpace..setPrefWidth(SCROLL_PANE_WIDTH);
+//        this.editSpace.setPrefHeight(SCROLL_PANE_HEIGHT);
+
+        // add to parent with constraints to top left side being 0
+        parent.getChildren().add(editSpace);
+        editSpace.toBack();
+        AnchorPane.setTopAnchor(this.editSpace,0.0);
+        AnchorPane.setLeftAnchor(this.editSpace,MainWindowController.SIDEBAR_WIDTH);
+        AnchorPane.setRightAnchor(this.editSpace,0.0);
+        AnchorPane.setBottomAnchor(this.editSpace,0.0);
+
+        // setup event handling for all mouse events
+        editSpace.getContentPane().setOnMouseMoved(this::mouseMovedOnCanvas);
+        editSpace.getContentPane().setOnMouseEntered(this::mouseEnteredOnCanvas);
+        editSpace.getContentPane().setOnMouseExited(this::mouseExitedOnCanvas);
+        editSpace.getContentPane().setOnMousePressed(this::mousePressedOnCanvas);
+        editSpace.getContentPane().setOnMouseDragged(this::mouseDraggedOnCanvas);
+        editSpace.getContentPane().setOnMouseReleased(this::mouseReleasedOnCanvas);
+        editSpace.getContentPane().setOnMouseClicked(this::mouseClickOnCanvas);
     }
 
     /**
      * Gets the location from the mouse event after cancelling any camera pan
      * @param mouseEvent mouse event that occurred on the sub scene
-     * @return transformed point that can be used in structure's pane space
+     * @return transformed point that can be used in structure's group space
      */
     public Point2D transformedAfterPan(MouseEvent mouseEvent){
         FunctionDefinitionStructure structure = getCurrentStructure();
         double x = mouseEvent.getX() + structure.cameraX;
         double y = mouseEvent.getY() + structure.cameraY;
+//        Logger.debug("(x,y)"+x+","+y);
         return new Point2D(x,y);
     }
 
@@ -113,8 +128,8 @@ public class WorkspaceController implements DataFlowViewListener {
 
             }
 
-            // add this node view to the structure's pane
-            structure.pane.getChildren().add(nodeView);
+            // add this node view to the structure's group
+            structure.group.getChildren().add(nodeView);
 
             // also add this node view list to the structure for tracking later
             structure.nodeViewList.add(nodeView);
@@ -134,13 +149,17 @@ public class WorkspaceController implements DataFlowViewListener {
         return tool;
     }
 
+    EditSpace getEditSpace() {
+        return editSpace;
+    }
+
     //==================================================================================================================
     //  Events received from the parent controller
     //==================================================================================================================
 
     void functionDefinitionChanged(FunctionDefinitionStructure newSelection,FunctionDefinitionStructure oldSelection){
 
-        // remove the pane of the old selection, and add this selection
+        // remove the group of the old selection, and add this selection
         if(oldSelection!=null){
             // do any transient de-allocation if needed
         }
@@ -148,71 +167,73 @@ public class WorkspaceController implements DataFlowViewListener {
         // clear the selection set for this new entry
         selectionManager.getSelectionSet().clear();
 
+        editSpace.setFunctionDefinitionStructure(newSelection);
+
         // set the root of the canvas to be that of new selection
-        canvas.setRoot(newSelection.pane);
-        canvas.getCamera().setTranslateX(newSelection.cameraX);
-        canvas.getCamera().setTranslateY(newSelection.cameraY);
-        canvas.getCamera().setTranslateZ(newSelection.cameraZ);
+//        canvas.setRoot(newSelection.group);
+//        canvas.getCamera().setTranslateX(newSelection.cameraX);
+//        canvas.getCamera().setTranslateY(newSelection.cameraY);
+//        canvas.getCamera().setTranslateZ(newSelection.cameraZ);
 
     }
 
-    /**
-     * Responsible for panning the canvas by a scroll event and subsequently saving that information in the current
-     * function structure
-     * @param scrollEvent the event that occurred on canvas that initiated this event
-     */
-    void panCanvas(ScrollEvent scrollEvent){
-//        Logger.debug("Canvas scrolled(dx,dy): ("+scrollEvent.getDeltaX()+","+(scrollEvent.getDeltaY())+")");
+//    /**
+//     * Responsible for panning the canvas by a scroll event and subsequently saving that information in the current
+//     * function structure
+//     * @param scrollEvent the event that occurred on canvas that initiated this event
+//     */
+//    void panCanvas(ScrollEvent scrollEvent){
+////        Logger.debug("Canvas scrolled(dx,dy): ("+scrollEvent.getDeltaX()+","+(scrollEvent.getDeltaY())+")");
+//
+//        //compute the new position of the camera based on the delta amount scrolled
+//        double newX = canvas.getCamera().getTranslateX() - scrollEvent.getDeltaX();
+//        double newY = canvas.getCamera().getTranslateY() - scrollEvent.getDeltaY();
+//        FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
+////        Logger.debug("New Canvas scroll(x,y): ("+newX+","+newY+") Canvas size :"+canvas.getWidth()+","+canvas.getHeight());
+//
+//        // within limits, change x and save the new position in the current structure
+//        if(newX > 0 && newX < canvas.getWidth()){
+//            canvas.getCamera().setTranslateX(newX);
+//            current.cameraX = newX;
+//        }
+//
+//        // within limits, change x and save the new position in the current structure
+//        if(newY > TITLE_BAR_HEIGHT && newY < canvas.getHeight()){
+//            canvas.getCamera().setTranslateY(newY);
+//            current.cameraY = newY;
+//        }
+//    }
 
-        //compute the new position of the camera based on the delta amount scrolled
-        double newX = canvas.getCamera().getTranslateX() - scrollEvent.getDeltaX();
-        double newY = canvas.getCamera().getTranslateY() - scrollEvent.getDeltaY();
-        FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
-//        Logger.debug("New Canvas scroll(x,y): ("+newX+","+newY+") Canvas size :"+canvas.getWidth()+","+canvas.getHeight());
-
-        // within limits, change x and save the new position in the current structure
-        if(newX > 0 && newX < canvas.getWidth()){
-            canvas.getCamera().setTranslateX(newX);
-            current.cameraX = newX;
-        }
-
-        // within limits, change x and save the new position in the current structure
-        if(newY > TITLE_BAR_HEIGHT && newY < canvas.getHeight()){
-            canvas.getCamera().setTranslateY(newY);
-            current.cameraY = newY;
-        }
-    }
-
-    /**
-     * Responsible for zooming the canvas (withing limits) by a zoom event and subsequently saving that
-     * information in the current function structure
-     * @param zoomEvent the event that occurred on canvas that initiated this event
-     */
-    void zoomCanvas(ZoomEvent zoomEvent){
-
-
-        // get the current camera z
-        double cameraZ = canvas.getCamera().getTranslateZ();
-
-        // compute new camera position
-        double newCameraZ = cameraZ;
-        if(zoomEvent.getZoomFactor()>=1){ // zoom in
-            if(cameraZ + ZOOM_DELTA_Z < CLOSEST_CAMERA_Z){  // don't go beyond threshold
-                newCameraZ = cameraZ + ZOOM_DELTA_Z;
-            }
-        }else{ // zoom out
-            if(cameraZ - ZOOM_DELTA_Z > FARTHEST_CAMERA_Z){ // don't go beyond threshold
-                newCameraZ = cameraZ - ZOOM_DELTA_Z;
-            }
-        }
-
-        // set the new camera position (z axis only)
-        canvas.getCamera().setTranslateZ(newCameraZ);
-
-        // save the Z axis in the current structure
-        FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
-        current.cameraZ = newCameraZ;
-    }
+//    /**
+//     * Responsible for zooming the canvas (withing limits) by a zoom event and subsequently saving that
+//     * information in the current function structure
+//     * @param zoomEvent the event that occurred on canvas that initiated this event
+//     */
+//    void zoomCanvas(ZoomEvent zoomEvent){
+//
+//
+//        // get the current camera z
+//        double cameraZ = canvas.getCamera().getTranslateZ();
+//
+//        // compute new camera position
+//        double newCameraZ = cameraZ;
+//        if(zoomEvent.getZoomFactor()>=1){ // zoom in
+//            if(cameraZ + ZOOM_DELTA_Z < CLOSEST_CAMERA_Z){  // don't go beyond threshold
+//                newCameraZ = cameraZ + ZOOM_DELTA_Z;
+//            }
+//        }else{ // zoom out
+//            if(cameraZ - ZOOM_DELTA_Z > FARTHEST_CAMERA_Z){ // don't go beyond threshold
+//                newCameraZ = cameraZ - ZOOM_DELTA_Z;
+//            }
+//        }
+//
+//        // set the new camera position (z axis only)
+//        canvas.getCamera().setTranslateZ(newCameraZ);
+//
+//        // save the Z axis in the current structure
+//        FunctionDefinitionStructure current = workspaceListener.getCurrentFunctionDefinitionStructure();
+//        current.cameraZ = newCameraZ;
+//    }
 
     void deleteSelectedViews(){
         List<DataFlowView> currentSelection = selectionManager.cloneSelection();
@@ -261,6 +282,7 @@ public class WorkspaceController implements DataFlowViewListener {
     void mouseClickOnCanvas(MouseEvent mouseEvent){
         DataFlowView newNodeCreated = tool.createNode(mouseEvent);
         if(newNodeCreated!=null){
+            newNodeCreated.postViewCreation();
             selectionManager.getSelectionSet().clear();
             selectionManager.getSelectionSet().add(newNodeCreated);
         }

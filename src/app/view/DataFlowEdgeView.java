@@ -3,6 +3,7 @@ package app.view;
 import editor.util.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -129,29 +130,29 @@ public class DataFlowEdgeView extends Line {
 
         outputXListener = (observable, oldValue, newValue) -> {
             Circle outputConnector = fromView.getOutputConnectorAt(edge.getFromOutputIndex());
-            Point2D connectorPositionInScene = outputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setStartX(connectorPositionInScene.getX());
+            Point2D connectorPositionInEditSpace = connectorToEditSpace(outputConnector,Point2D.ZERO);
+            DataFlowEdgeView.this.setStartX(connectorPositionInEditSpace.getX());
         };
         fromView.translateXProperty().addListener(outputXListener);
 
         outputYListener = (observable, oldValue, newValue) -> {
             Circle outputConnector = fromView.getOutputConnectorAt(edge.getFromOutputIndex());
-            Point2D connectorPositionInScene = outputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setStartY(connectorPositionInScene.getY());
+            Point2D connectorPositionInEditSpace = connectorToEditSpace(outputConnector,Point2D.ZERO);
+            DataFlowEdgeView.this.setStartY(connectorPositionInEditSpace.getY());
         };
         fromView.translateYProperty().addListener(outputYListener);
 
         inputXListener = (observable, oldValue, newValue) -> {
             Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
-            Point2D connectorPositionInScene = inputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setEndX(connectorPositionInScene.getX());
+            Point2D connectorPositionInEditSpace = connectorToEditSpace(inputConnector,Point2D.ZERO);
+            DataFlowEdgeView.this.setEndX(connectorPositionInEditSpace.getX());
         };
         toView.translateXProperty().addListener(inputXListener);
 
         inputYListener = (observable, oldValue, newValue) -> {
             Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
-            Point2D connectorPositionInScene = inputConnector.localToScene(0, 0);
-            DataFlowEdgeView.this.setEndY(connectorPositionInScene.getY());
+            Point2D connectorPositionInEditSpace = connectorToEditSpace(inputConnector,Point2D.ZERO);
+            DataFlowEdgeView.this.setEndY(connectorPositionInEditSpace.getY());
         };
         toView.translateYProperty().addListener(inputYListener);
 
@@ -159,14 +160,14 @@ public class DataFlowEdgeView extends Line {
 
     private void updatePositionEndpoints(){
         Circle outputConnector = fromView.getOutputConnectorAt(edge.getFromOutputIndex());
-        Point2D outputPositionInScene = outputConnector.localToScene(0, 0);
-        DataFlowEdgeView.this.setStartX(outputPositionInScene.getX());
-        DataFlowEdgeView.this.setStartY(outputPositionInScene.getY());
+        Point2D outputPositionInEditSpace = connectorToEditSpace(outputConnector,Point2D.ZERO);
+        DataFlowEdgeView.this.setStartX(outputPositionInEditSpace.getX());
+        DataFlowEdgeView.this.setStartY(outputPositionInEditSpace.getY());
 
         Circle inputConnector = toView.getInputConnectorAt(edge.getToInputIndex());
-        Point2D inputPositionInScene = inputConnector.localToScene(0, 0);
-        DataFlowEdgeView.this.setEndX(inputPositionInScene.getX());
-        DataFlowEdgeView.this.setEndY(inputPositionInScene.getY());
+        Point2D inputPositionInEditSpace = connectorToEditSpace(inputConnector,Point2D.ZERO);
+        DataFlowEdgeView.this.setEndX(inputPositionInEditSpace.getX());
+        DataFlowEdgeView.this.setEndY(inputPositionInEditSpace.getY());
 
     }
 
@@ -211,5 +212,18 @@ public class DataFlowEdgeView extends Line {
         // remove the edge view (this) from the edge list of associated node views
         fromView.getOutgoingEdges().remove(this);
         toView.getIncomingEdges().remove(this);
+    }
+
+    /**
+     * Converts a point from the local space of a connector to edit space by making intermediately
+     * converting into group space first. This method only works if the connector is a direct child of
+     * the group
+     * @param connector a node that is a direct child of a {@link DataFlowView} group
+     * @param p the point in the local space of the connector
+     * @return a point in the edit space (or informally, this will be the structure's group)
+     */
+    public static Point2D connectorToEditSpace(Node connector, Point2D p){
+        Point2D groupSpace = connector.localToParent(p);
+        return connector.getParent().localToParent(groupSpace);
     }
 }

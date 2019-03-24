@@ -9,13 +9,11 @@ import editor.data.DummyData;
 import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.SubScene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.scene.layout.VBox;
 import model.Root;
 
 import java.util.EmptyStackException;
@@ -28,6 +26,8 @@ import java.util.Stack;
  */
 public class MainWindowController implements SidebarListener, WorkspaceListener {
 
+    public static final double SIDEBAR_WIDTH = 300;
+
     private Stack<Command> undoStack = new Stack<>();
     private Stack<Command> redoStack = new Stack<>();
 
@@ -38,7 +38,9 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     private AnchorPane rootContainer;
     @FXML
-    private SubScene canvas;
+    private VBox sidebarContainer;
+//    @FXML
+//    private SubScene canvas;
     @FXML
     private ListView<FunctionDefinitionStructure> functionListView;
 
@@ -52,10 +54,11 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private Root root;
 
     public void initialize(){
-        canvas.widthProperty().bind(rootContainer.widthProperty().multiply(3));
-        canvas.heightProperty().bind(rootContainer.heightProperty().multiply(3));
+//        canvas.widthProperty().bind(rootContainer.widthProperty().multiply(3));
+//        canvas.heightProperty().bind(rootContainer.heightProperty().multiply(3));
+        this.sidebarContainer.setPrefWidth(SIDEBAR_WIDTH);
         this.sidebarController = new SidebarController(this,functionListView);
-        this.workspaceController = new WorkspaceController(this,canvas);
+        this.workspaceController = new WorkspaceController(this,rootContainer);
 
         //TODO file handling, create models
 
@@ -165,7 +168,7 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private void mousePressedOnCanvas(MouseEvent mouseEvent){
 //        Logger.debug("Mouse press registered for target" + mouseEvent.getTarget());
         workspaceController.mousePressedOnCanvas(mouseEvent);
-        canvas.requestFocus();
+        workspaceController.getEditSpace().requestFocus();
     }
 
     @FXML
@@ -197,12 +200,13 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
 
     @FXML
     private void scrollCanvas(ScrollEvent scrollEvent){
-        workspaceController.panCanvas(scrollEvent);
+//        workspaceController.panCanvas(scrollEvent);
     }
 
     @FXML
     private void zoomCanvas(ZoomEvent zoomEvent){
-        workspaceController.zoomCanvas(zoomEvent);
+
+//        workspaceController.zoomCanvas(zoomEvent);
     }
 
     // Function List View events

@@ -78,12 +78,13 @@ public abstract class DataFlowView extends Group {
                 public void handle(MouseEvent event) {
 
                     DataFlowEdgeView edgeView = new DataFlowEdgeView(DataFlowView.this,outputIndex);
-                    Point2D outputConnectorScenePoint = outputConnector.localToScene(event.getX(), event.getY());
-                    edgeView.setStartX(outputConnectorScenePoint.getX());
-                    edgeView.setStartY(outputConnectorScenePoint.getY());
-                    edgeView.setEndX(outputConnectorScenePoint.getX());
-                    edgeView.setEndY(outputConnectorScenePoint.getY());
-                    dataFlowViewListener.getCurrentStructure().pane.getChildren().add(edgeView);
+                    Point2D eventPoint = new Point2D(event.getX(), event.getY());
+                    Point2D editSpacePoint = DataFlowEdgeView.connectorToEditSpace(outputConnector,eventPoint);
+                    edgeView.setStartX(editSpacePoint.getX());
+                    edgeView.setStartY(editSpacePoint.getY());
+                    edgeView.setEndX(editSpacePoint.getX());
+                    edgeView.setEndY(editSpacePoint.getY());
+                    dataFlowViewListener.getCurrentStructure().group.getChildren().add(edgeView);
                     edgeView.toBack();
 
                     createEdge = new CreateDataFlowEdge(edgeView,dataFlowViewListener.getCurrentStructure());
@@ -96,11 +97,13 @@ public abstract class DataFlowView extends Group {
                 @Override
                 public void handle(MouseEvent event) {
 
-                    // get event point in scene space and use that for rendering and computation
+                    // get event point in edit space and use that for rendering and computation
                     DataFlowEdgeView edgeView = createEdge.getEdgeView();
-                    Point2D eventScenePoint = outputConnector.localToScene(event.getX(), event.getY());
-                    edgeView.setEndX(eventScenePoint.getX());
-                    edgeView.setEndY(eventScenePoint.getY());
+
+                    Point2D eventPoint = new Point2D(event.getX(), event.getY());
+                    Point2D editSpacePoint = DataFlowEdgeView.connectorToEditSpace(outputConnector,eventPoint);
+                    edgeView.setEndX(editSpacePoint.getX());
+                    edgeView.setEndY(editSpacePoint.getY());
 
                     List<ConnectionPoint> inputConnectionPoints = dataFlowViewListener.
                             getAvailableInputConnectionPoints(DataFlowView.this);
@@ -109,11 +112,12 @@ public abstract class DataFlowView extends Group {
                     edgeView.nullifyInputNode();
                     for(ConnectionPoint inputConnectionPoint:inputConnectionPoints){
 
-                        // transform input connection point to scene space
-                        Point2D inputScenePoint = inputConnectionPoint.connector.localToScene(0, 0);
+                        // transform input connection point to edit space
+                        Point2D originPoint = new Point2D(0,0);
+                        Point2D inputEditSpacePoint = DataFlowEdgeView.connectorToEditSpace(inputConnectionPoint.connector,originPoint);
 
                         // check if the input connection point is close enough
-                        if(inputScenePoint.distance(eventScenePoint)<=OUTPUT_RADIUS){
+                        if(inputEditSpacePoint.distance(editSpacePoint)<=OUTPUT_RADIUS){
                             // check if the types are compatible or not
                             edgeView.checkAndSetInputNode(inputConnectionPoint.node,inputConnectionPoint.index);
                         }
@@ -135,8 +139,8 @@ public abstract class DataFlowView extends Group {
                         dataFlowViewListener.registerCommand(createEdge,false);
                     }else{
 
-                        //remove the view from function definition's pane
-                        dataFlowViewListener.getCurrentStructure().pane.getChildren().remove(edgeView);
+                        //remove the view from function definition's group
+                        dataFlowViewListener.getCurrentStructure().group.getChildren().remove(edgeView);
                     }
                     event.consume();
                 }
@@ -150,6 +154,15 @@ public abstract class DataFlowView extends Group {
 
     public List<DataFlowEdgeView> getOutgoingEdges() {
         return outgoingEdges;
+    }
+
+    /**
+     * Lifecycle callback for Data Flow view to do any post view creation handling. This method is called after
+     * the user places a node on the workspace. Default implementation does nothing, but derived subclasses may
+     * choose to override this method.
+     */
+    public void postViewCreation(){
+
     }
 
     public abstract DataFlowNode getDataFlowNode();

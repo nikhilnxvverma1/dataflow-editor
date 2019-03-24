@@ -18,9 +18,9 @@ public class CreateDataFlowEdge extends CanvasCommand{
 
         edgeView.disconnectFromNodes();
 
-        // remove the view from the function's pane
-        if(structure.pane.getChildren().contains(edgeView)){
-            structure.pane.getChildren().remove(edgeView);
+        // remove the view from the function's group
+        if(structure.group.getChildren().contains(edgeView)){
+            structure.group.getChildren().remove(edgeView);
         }
 
         // remove any change listeners defined
@@ -33,8 +33,8 @@ public class CreateDataFlowEdge extends CanvasCommand{
 
         edgeView.connectToNodes();
 
-        // add the edge view to the function's pane
-        structure.pane.getChildren().add(edgeView);
+        // add the edge view to the function's group
+        structure.group.getChildren().add(edgeView);
         edgeView.toBack();
 
         // add positional change listeners on connected nodes

@@ -47,7 +47,7 @@ public class NodeTool {
             source = null;
         }
         if (nodePreview != null) {
-            backReference.getCurrentStructure().pane.getChildren().remove(nodePreview);
+            backReference.getCurrentStructure().group.getChildren().remove(nodePreview);
             nodePreview = null;
         }
         type = null;
@@ -70,7 +70,7 @@ public class NodeTool {
             // set a new data flow view and enable its creation
             this.type = type;
             nodePreview = buildPreviewDataFlowView();
-            backReference.getCurrentStructure().pane.getChildren().add(nodePreview);
+            backReference.getCurrentStructure().group.getChildren().add(nodePreview);
             this.source = source;
             this.source.setSelected(true);
             creationMode = true;
@@ -94,7 +94,7 @@ public class NodeTool {
 
             //set a new node preview at mouse position
             nodePreview = buildPreviewDataFlowView();
-            backReference.getCurrentStructure().pane.getChildren().add(nodePreview);
+            backReference.getCurrentStructure().group.getChildren().add(nodePreview);
             nodePreview.setLocation(p.getX(),p.getY());
 
             return newNodeCreated;
