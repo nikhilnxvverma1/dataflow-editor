@@ -1,6 +1,7 @@
 package app.controller.util;
 
 import editor.container.FunctionDefinitionStructure;
+import editor.util.Logger;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -16,8 +17,8 @@ import javafx.scene.layout.VBox;
  */
 public class EditSpace extends ScrollPane {
     private static final double ZOOM_INTENSITY = 0.02;
-    public static final double CONTENT_PANE_WIDTH = 1200;
-    public static final double CONTENT_PANE_HEIGHT = 900;
+    public static final double CONTENT_PANE_WIDTH = 9000;
+    public static final double CONTENT_PANE_HEIGHT = 9000;
 
     private double scaleValue;
     private Pane contentPane;
@@ -27,19 +28,29 @@ public class EditSpace extends ScrollPane {
     public EditSpace() {
         super();
         setPannable(true);
-        setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         setFitToHeight(true); //center
         setFitToWidth(true); //center
+
+        //save the position of the scroll bar on scroll
+        this.hvalueProperty().addListener(event->{
+            structure.cameraX = getHvalue();
+        });
+        this.vvalueProperty().addListener(event->{
+            structure.cameraY = getVvalue();
+        });
 
         // setup the content pane
         this.contentPane = new Pane();
         this.contentPane.setPrefSize(CONTENT_PANE_WIDTH,CONTENT_PANE_HEIGHT);
-        this.setContent(contentPane);
+        this.setContent(new Group(contentPane));
         contentPane.setOnZoom(e -> {
             e.consume();
+            Logger.debug("zooming now");
             onZoom(e.getZoomFactor(), new Point2D(e.getX(), e.getY()));
         });
+
     }
 
     public void setFunctionDefinitionStructure(FunctionDefinitionStructure structure){

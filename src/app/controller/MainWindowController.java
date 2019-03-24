@@ -54,8 +54,6 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private Root root;
 
     public void initialize(){
-//        canvas.widthProperty().bind(rootContainer.widthProperty().multiply(3));
-//        canvas.heightProperty().bind(rootContainer.heightProperty().multiply(3));
         this.sidebarContainer.setPrefWidth(SIDEBAR_WIDTH);
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,rootContainer);
@@ -155,58 +153,6 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         } else if (keyEvent.getCode() == KeyCode.DELETE || keyEvent.getCode() == KeyCode.BACK_SPACE){
             workspaceController.deleteSelectedViews();
         }
-    }
-
-    // Canvas events
-
-    @FXML
-    private void mouseClickOnCanvas(MouseEvent mouseEvent){
-        workspaceController.mouseClickOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void mousePressedOnCanvas(MouseEvent mouseEvent){
-//        Logger.debug("Mouse press registered for target" + mouseEvent.getTarget());
-        workspaceController.mousePressedOnCanvas(mouseEvent);
-        workspaceController.getEditSpace().requestFocus();
-    }
-
-    @FXML
-    private void mouseDraggedOnCanvas(MouseEvent mouseEvent){
-//        Logger.debug("Mouse drag registered for target" + mouseEvent.getTarget());
-        workspaceController.mouseDraggedOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void mouseReleasedOnCanvas(MouseEvent mouseEvent){
-//        Logger.debug("Mouse release registered for target" + mouseEvent.getTarget());
-        workspaceController.mouseReleasedOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void mouseMovedOnCanvas(MouseEvent mouseEvent){
-        workspaceController.mouseMovedOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void mouseEnteredOnCanvas(MouseEvent mouseEvent){
-        workspaceController.mouseEnteredOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void mouseExitedOnCanvas(MouseEvent mouseEvent){
-        workspaceController.mouseExitedOnCanvas(mouseEvent);
-    }
-
-    @FXML
-    private void scrollCanvas(ScrollEvent scrollEvent){
-//        workspaceController.panCanvas(scrollEvent);
-    }
-
-    @FXML
-    private void zoomCanvas(ZoomEvent zoomEvent){
-
-//        workspaceController.zoomCanvas(zoomEvent);
     }
 
     // Function List View events
