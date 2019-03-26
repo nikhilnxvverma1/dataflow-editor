@@ -1,19 +1,32 @@
-package model;
+package model.component;
+
+import model.DataFlowNode;
 
 import java.util.ArrayList;
 
-public class ComponentNode extends DataFlowNode{
+public class ComponentNode extends DataFlowNode {
+    private String name;
     private ArrayList<String> inputChannels = new ArrayList<>();
     private ArrayList<String> outputChannels = new ArrayList<>();
     private ArrayList<String> inputChannelNames = new ArrayList<>();
     private ArrayList<String> outputChannelNames = new ArrayList<>();
-    private double red = 0.2;
-    private double green = 0.2;
-    private double blue = 0.2;
-
+    private double redBg = 0.2;
+    private double greenBg = 0.2;
+    private double blueBg = 0.2;
+    private double redFg = 1;
+    private double greenFg = 1;
+    private double blueFg = 1;
 
     public ComponentNode(double x, double y) {
         super(x, y);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<String> getInputChannels() {
@@ -48,27 +61,51 @@ public class ComponentNode extends DataFlowNode{
         this.outputChannelNames = outputChannelNames;
     }
 
-    public double getRed() {
-        return red;
+    public double getRedBg() {
+        return redBg;
     }
 
-    public void setRed(double red) {
-        this.red = red;
+    public void setRedBg(double redBg) {
+        this.redBg = redBg;
     }
 
-    public double getGreen() {
-        return green;
+    public double getGreenBg() {
+        return greenBg;
     }
 
-    public void setGreen(double green) {
-        this.green = green;
+    public void setGreenBg(double greenBg) {
+        this.greenBg = greenBg;
     }
 
-    public double getBlue() {
-        return blue;
+    public double getBlueBg() {
+        return blueBg;
     }
 
-    public void setBlue(double blue) {
-        this.blue = blue;
+    public void setBlueBg(double blueBg) {
+        this.blueBg = blueBg;
+    }
+
+    public double getRedFg() {
+        return redFg;
+    }
+
+    public void setRedFg(double redFg) {
+        this.redFg = redFg;
+    }
+
+    public double getGreenFg() {
+        return greenFg;
+    }
+
+    public void setGreenFg(double greenFg) {
+        this.greenFg = greenFg;
+    }
+
+    public double getBlueFg() {
+        return blueFg;
+    }
+
+    public void setBlueFg(double blueFg) {
+        this.blueFg = blueFg;
     }
 }
