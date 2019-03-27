@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class ComponentNode extends DataFlowNode {
     private String name;
+    private String description = "No available description";
     private ArrayList<String> inputChannels = new ArrayList<>();
     private ArrayList<String> outputChannels = new ArrayList<>();
     private ArrayList<String> inputChannelNames = new ArrayList<>();
@@ -17,6 +18,9 @@ public class ComponentNode extends DataFlowNode {
     private double greenFg = 1;
     private double blueFg = 1;
 
+    public ComponentNode() {
+    }
+
     public ComponentNode(double x, double y) {
         super(x, y);
     }
@@ -27,6 +31,14 @@ public class ComponentNode extends DataFlowNode {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ArrayList<String> getInputChannels() {
