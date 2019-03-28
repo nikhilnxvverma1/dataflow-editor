@@ -206,6 +206,7 @@ public class WorkspaceController implements DataFlowViewListener {
     }
 
     void mouseClickOnCanvas(MouseEvent mouseEvent){
+        editSpace.getContentPane().requestFocus();
         DataFlowView newNodeCreated = tool.createNode(mouseEvent);
         if(newNodeCreated!=null){
             newNodeCreated.postViewCreation();

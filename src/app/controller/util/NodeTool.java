@@ -152,13 +152,13 @@ public class NodeTool {
             case NUMBER_INPUT:
             {
                 NumberInputNode model = new NumberInputNode(0,0);
-                dataFlowView =  new IntegerInputView(model,backReference);
+                dataFlowView =  new NumberInputView(model,backReference);
             }
             break;
             case INTEGER_INPUT:
             {
                 NumberInputNode model = new NumberInputNode(0,0); // number can store integer
-                dataFlowView =  new NumberInputView(model,backReference);
+                dataFlowView =  new IntegerInputView(model,backReference);
             }
             break;
             case BOOLEAN_INPUT:

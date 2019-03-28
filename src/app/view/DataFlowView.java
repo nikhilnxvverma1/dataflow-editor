@@ -6,6 +6,8 @@ import editor.container.ConnectionPoint;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -145,6 +147,16 @@ public abstract class DataFlowView extends Group {
                     event.consume();
                 }
             });
+        }
+    }
+
+    /**
+     * Lose focus by setting requesting focus on the node itself
+     * @param event a key event for a key press-release event
+     */
+    protected void loseFocusIfNeeded(KeyEvent event){
+        if(event.getCode()== KeyCode.ESCAPE){
+            this.requestFocus();
         }
     }
 

@@ -75,25 +75,18 @@ public class NumberInputView extends DataFlowView{
 
     }
 
-    protected void onKeyReleased(KeyEvent event){
+    private void onKeyReleased(KeyEvent event){
         loseFocusIfNeeded(event);
         // validate if the text is a number or not
         String text = field.getText();
-        if(isDouble(text)){
+        if(validInput(text)){
             field.setStyle("-fx-text-fill: green;");
         }else{
             field.setStyle("-fx-text-fill: red;");
         }
     }
 
-    /** lose focus by setting requesting focus on the node itself */
-    protected void loseFocusIfNeeded(KeyEvent event){
-        if(event.getCode()== KeyCode.ESCAPE){
-            this.requestFocus();
-        }
-    }
-
-    private boolean isDouble(String text){
+    boolean validInput(String text){
         try{
             Double.parseDouble(text.trim());
         }catch(NumberFormatException e){
