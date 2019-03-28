@@ -4,6 +4,7 @@ import app.controller.util.NodeTool;
 import app.delegate.SidebarListener;
 import app.delegate.WorkspaceListener;
 import editor.command.Command;
+import editor.container.ComponentTemplate;
 import editor.container.FunctionDefinitionStructure;
 import editor.data.DummyData;
 import editor.util.Logger;
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import model.Root;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
@@ -58,7 +60,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,rootContainer);
 
-        //TODO file handling, create models
+        ArrayList<ComponentTemplate> componentTemplates = ComponentTemplate.loadDefaultLibrary();
+        System.out.println(componentTemplates);
 
 //        DummyData.filledFunctionDefinitions(5,1,5)
         root = getEmptyModel();

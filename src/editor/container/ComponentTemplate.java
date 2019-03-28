@@ -61,11 +61,10 @@ public class ComponentTemplate {
      */
     private static ArrayList<Class> buildTypeList(List<String> typeNames){
         ArrayList<Class> types = new ArrayList<>(typeNames.size());
-        int index = 0;
         for(String fullyQualifiedName:typeNames){
             try {
                 Class<?> aClass = Class.forName(fullyQualifiedName);
-                types.set(index++,aClass);
+                types.add(aClass);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 Logger.error("Not a valid type "+fullyQualifiedName);
@@ -85,8 +84,6 @@ public class ComponentTemplate {
         for(Object o : library){
 
             ComponentNode node = new ComponentNode();
-            int totalInputs = 0;
-            int totalOutputs = 0;
             node.setName(node.getClass().getSimpleName());
 
             Class aClass = o.getClass();
@@ -118,7 +115,7 @@ public class ComponentTemplate {
             }
 
             // look for input and output channels in field
-            Field[] fields = aClass.getFields();
+            Field[] fields = aClass.getDeclaredFields();
             for(Field field : fields){
                 Annotation[] fieldAnnotations = field.getAnnotations();
                 for(Annotation fieldAnnotation : fieldAnnotations){
@@ -126,38 +123,34 @@ public class ComponentTemplate {
                     if(fieldAnnotation instanceof Input){
 
                         // add to input channels by registering its canonical name
-                        node.getInputChannels().set(totalInputs,field.getClass().getCanonicalName());
+                        node.getInputChannels().add(field.getType().getCanonicalName());
 
                         // set the name of the output channel by noting its name inside the annotation (if exists)
                         Input input = (Input) fieldAnnotation;
                         String name = input.value();
                         if(name.trim().equalsIgnoreCase("")){
-                            node.getInputChannelNames().set(totalInputs,field.getName());
+                            node.getInputChannelNames().add(field.getName());
                         }else{
-                            node.getInputChannelNames().set(totalInputs,name);
+                            node.getInputChannelNames().add(name);
                         }
-
-                        totalInputs++;
 
                     }else if(fieldAnnotation instanceof Output){
 
                         // add to output channels by registering its canonical name
-                        node.getOutputChannels().set(totalOutputs,field.getClass().getCanonicalName());
+                        node.getOutputChannels().add(field.getType().getCanonicalName());
 
                         // set the name of the output channel by noting its name inside the annotation (if exists)
                         Output output = (Output) fieldAnnotation;
                         String name = output.value();
                         if(name.trim().equalsIgnoreCase("")){
-                            node.getOutputChannelNames().set(totalOutputs,field.getName());
+                            node.getOutputChannelNames().add(field.getName());
                         }else{
-                            node.getOutputChannelNames().set(totalOutputs,name);
+                            node.getOutputChannelNames().add(name);
                         }
-
-                        totalOutputs++;
                     }
                 }
             }
-            componentList.set(index++, new ComponentTemplate(node));
+            componentList.add(new ComponentTemplate(node));
         }
 
         return componentList;
