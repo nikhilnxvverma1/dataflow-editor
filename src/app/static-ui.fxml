@@ -37,7 +37,7 @@
                         </ToolBar>
                         <VBox layoutY="253.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                            <children>
-                              <TitledPane animated="false" expanded="false" text="Arithemetic">
+                              <TitledPane animated="false" text="Arithemetic">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -49,13 +49,14 @@
                                                 <ToggleButton layoutX="104.0" layoutY="10.0" mnemonicParsing="false" onAction="#divideClicked" text="/" />
                                                 <ToggleButton layoutX="151.0" layoutY="10.0" mnemonicParsing="false" onAction="#moduloClicked" text="\%" />
                                                 <ToggleButton layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#numberInputClicked" text="Number" />
+                                                <ToggleButton layoutX="184.0" layoutY="57.0" mnemonicParsing="false" onAction="#integerInputClicked" text="Integer" />
                                              </children>
                                           </TilePane>
                                        </children>
                                     </AnchorPane>
                                 </content>
                               </TitledPane>
-                              <TitledPane animated="false" text="Conditional">
+                              <TitledPane animated="false" expanded="false" text="Conditional">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>

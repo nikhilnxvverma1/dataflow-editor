@@ -10,14 +10,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import model.DataFlowNode;
 import model.NumberInputNode;
 
 /**
- * Data flow View with a text field that allows for number input
+ * TODO Too much repetition, this class should extend number input view
+ * Data flow View with a text field that allows for integer outputs only.
+ * Note that it uses a Number input model to store its content,
+ * but value of its output channel is always Integer
  */
-public class NumberInputView extends DataFlowView{
+public class IntegerInputView extends DataFlowView{
     // radii
     private static final double MAIN_RECT_LENGTH = 100;
     private static final double MAIN_RECT_HEIGHT= 60;
@@ -31,9 +33,9 @@ public class NumberInputView extends DataFlowView{
     private static final Font FONT = new Font(80);
 
     private NumberInputNode numberInputNode;
-    protected TextField field = new TextField();
+    private TextField field = new TextField();
 
-    public NumberInputView(NumberInputNode numberInputNode,DataFlowViewListener dataFlowViewListener) {
+    public IntegerInputView(NumberInputNode numberInputNode, DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
         this.numberInputNode = numberInputNode;
         initialize();
@@ -60,9 +62,9 @@ public class NumberInputView extends DataFlowView{
         outputHandle.setFill(OUTPUT_COLOR);
 
         // input field
-
+        field.setEditable(true);
         field.setOnKeyReleased(this::onKeyReleased);
-        field.setPrefWidth(MAIN_RECT_LENGTH-2*OUTPUT_RADIUS);
+        field.setPrefWidth(MAIN_RECT_LENGTH - MAIN_RECT_LENGTH/3 -2*OUTPUT_RADIUS);
         field.setPrefHeight(MAIN_RECT_HEIGHT/2);
         field.setLayoutX(OUTPUT_RADIUS);
         field.setLayoutY(-MAIN_RECT_HEIGHT/4);
@@ -76,26 +78,23 @@ public class NumberInputView extends DataFlowView{
     }
 
     protected void onKeyReleased(KeyEvent event){
-        loseFocusIfNeeded(event);
-        // validate if the text is a number or not
+        if(event.getCode()== KeyCode.ESCAPE){
+            //lose focus by setting requesting focus on the node itself
+            this.requestFocus();
+        }
+
         String text = field.getText();
-        if(isDouble(text)){
+        // validate if the text is a number or not
+        if(isInteger(text)){
             field.setStyle("-fx-text-fill: green;");
         }else{
             field.setStyle("-fx-text-fill: red;");
         }
     }
 
-    /** lose focus by setting requesting focus on the node itself */
-    protected void loseFocusIfNeeded(KeyEvent event){
-        if(event.getCode()== KeyCode.ESCAPE){
-            this.requestFocus();
-        }
-    }
-
-    private boolean isDouble(String text){
+    private boolean isInteger(String text){
         try{
-            Double.parseDouble(text.trim());
+            Integer.parseInt(text);
         }catch(NumberFormatException e){
             return false;
         }
@@ -139,6 +138,6 @@ public class NumberInputView extends DataFlowView{
 
     @Override
     public Class getTypeForOutput(int index) {
-        return double.class;
+        return int.class;
     }
 }

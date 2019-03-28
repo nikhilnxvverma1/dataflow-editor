@@ -7,17 +7,20 @@ import model.component.library.MyComponent;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ComponentTemplate {
 
     private static final Object [] LIBRARY = new Object [] {new MyComponent()};
+    private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = createPrimitiveMap();
 
     private ComponentNode componentNode;
     private ArrayList<Class> inputTypes;
     private ArrayList<Class> outputTypes;
 
-    public ComponentTemplate(ComponentNode componentNode) {
+    private ComponentTemplate(ComponentNode componentNode) {
         this.componentNode = componentNode;
         this.inputTypes = ComponentTemplate.buildTypeList(componentNode.getInputChannels());
         this.outputTypes = ComponentTemplate.buildTypeList(componentNode.getOutputChannels());
@@ -52,6 +55,22 @@ public class ComponentTemplate {
 
     public ArrayList<Class> getOutputTypes() {
         return outputTypes;
+    }
+
+    private static HashMap<Class<?>, Class<?>> createPrimitiveMap(){
+        HashMap<Class<?>, Class<?>> map = new HashMap<>();
+
+        map.put(boolean.class, Boolean.class);
+        map.put(byte.class, Byte.class);
+        map.put(char.class, Character.class);
+        map.put(double.class, Double.class);
+        map.put(float.class, Float.class);
+        map.put(int.class, Integer.class);
+        map.put(long.class, Long.class);
+        map.put(short.class, Short.class);
+        map.put(void.class, Void.class);
+
+        return map;
     }
 
     /**
@@ -123,7 +142,7 @@ public class ComponentTemplate {
                     if(fieldAnnotation instanceof Input){
 
                         // add to input channels by registering its canonical name
-                        node.getInputChannels().add(field.getType().getCanonicalName());
+                        node.getInputChannels().add(wrapIfNeeded(field.getType()).getCanonicalName());
 
                         // set the name of the output channel by noting its name inside the annotation (if exists)
                         Input input = (Input) fieldAnnotation;
@@ -137,7 +156,7 @@ public class ComponentTemplate {
                     }else if(fieldAnnotation instanceof Output){
 
                         // add to output channels by registering its canonical name
-                        node.getOutputChannels().add(field.getType().getCanonicalName());
+                        node.getOutputChannels().add(wrapIfNeeded(field.getType()).getCanonicalName());
 
                         // set the name of the output channel by noting its name inside the annotation (if exists)
                         Output output = (Output) fieldAnnotation;
@@ -158,5 +177,13 @@ public class ComponentTemplate {
 
     public static ArrayList<ComponentTemplate> loadDefaultLibrary(){
         return loadComponentsFrom(LIBRARY);
+    }
+
+    private static Class<?> wrapIfNeeded(Class<?> aClass){
+        if(aClass.isPrimitive()){
+            return PRIMITIVES_TO_WRAPPERS.get(aClass);
+        }else{
+            return aClass;
+        }
     }
 }

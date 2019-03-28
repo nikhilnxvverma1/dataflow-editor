@@ -8,7 +8,7 @@ import model.component.Output;
 public class MyComponent {
 
     @Input("multiple")
-    Integer m;
+    int m;
     @Input()
     String text;
 

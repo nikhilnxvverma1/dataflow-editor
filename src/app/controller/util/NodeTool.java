@@ -152,6 +152,12 @@ public class NodeTool {
             case NUMBER_INPUT:
             {
                 NumberInputNode model = new NumberInputNode(0,0);
+                dataFlowView =  new IntegerInputView(model,backReference);
+            }
+            break;
+            case INTEGER_INPUT:
+            {
+                NumberInputNode model = new NumberInputNode(0,0); // number can store integer
                 dataFlowView =  new NumberInputView(model,backReference);
             }
             break;
@@ -242,6 +248,7 @@ public class NodeTool {
         DIVIDE,
         MODULO,
         NUMBER_INPUT,
+        INTEGER_INPUT,
         BOOLEAN_INPUT,
         LESS_THAN,
         LESS_THAN_EQUAL_TO,
@@ -253,7 +260,8 @@ public class NodeTool {
         OR,
         NOT,
         FUNCTION,
-        MODULE
+        MODULE,
+        COMPONENT
     }
 
 }

@@ -228,6 +228,11 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     }
 
     @FXML
+    void integerInputClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.NUMBER_INPUT, (ToggleButton) event.getSource());
+    }
+
+    @FXML
     void lessThanClicked(ActionEvent event){
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.LESS_THAN, (ToggleButton) event.getSource());
     }
