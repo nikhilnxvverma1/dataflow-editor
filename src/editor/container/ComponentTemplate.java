@@ -57,6 +57,14 @@ public class ComponentTemplate {
         return outputTypes;
     }
 
+    public String getName(){
+        return componentNode.getName();
+    }
+
+    public ComponentNode getComponentNode() {
+        return componentNode;
+    }
+
     private static HashMap<Class<?>, Class<?>> createPrimitiveMap(){
         HashMap<Class<?>, Class<?>> map = new HashMap<>();
 

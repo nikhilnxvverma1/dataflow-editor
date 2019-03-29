@@ -121,7 +121,7 @@ public class BooleanNodeView extends DataFlowView{
 
     @Override
     public Class getTypeForOutput(int index) {
-        return boolean.class;
+        return Boolean.class;
     }
 
 }

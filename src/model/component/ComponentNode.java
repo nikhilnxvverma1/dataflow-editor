@@ -11,9 +11,9 @@ public class ComponentNode extends DataFlowNode {
     private ArrayList<String> outputChannels = new ArrayList<>();
     private ArrayList<String> inputChannelNames = new ArrayList<>();
     private ArrayList<String> outputChannelNames = new ArrayList<>();
-    private double redBg = 0.2;
+    private double redBg = 0.1;
     private double greenBg = 0.2;
-    private double blueBg = 0.2;
+    private double blueBg = 0.6;
     private double redFg = 1;
     private double greenFg = 1;
     private double blueFg = 1;

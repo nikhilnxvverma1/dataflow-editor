@@ -75,7 +75,7 @@ public class ArithmeticNodeView extends DataFlowView{
     @Override
     public Class getTypeForInput(int index) {
         if(index == 0 || index == 1 ){
-            return double.class;
+            return Double.class;
         }else{
             return null;
         }

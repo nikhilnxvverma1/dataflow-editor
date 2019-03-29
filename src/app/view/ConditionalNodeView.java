@@ -83,16 +83,16 @@ public class ConditionalNodeView extends DataFlowView{
                 // relational operators need boolean inputs
                 if(type== ConditionalNode.Type.NOT ){
                     if(index == 0){
-                        return boolean.class;
+                        return Boolean.class;
                     }else{
                         return null;
                     }
                 }else{
-                    return boolean.class;
+                    return Boolean.class;
                 }
 
             }else {
-                return double.class;
+                return Double.class;
             }
 
         }else{
@@ -103,7 +103,7 @@ public class ConditionalNodeView extends DataFlowView{
     @Override
     public Class getTypeForOutput(int index) {
         if(index == 0){
-            return boolean.class;
+            return Boolean.class;
         }else{
             return null;
         }

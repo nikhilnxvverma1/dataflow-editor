@@ -35,6 +35,6 @@ public class IntegerInputView extends NumberInputView{
 
     @Override
     public Class getTypeForOutput(int index) {
-        return int.class;
+        return Integer.class;
     }
 }

@@ -132,6 +132,6 @@ public class NumberInputView extends DataFlowView{
 
     @Override
     public Class getTypeForOutput(int index) {
-        return double.class;
+        return Double.class;
     }
 }

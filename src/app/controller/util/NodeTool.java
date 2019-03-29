@@ -3,10 +3,12 @@ package app.controller.util;
 import app.controller.WorkspaceController;
 import app.view.*;
 import editor.command.CreateDataFlowNode;
+import editor.container.ComponentTemplate;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import model.*;
+import model.component.ComponentNode;
 
 /**
  * Utility used by workspace controller to drive the toolset in creating nodes on the canvas under the current
@@ -20,6 +22,7 @@ public class NodeTool {
     private ToggleButton source = null;
     private DataFlowView nodePreview = null;
     private Type type = null;
+    private ComponentTemplate componentTemplate;
 
     public NodeTool(WorkspaceController backReference) {
         this.backReference = backReference;
@@ -51,6 +54,14 @@ public class NodeTool {
             nodePreview = null;
         }
         type = null;
+    }
+
+    public void toggleComponentCreationFor(ComponentTemplate componentTemplate, ToggleButton source){
+        this.componentTemplate = componentTemplate;
+        boolean inCreation = toggleNodeCreationFor(Type.COMPONENT,source);
+        if(!inCreation){
+            this.componentTemplate = null;
+        }
     }
 
     public boolean toggleNodeCreationFor(Type type, ToggleButton source){
@@ -233,6 +244,12 @@ public class NodeTool {
             case FUNCTION:
                 break;
             case MODULE:
+                break;
+            case COMPONENT:
+                ComponentNode model = componentTemplate.buildComponent();
+                ComponentNodeView componentNodeView = new ComponentNodeView(componentTemplate, backReference);
+//                componentNodeView.setChannelTypes(componentTemplate.getInputTypes(),componentTemplate.getOutputTypes());
+                dataFlowView = componentNodeView;
                 break;
         }
 

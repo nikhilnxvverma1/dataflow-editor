@@ -11,9 +11,11 @@ import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import model.Root;
 
@@ -41,8 +43,8 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     private AnchorPane rootContainer;
     @FXML
     private VBox sidebarContainer;
-//    @FXML
-//    private SubScene canvas;
+    @FXML
+    private TilePane componentListContainer;
     @FXML
     private ListView<FunctionDefinitionStructure> functionListView;
 
@@ -60,13 +62,29 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
         this.sidebarController = new SidebarController(this,functionListView);
         this.workspaceController = new WorkspaceController(this,rootContainer);
 
-        ArrayList<ComponentTemplate> componentTemplates = ComponentTemplate.loadDefaultLibrary();
-        System.out.println(componentTemplates);
-
 //        DummyData.filledFunctionDefinitions(5,1,5)
         root = getEmptyModel();
         this.sidebarController.initialize(root.getFunctionDefinitionList());
         this.workspaceController.initialize();
+        this.loadComponents();
+    }
+
+    private void loadComponents(){
+
+        // load the component library and scan through it
+        ArrayList<ComponentTemplate> componentTemplates = ComponentTemplate.loadDefaultLibrary();
+        NodeTool tool = workspaceController.getTool();
+        for(ComponentTemplate template : componentTemplates){
+
+            // add the toggle button to the component list
+            ToggleButton toggleButton = new ToggleButton(template.getName());
+            componentListContainer.getChildren().add(toggleButton);
+
+            // setup a handler on the toggle button
+            toggleButton.setOnAction(event -> {
+                tool.toggleComponentCreationFor(template,toggleButton);
+            });
+        }
     }
 
     private void undo(){
