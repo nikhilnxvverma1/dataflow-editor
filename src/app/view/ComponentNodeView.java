@@ -2,6 +2,7 @@ package app.view;
 
 import editor.container.ComponentTemplate;
 import editor.util.Logger;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -29,8 +30,6 @@ public class ComponentNodeView extends DataFlowView {
 
     private ComponentTemplate componentTemplate;
     private ComponentNode componentNode;
-//    private ArrayList<Class> inputChannels;
-//    private ArrayList<Class> outputChannels;
 
     private ArrayList<Circle> inputConnectors = new ArrayList<>();
     private ArrayList<Circle> outputConnectors = new ArrayList<>();
@@ -78,8 +77,9 @@ public class ComponentNodeView extends DataFlowView {
             // label
             Label inputLabel = new Label(channelName);
             inputLabel.setAlignment(Pos.CENTER_LEFT);
-            inputLabel.setPrefSize(longestInput*FONT.getSize(),CHANNEL_HEIGHT);
             inputLabel.setFont(FONT);
+//            inputLabel.setPrefSize(longestInput*FONT.getSize(),CHANNEL_HEIGHT);
+            inputLabel.setPrefSize(width,CHANNEL_HEIGHT);
             inputLabel.setTranslateX(INPUT_RADIUS);
             inputLabel.setTranslateY(-CHANNEL_HEIGHT/2);
             inputLabel.setLayoutX(x);
@@ -97,7 +97,7 @@ public class ComponentNodeView extends DataFlowView {
         // output labels and connectors
         double outputCount = componentNode.getOutputChannels().size();
         double outputSpacing = (height-HEADER_HEIGHT) / (outputCount+1);
-        double longestOutput = longestLength(componentNode.getInputChannelNames());
+        double longestOutput = longestLength(componentNode.getOutputChannelNames());
         ArrayList<Label> outputLabels = new ArrayList<>();
         i=0;
         for(String channelName : componentNode.getOutputChannelNames()){
@@ -108,10 +108,12 @@ public class ComponentNodeView extends DataFlowView {
 
             // label
             Label outputLabel = new Label(channelName);
-            outputLabel.setPrefSize(longestOutput*FONT.getSize(),CHANNEL_HEIGHT);
             outputLabel.setAlignment(Pos.CENTER_RIGHT);
             outputLabel.setFont(FONT);
-            outputLabel.setTranslateX(-(longestOutput*FONT.getSize()+OUTPUT_RADIUS));
+//            outputLabel.setPrefSize(longestOutput*FONT.getSize(),CHANNEL_HEIGHT);
+            outputLabel.setPrefSize(width,CHANNEL_HEIGHT);
+//            outputLabel.setTranslateX(-(longestOutput*FONT.getSize()+OUTPUT_RADIUS));
+            outputLabel.setTranslateX(-(width+OUTPUT_RADIUS));
             outputLabel.setTranslateY(-CHANNEL_HEIGHT/2);
             outputLabel.setLayoutX(x);
             outputLabel.setLayoutY(y);
@@ -211,21 +213,6 @@ public class ComponentNodeView extends DataFlowView {
         String biggest = biggestWord(words);
         return biggest == null? 0 : biggest.length();
     }
-
-//    /**
-//     * Shortcut setter for channel types by the component template itself
-//     * @param inputChannelsTypes array list of class per each input channel
-//     * @param outputChannelsTypes array list of class per each output channel
-//     */
-//    public void setChannelTypes(ArrayList<Class> inputChannelsTypes,ArrayList<Class> outputChannelsTypes){
-//        inputChannels = inputChannelsTypes;
-//        outputChannels = outputChannelsTypes;
-//    }
-
-//    private void buildChannelsList(){
-//        inputChannels = loadChannels(componentNode.getInputChannels());
-//        outputChannels = loadChannels(componentNode.getOutputChannels());
-//    }
 
     /**
      * Read off the list of channels and loads them
