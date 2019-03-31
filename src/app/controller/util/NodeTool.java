@@ -178,6 +178,12 @@ public class NodeTool {
                 dataFlowView =  new BooleanNodeView(model,backReference);
             }
             break;
+            case STRING_INPUT:
+            {
+                StringInputNode model = new StringInputNode(0,0); // number can store integer
+                dataFlowView =  new StringInputView(model,backReference);
+            }
+            break;
             case LESS_THAN:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
@@ -266,6 +272,7 @@ public class NodeTool {
         MODULO,
         NUMBER_INPUT,
         INTEGER_INPUT,
+        STRING_INPUT,
         BOOLEAN_INPUT,
         LESS_THAN,
         LESS_THAN_EQUAL_TO,

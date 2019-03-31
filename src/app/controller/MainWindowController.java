@@ -19,6 +19,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import model.Root;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
@@ -248,6 +249,11 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     void integerInputClicked(ActionEvent event){
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.INTEGER_INPUT, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void stringInputClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.STRING_INPUT, (ToggleButton) event.getSource());
     }
 
     @FXML
