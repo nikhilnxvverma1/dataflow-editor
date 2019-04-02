@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added a string input node with both view &amp; model &amp; tested with UI">
-      <change afterPath="$PROJECT_DIR$/src/app/view/ColorInputView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/view/DateInputView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/ColorInputNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/DateInputNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/util/Color.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/static-ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/static-ui.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -167,20 +160,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/view/DateInputView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+            <state relative-caret-position="780">
+              <caret line="64" column="48" lean-forward="true" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/view/ColorInputView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+            <state relative-caret-position="272">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
             </state>
           </provider>
         </entry>
@@ -428,7 +421,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554174269181" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554239776068" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -541,13 +534,6 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-    </task>
-    <task id="LOCAL-00029" summary="Basic setup of undo redo including shortcuts, command interface &amp; stacks">
-      <created>1550724929731</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1550724929731</updated>
     </task>
     <task id="LOCAL-00030" summary="Undo redo related methods, new base class for controller delegates">
       <created>1550809574119</created>
@@ -885,7 +871,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554073053119</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested">
+      <created>1554174326257</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1554174326257</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -905,7 +898,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32618025" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39914164" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -937,7 +930,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Refactored selection management to be done outside of controller class" />
     <MESSAGE value="Fixed highlight rect during panning &amp; solo view move in selection set" />
     <MESSAGE value="Added deletion of selected nodes (with edges) through 1 undoable command" />
     <MESSAGE value="Enhanced move operation to work on multiple selected nodes at a time" />
@@ -962,7 +954,8 @@
     <MESSAGE value="Finished component view, new tabbed toolset, changes in node tool, fixes" />
     <MESSAGE value="Fixed a positioning &amp; alignment bug when either I/O channels are empty" />
     <MESSAGE value="Added a string input node with both view &amp; model &amp; tested with UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a string input node with both view &amp; model &amp; tested with UI" />
+    <MESSAGE value="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1596,17 +1589,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/ColorInputView.java">
+    <entry file="file://$PROJECT_DIR$/src/app/view/DateInputView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+        <state relative-caret-position="780">
+          <caret line="64" column="48" lean-forward="true" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/view/DateInputView.java">
+    <entry file="file://$PROJECT_DIR$/src/app/view/ColorInputView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+        <state relative-caret-position="272">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
         </state>
       </provider>
     </entry>

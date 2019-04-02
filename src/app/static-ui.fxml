@@ -103,25 +103,11 @@
                                  <content>
                                     <TilePane prefHeight="683.0" prefWidth="278.0">
                                        <children>
-                                          <ToggleButton mnemonicParsing="false" text="Data Source" />
-                                          <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Data Store" />
-                                          <ToggleButton layoutX="112.0" layoutY="10.0" mnemonicParsing="false" text="Doc Box" />
                                           <ToggleButton layoutX="22.0" layoutY="37.0" mnemonicParsing="false" text="Formatted Text" />
-                                          <ToggleButton layoutX="123.0" layoutY="37.0" mnemonicParsing="false" text="If Else" />
-                                          <ToggleButton layoutX="39.0" layoutY="64.0" mnemonicParsing="false" text="Switcher" />
-                                          <ToggleButton layoutX="144.0" layoutY="64.0" mnemonicParsing="false" text="Chatbot Output" />
-                                          <ToggleButton layoutX="10.0" layoutY="91.0" mnemonicParsing="false" text="User Text Input" />
-                                          <ToggleButton layoutX="125.0" layoutY="91.0" mnemonicParsing="false" text="User Range Input" />
-                                          <ToggleButton layoutX="10.0" layoutY="118.0" mnemonicParsing="false" text="User Integer Input" />
-                                          <ToggleButton layoutX="139.0" layoutY="118.0" mnemonicParsing="false" text="User Double Input" />
-                                          <ToggleButton layoutX="10.0" layoutY="145.0" mnemonicParsing="false" text="User Date Input" />
-                                          <ToggleButton layoutX="146.0" layoutY="145.0" mnemonicParsing="false" text="User Combo Input" />
-                                          <ToggleButton layoutX="10.0" layoutY="172.0" mnemonicParsing="false" text="Output Placeholder" />
-                                          <ToggleButton layoutX="147.0" layoutY="172.0" mnemonicParsing="false" text="Input Placeholder" />
-                                          <ToggleButton layoutX="16.0" layoutY="199.0" mnemonicParsing="false" text="Variable Locator" />
-                                          <ToggleButton layoutX="156.0" layoutY="199.0" mnemonicParsing="false" text="Multiple Choice Single Answer" />
-                                          <ToggleButton layoutX="10.0" layoutY="442.0" mnemonicParsing="false" text="Multiple Choice Multiple Answer" />
-                                          <ToggleButton layoutX="10.0" layoutY="469.0" mnemonicParsing="false" text="User Spinner Input" />
+                                          <ToggleButton layoutX="10.0" layoutY="469.0" mnemonicParsing="false" text="History" />
+                                          <ToggleButton layoutX="137.0" layoutY="10.0" mnemonicParsing="false" text="Input" />
+                                          <ToggleButton layoutX="42.0" layoutY="37.0" mnemonicParsing="false" text="Copy Clipoard" />
+                                          <ToggleButton layoutX="141.0" layoutY="37.0" mnemonicParsing="false" text="Paste Clipboard" />
                                        </children>
                                     </TilePane>
                                  </content>
