@@ -184,6 +184,18 @@ public class NodeTool {
                 dataFlowView =  new StringInputView(model,backReference);
             }
             break;
+            case DATE_INPUT:
+            {
+                DateInputNode model = new DateInputNode(0,0); // number can store integer
+                dataFlowView =  new DateInputView(model,backReference);
+            }
+            break;
+            case COLOR_INPUT:
+            {
+                ColorInputNode model = new ColorInputNode(0,0); // number can store integer
+                dataFlowView =  new ColorInputView(model,backReference);
+            }
+            break;
             case LESS_THAN:
             {
                 ConditionalNode model = new ConditionalNode(0, 0);
@@ -272,8 +284,10 @@ public class NodeTool {
         MODULO,
         NUMBER_INPUT,
         INTEGER_INPUT,
-        STRING_INPUT,
         BOOLEAN_INPUT,
+        STRING_INPUT,
+        DATE_INPUT,
+        COLOR_INPUT,
         LESS_THAN,
         LESS_THAN_EQUAL_TO,
         GREATER_THAN,

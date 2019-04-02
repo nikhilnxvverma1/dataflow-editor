@@ -85,6 +85,8 @@
                                                       <ToggleButton mnemonicParsing="false" onAction="#integerInputClicked" text="Integer" />
                                                       <ToggleButton mnemonicParsing="false" onAction="#booleanInputClicked" text="Boolean" />
                                                       <ToggleButton layoutX="186.0" layoutY="10.0" mnemonicParsing="false" onAction="#stringInputClicked" text="String" />
+                                                      <ToggleButton layoutX="17.0" layoutY="57.0" mnemonicParsing="false" onAction="#dateInputClicked" text="Date" />
+                                                      <ToggleButton layoutX="105.0" layoutY="57.0" mnemonicParsing="false" onAction="#colorInputClicked" text="Color" />
                                                    </children>
                                                 </TilePane>
                                              </children>

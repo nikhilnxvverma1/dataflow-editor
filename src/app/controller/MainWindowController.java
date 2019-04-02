@@ -257,6 +257,16 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     }
 
     @FXML
+    void dateInputClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.DATE_INPUT, (ToggleButton) event.getSource());
+    }
+
+    @FXML
+    void colorInputClicked(ActionEvent event){
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.COLOR_INPUT, (ToggleButton) event.getSource());
+    }
+
+    @FXML
     void lessThanClicked(ActionEvent event){
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.LESS_THAN, (ToggleButton) event.getSource());
     }
