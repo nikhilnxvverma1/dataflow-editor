@@ -1,6 +1,7 @@
 package editor.data;
 
 import model.*;
+import model.module.ArithmeticNode;
 
 import java.util.LinkedList;
 import java.util.List;

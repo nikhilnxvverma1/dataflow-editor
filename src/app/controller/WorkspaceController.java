@@ -9,12 +9,12 @@ import editor.command.CanvasCommand;
 import editor.command.DeleteDataFlowNodes;
 import editor.container.ConnectionPoint;
 import editor.container.FunctionDefinitionStructure;
-import editor.util.Logger;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.*;
+import model.module.ArithmeticNode;
 
 import java.util.LinkedList;
 import java.util.List;

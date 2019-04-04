@@ -1,4 +1,6 @@
-package model;
+package model.module;
+
+import model.DataFlowNode;
 
 public class ArithmeticNode extends DataFlowNode {
 

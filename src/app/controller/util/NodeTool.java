@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import model.*;
+import model.module.ArithmeticNode;
 import model.component.ComponentNode;
 
 /**
@@ -293,6 +294,7 @@ public class NodeTool {
         AND,
         OR,
         NOT,
+        FORMATTED_TEXT,
         CLIPBOARD_HISTORY,
         DELIMITED_TOKENS,
         INPUT,

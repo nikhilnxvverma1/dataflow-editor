@@ -1,6 +1,8 @@
 package model;
 
-public class UnaryArithmeticNode extends ArithmeticNode{
+import model.module.ArithmeticNode;
+
+public class UnaryArithmeticNode extends ArithmeticNode {
 
     private double secondInput = 1;
 
