@@ -259,10 +259,6 @@ public class NodeTool {
                 dataFlowView =  new ConditionalNodeView(model,backReference);
             }
             break;
-            case FUNCTION:
-                break;
-            case MODULE:
-                break;
             case COMPONENT:
                 ComponentNode model = componentTemplate.buildComponent();
                 ComponentNodeView componentNodeView = new ComponentNodeView(componentTemplate, backReference);
@@ -297,8 +293,13 @@ public class NodeTool {
         AND,
         OR,
         NOT,
-        FUNCTION,
-        MODULE,
+        CLIPBOARD_HISTORY,
+        DELIMITED_TOKENS,
+        INPUT,
+        ARGUMENT,
+        OUTPUT,
+        FILE_CHOOSER,
+        DIRECTORY_CHOOSER,
         COMPONENT
     }
 

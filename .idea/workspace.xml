@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Replaced unneeded modules with new clipboard specific module buttons">
+      <change afterPath="$PROJECT_DIR$/src/model/ArgumentNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/static-ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/static-ui.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,8 +155,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="172" column="13" selection-start-line="172" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
+            <state relative-caret-position="612">
+              <caret line="289" column="30" lean-forward="true" selection-start-line="289" selection-start-column="30" selection-end-line="289" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/ArgumentNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+              <folding>
+                <element signature="e#133#134#0" expanded="true" />
+                <element signature="e#165#166#0" expanded="true" />
+                <element signature="e#212#213#0" expanded="true" />
+                <element signature="e#239#240#0" expanded="true" />
+                <element signature="e#270#271#0" expanded="true" />
+                <element signature="e#297#298#0" expanded="true" />
+                <element signature="e#337#338#0" expanded="true" />
+                <element signature="e#369#370#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,11 +189,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/view/ColorInputView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="267">
+              <caret line="63" column="48" lean-forward="true" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -254,7 +274,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/editor/container/ConnectionPoint.java" />
         <option value="$PROJECT_DIR$/src/model/ArithmeticNode.java" />
         <option value="$PROJECT_DIR$/src/model/BooleanInputNode.java" />
         <option value="$PROJECT_DIR$/src/model/ConditionalNode.java" />
@@ -301,10 +320,11 @@
         <option value="$PROJECT_DIR$/src/model/DateNode.java" />
         <option value="$PROJECT_DIR$/src/model/util/Color.java" />
         <option value="$PROJECT_DIR$/src/model/ColorInputNode.java" />
-        <option value="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" />
         <option value="$PROJECT_DIR$/src/app/controller/MainWindowController.java" />
-        <option value="$PROJECT_DIR$/src/app/view/ColorInputView.java" />
         <option value="$PROJECT_DIR$/src/app/view/DateInputView.java" />
+        <option value="$PROJECT_DIR$/src/app/view/ColorInputView.java" />
+        <option value="$PROJECT_DIR$/src/app/controller/util/NodeTool.java" />
+        <option value="$PROJECT_DIR$/src/model/ArgumentNode.java" />
       </list>
     </option>
   </component>
@@ -394,13 +414,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="dataflow-editor" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dataflow-editor" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -421,7 +434,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554239776068" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554346252317" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -534,13 +547,6 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-    </task>
-    <task id="LOCAL-00030" summary="Undo redo related methods, new base class for controller delegates">
-      <created>1550809574119</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1550809574119</updated>
     </task>
     <task id="LOCAL-00031" summary="Event handling for moving node with command. Still needs refinement">
       <created>1550884458040</created>
@@ -878,7 +884,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554174326257</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Replaced unneeded modules with new clipboard specific module buttons">
+      <created>1554241155396</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1554241155396</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -888,7 +901,7 @@
     <frame x="0" y="23" width="1680" height="1024" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18315019" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18315019" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -930,7 +943,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Fixed highlight rect during panning &amp; solo view move in selection set" />
     <MESSAGE value="Added deletion of selected nodes (with edges) through 1 undoable command" />
     <MESSAGE value="Enhanced move operation to work on multiple selected nodes at a time" />
     <MESSAGE value="Introduced classes for saving &amp; loading XML data. Implementation pending" />
@@ -955,7 +967,8 @@
     <MESSAGE value="Fixed a positioning &amp; alignment bug when either I/O channels are empty" />
     <MESSAGE value="Added a string input node with both view &amp; model &amp; tested with UI" />
     <MESSAGE value="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a input nodes for Date &amp; Color with both view &amp; model. UI tested" />
+    <MESSAGE value="Replaced unneeded modules with new clipboard specific module buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Replaced unneeded modules with new clipboard specific module buttons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -986,13 +999,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/editor/data/XmlData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/data/DummyData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1522,13 +1528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="172" column="13" selection-start-line="172" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/controller/MainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -1598,8 +1597,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/view/ColorInputView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="267">
+          <caret line="63" column="48" lean-forward="true" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/controller/util/NodeTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="289" column="30" lean-forward="true" selection-start-line="289" selection-start-column="30" selection-end-line="289" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ArgumentNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding>
+            <element signature="e#133#134#0" expanded="true" />
+            <element signature="e#165#166#0" expanded="true" />
+            <element signature="e#212#213#0" expanded="true" />
+            <element signature="e#239#240#0" expanded="true" />
+            <element signature="e#270#271#0" expanded="true" />
+            <element signature="e#297#298#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
