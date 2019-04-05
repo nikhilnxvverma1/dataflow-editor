@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import model.*;
 import model.module.ArithmeticNode;
 import model.component.ComponentNode;
+import model.module.FormatTextNode;
 
 /**
  * Utility used by workspace controller to drive the toolset in creating nodes on the canvas under the current
@@ -261,10 +262,11 @@ public class NodeTool {
             }
             break;
             case COMPONENT:
-                ComponentNode model = componentTemplate.buildComponent();
-                ComponentNodeView componentNodeView = new ComponentNodeView(componentTemplate, backReference);
-//                componentNodeView.setChannelTypes(componentTemplate.getInputTypes(),componentTemplate.getOutputTypes());
-                dataFlowView = componentNodeView;
+                dataFlowView = new ComponentNodeView(componentTemplate, backReference);
+                break;
+            case FORMAT_TEXT:
+                FormatTextNode formatTextNode = new FormatTextNode(0,0);
+                dataFlowView = new FormatTextView(formatTextNode,backReference);
                 break;
         }
 
@@ -294,7 +296,7 @@ public class NodeTool {
         AND,
         OR,
         NOT,
-        FORMATTED_TEXT,
+        FORMAT_TEXT,
         CLIPBOARD_HISTORY,
         DELIMITED_TOKENS,
         INPUT,

@@ -1,7 +1,5 @@
 package app.view;
 
-import editor.container.ComponentTemplate;
-import editor.util.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -10,13 +8,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import model.DataFlowNode;
-import model.component.ComponentNode;
-import model.module.TextFormatNode;
+import model.module.FormatTextNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFormatView extends DataFlowView{
+public class FormatTextView extends DataFlowView{
 
     private static final double GAP_INPUT_OUTPUT = 20;
     private static final double HEADER_HEIGHT = 30;
@@ -30,14 +27,14 @@ public class TextFormatView extends DataFlowView{
     private static final String OUTPUT_TEXT = "Output";
     private static final int ARGUMENT_WIDTH = 20;
 
-    private TextFormatNode textFormatNode;
+    private FormatTextNode formatTextNode;
 
     private ArrayList<Circle> inputConnectors = new ArrayList<>();
     private ArrayList<Circle> outputConnectors = new ArrayList<>();
 
-    public TextFormatView(TextFormatNode textFormatNode, DataFlowViewListener dataFlowViewListener) {
+    public FormatTextView(FormatTextNode formatTextNode, DataFlowViewListener dataFlowViewListener) {
         super(dataFlowViewListener);
-        this.textFormatNode = textFormatNode;
+        this.formatTextNode = formatTextNode;
         initialize();
     }
 
@@ -61,13 +58,13 @@ public class TextFormatView extends DataFlowView{
         divider.setTranslateX(0);
         divider.setTranslateY(-height/2);
 
-        double inputCount = textFormatNode.getArguments().size();
+        double inputCount = formatTextNode.getArguments().size();
         double inputSpacing = (height-HEADER_HEIGHT) / (inputCount+1);
 
         // input labels and connectors
         ArrayList<Label> inputLabels = new ArrayList<>();
         int i=0;
-        for(Object arg : textFormatNode.getArguments()){
+        for(Object arg : formatTextNode.getArguments()){
             String channelName = arg.toString();
 
             // position
@@ -173,18 +170,18 @@ public class TextFormatView extends DataFlowView{
 
     private double computeHeight(){
         double headerMarginInset = HEADER_HEIGHT + HEADER_BOTTOM_MARGIN + BOTTOM_INSET;
-        double maxVerticalChannels = 1+textFormatNode.getArguments().size();
+        double maxVerticalChannels = 1+ formatTextNode.getArguments().size();
         return headerMarginInset + maxVerticalChannels*(LABEL_HEIGHT+ CHANNEL_GAP);
     }
 
     @Override
     public DataFlowNode getDataFlowNode() {
-        return textFormatNode;
+        return formatTextNode;
     }
 
     @Override
     public int totalInputChannels() {
-        return textFormatNode.getArguments().size();
+        return formatTextNode.getArguments().size();
     }
 
     @Override

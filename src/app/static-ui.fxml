@@ -103,11 +103,11 @@
                                  <content>
                                     <TilePane prefHeight="683.0" prefWidth="278.0">
                                        <children>
-                                          <ToggleButton layoutX="22.0" layoutY="37.0" mnemonicParsing="false" text="Formatted Text" />
+                                          <ToggleButton layoutX="22.0" layoutY="37.0" mnemonicParsing="false" onAction="#formatTextClicked" text="Format Text" />
                                           <ToggleButton layoutX="10.0" layoutY="469.0" mnemonicParsing="false" text="History" />
                                           <ToggleButton layoutX="137.0" layoutY="10.0" mnemonicParsing="false" text="Input" />
-                                          <ToggleButton layoutX="42.0" layoutY="37.0" mnemonicParsing="false" text="Copy Clipoard" />
-                                          <ToggleButton layoutX="141.0" layoutY="37.0" mnemonicParsing="false" text="Paste Clipboard" />
+                                          <ToggleButton layoutX="42.0" layoutY="37.0" mnemonicParsing="false" text="Output" />
+                                          <ToggleButton layoutX="141.0" layoutY="37.0" mnemonicParsing="false" text="Argument" />
                                        </children>
                                     </TilePane>
                                  </content>

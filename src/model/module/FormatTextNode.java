@@ -4,17 +4,19 @@ import model.DataFlowNode;
 
 import java.util.ArrayList;
 
-public class TextFormatNode extends DataFlowNode {
+public class FormatTextNode extends DataFlowNode {
     private String text;
     private ArrayList<Object> arguments;
 
-    public TextFormatNode(String text, ArrayList<Object> arguments) {
+    public FormatTextNode(String text, ArrayList<Object> arguments) {
         this.text = text;
         this.arguments = arguments;
     }
 
-    public TextFormatNode(double x, double y) {
+    public FormatTextNode(double x, double y) {
         super(x, y);
+        text = "";
+        arguments = new ArrayList<>();
     }
 
     public String getText() {

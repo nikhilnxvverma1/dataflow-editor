@@ -11,7 +11,6 @@ import editor.util.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +18,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import model.Root;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
@@ -314,5 +312,13 @@ public class MainWindowController implements SidebarListener, WorkspaceListener 
     @FXML
     void booleanInputClicked(ActionEvent event){
         workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.BOOLEAN_INPUT, (ToggleButton) event.getSource());
+    }
+
+    // modules
+
+    @FXML
+    void formatTextClicked(ActionEvent event){
+        Logger.debug("format text clicked");
+        workspaceController.getTool().toggleNodeCreationFor(NodeTool.Type.FORMAT_TEXT, (ToggleButton) event.getSource());
     }
 }
